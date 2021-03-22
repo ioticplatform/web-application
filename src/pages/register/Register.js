@@ -5,7 +5,34 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import {Redirect} from "react-router";
 
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Grid from '@material-ui/core/Grid';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
+
+const useStyles = makeStyles((theme) => ({
+    paper: {
+        marginTop: theme.spacing(1),
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+    },
+    avatar: {
+        margin: theme.spacing(1),
+        backgroundColor: theme.palette.secondary.main,
+    },
+    form: {
+        width: '100%',
+        marginTop: theme.spacing(1),
+    }
+}));
+
 export default function Register() {
+    const classes = useStyles();
+
     let [username, setUsername] = useState("")
     let [password, setPassword] = useState("")
     let [email, setEmail] = useState("")
@@ -26,21 +53,68 @@ export default function Register() {
         return <Redirect to={"/home"}/>
     }
 
-    return <div className="container">
-        <div className="row">
-            <p className="error">{error}</p>
+    return <Container className={classes.paper} component="main" maxWidth="xs">
+        <CssBaseline />
+        <div className={classes.paper}>
+            <div className="row">
+                <p className="error">{error}</p>
+            </div>
+            <paper variant="outlined">
+                <img src="anonymous-user.png" />
+            </paper>
+            <Typography component="h1" variant="h5">
+                Register
+            </Typography>
+            <form className={classes.form} noValidate>
+                <TextField
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    fullWidth
+                    label="Username"
+                    value={username} onChange={(it) => setUsername(it.target.value)}
+                    autoComplete="username"
+                    autoFocus
+                />
+                <TextField
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    fullWidth
+                    label="Email"
+                    value={email} onChange={(it) => setEmail(it.target.value)}
+                    autoComplete="username"
+                    autoFocus
+                />
+                <TextField
+                    label="Password"
+                    type="password"
+                    value={password} onChange={(it) => setPassword(it.target.value)}
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    fullWidth
+                    autoComplete="current-password"
+                />
+                <FormControlLabel
+                    control={<Checkbox value="remember" color="primary" />}
+                    label="Remember me"
+                />
+                <FormControlLabel
+                    control={<Checkbox value="allowExtraEmails" color="primary" />}
+                    label="I have read and agree to the Privacy Policy."
+                />
+                <FormControlLabel
+                    control={<Checkbox value="allowExtraEmails" color="primary" />}
+                    label="I want to receive promotions and updates via email."
+                />
+                <Button
+                    onClick={onRegisterClick}
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                >Create Account</Button>
+            </form>
         </div>
-        <div className="row">
-            <TextField label="Username" value={username} onChange={(it) => setUsername(it.target.value)}/>
-        </div>
-        <div className="row">
-            <TextField label="Email" value={email} onChange={(it) => setEmail(it.target.value)}/>
-        </div>
-        <div className="row">
-            <TextField label="Password" type="password" value={password} onChange={(it) => setPassword(it.target.value)}/>
-        </div>
-        <div className="row">
-            <Button onClick={onRegisterClick}>Create Account</Button>
-        </div>
-    </div>
+    </Container>
 }
