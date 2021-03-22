@@ -30,10 +30,26 @@ async function login(username, pass) {
     return res;
 }
 
+async function register(username, password, email) {
+    let res = await axios.post(API_HOST + "/users", {username: username, password: password, email: email});
+    if (res.status === 201) {
+        token = res.data.access_token;
+        user = {
+            id: res.data._id,
+            email: res.data.email,
+            username: res.data.username
+        }
+        localStorage.setItem("token", token);
+        localStorage.setItem("user", JSON.stringify(user));
+        globalData.user = user;
+    }
+    return res;
+}
+
 async function getDevices() {
     return axios.get(API_HOST + `/users/${user.id}/devices`, {headers: {Authorization: `jwt ${token}`}});
 }
 
-let api = {login, getDevices}
+let api = {login, register, getDevices}
 export {api, globalData}
 

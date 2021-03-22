@@ -1,30 +1,28 @@
 import React, {useState} from "react";
-import "./Login.scss"
+import "./Register.scss"
 import {api} from "../../repo/api.js"
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import {Redirect} from "react-router";
 
-export default function Login() {
-    let [login, setLogin] = useState("")
+export default function Register() {
+    let [username, setUsername] = useState("")
     let [password, setPassword] = useState("")
-    let [error, setError] = useState("")
-    let [loggedIn, setLoggedIn] = useState(false)
+    let [email, setEmail] = useState("")
 
-    async function onLoginClick(){
-        try{
-            await api.login(login,password)
-            setLoggedIn(true)
+    let [error, setError] = useState("")
+    let [registered, setRegistered] = useState(false)
+
+    async function onRegisterClick(){
+        try {
+            await api.register(username, password, email)
+            setRegistered(true)
         } catch (e){
-            setError("Login Error")
+            setError("Register Error")
         }
     }
 
-    async function onRegisterClick(){
-        return <Redirect to={"/register"}/>
-    }
-
-    if(loggedIn){
+    if (registered){
         return <Redirect to={"/home"}/>
     }
 
@@ -33,13 +31,13 @@ export default function Login() {
             <p className="error">{error}</p>
         </div>
         <div className="row">
-            <TextField label="Username" value={login} onChange={(it) => setLogin(it.target.value)}/>
+            <TextField label="Username" value={username} onChange={(it) => setUsername(it.target.value)}/>
+        </div>
+        <div className="row">
+            <TextField label="Email" value={email} onChange={(it) => setEmail(it.target.value)}/>
         </div>
         <div className="row">
             <TextField label="Password" type="password" value={password} onChange={(it) => setPassword(it.target.value)}/>
-        </div>
-        <div className="row">
-            <Button onClick={onLoginClick}>Login</Button>
         </div>
         <div className="row">
             <Button onClick={onRegisterClick}>Create Account</Button>
