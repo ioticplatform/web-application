@@ -50,6 +50,10 @@ async function getDevices() {
     return axios.get(API_HOST + `/users/${user.id}/devices`, {headers: {Authorization: `jwt ${token}`}});
 }
 
-let api = {login, register, getDevices}
+async function getSensors() {
+    return axios.get(API_HOST + `/users/${user.id}/sensors`, {headers: {Authorization: `jwt ${token}`}});
+}
+
+let api = {login, register, getDevices, getSensors}
 export {api, globalData}
 

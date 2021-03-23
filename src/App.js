@@ -7,9 +7,13 @@ import {
     Link
 } from "react-router-dom";
 import Login from "./pages/login/Login";
-import Home from "./pages/home/Home";
+import Devices from "./pages/devices/Devices";
+import Menu from "./pages/menu/Menu";
 import Device from "./pages/device/Device";
 import Register from "./pages/register/Register";
+import Sensor from "./pages/sensor/Sensor";
+import Sensors from "./pages/sensors/Sensors";
+
 
 function App() {
     return <div className="App">
@@ -21,7 +25,7 @@ function App() {
                             <Link to="/login">Login</Link>
                         </li>
                         <li>
-                            <Link to="/register">Register</Link>
+                            <Link to="/home">Home</Link>
                         </li>
                     </ul>
                 </nav>
@@ -33,10 +37,19 @@ function App() {
                         <Login/>
                     </Route>
                     <Route path="/home">
-                        <Home/>
+                        <Menu/>
+                    </Route>
+                    <Route path="/devices">
+                        <Devices/>
                     </Route>
                     <Route path="/device">
                         <Device/>
+                    </Route>
+                    <Route path="/sensors">
+                        <Sensors/>
+                    </Route>
+                    <Route path="/sensor">
+                        <Sensor/>
                     </Route>
                     <Route path="/register">
                         <Register/>

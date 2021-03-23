@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from "react";
 import CircularProgress from '@material-ui/core/CircularProgress';
 import {api, globalData} from "../../repo/api.js"
+import "./Devices.scss"
 import Paper from "@material-ui/core/Paper";
-import "./Home.scss"
 import {Redirect} from "react-router";
 
 function Device({device, onClick}) {
@@ -14,7 +14,7 @@ function Device({device, onClick}) {
     </Paper>
 }
 
-export default function Home() {
+export default function Devices() {
     let [devices, setDevices] = useState([]);
     let [isLoading, setLoading] = useState(false);
     let [deviceClicked, setDeviceClicked] = useState(false);
@@ -41,7 +41,7 @@ export default function Home() {
 
     return <div className="container">
         <div className="row">
-            <p>Welcome Home {globalData.user.username}</p>
+            <p>Devices {globalData.user.username}</p>
         </div>
         {isLoading ? <CircularProgress/> : devices.map(it => <Device key={it.id} device={it} onClick={onDeviceClick} />)}
     </div>
