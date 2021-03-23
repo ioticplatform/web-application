@@ -109,6 +109,15 @@ export default function ButtonBases() {
         setSensors(true)
     }
 
+    function onButtonClick(idx){
+        if(idx === 0){
+            setDevices(true)
+        }
+        else if (idx === 1){
+            setSensors(true)
+        }
+    }
+
     if (devices) {
         return <Redirect to={"/devices"}/>
     }
@@ -119,7 +128,7 @@ export default function ButtonBases() {
 
     return (
         <div className={classes.root}>
-            {images.map((image) => (
+            {images.map((image, index) => (
                 <ButtonBase
                     focusRipple
                     key={images[0].title}
@@ -128,7 +137,7 @@ export default function ButtonBases() {
                     style={{
                         width: image.width,
                     }}
-                    onClick={`${image.url}` === "devices.jpg"? onDevicesClick:onSensorsClick}
+                    onClick={() => onButtonClick(index)}
                 >
           <span
               className={classes.imageSrc}

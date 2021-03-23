@@ -1,11 +1,10 @@
 import React, {useState} from "react";
 import "./Login.scss"
-import {api} from "../../repo/api.js"
+import {api, globalData} from "../../repo/api.js"
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import {Redirect} from "react-router";
 
-import Avatar from '@material-ui/core/Avatar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -58,7 +57,9 @@ export default function Login() {
     async function onLoginClick(){
         try{
             await api.login(login,password)
-            setLoggedIn(true)
+            setLoggedIn(true);
+            globalData.isLoggedIn = loggedIn;
+            globalData.setLoggedIn(true);
         } catch (e){
             setError("Login Error")
         }

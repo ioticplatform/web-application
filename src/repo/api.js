@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {useState} from "react";
 
 let API_HOST = "http://52.29.155.35:5000/api"
 
@@ -10,9 +11,7 @@ if(userStr){
     user = JSON.parse(userStr);
 }
 
-console.log(user);
-
-let globalData = {user}
+let globalData = {user: {}}
 
 async function login(username, pass) {
     let res = await axios.post(API_HOST + "/users/login", {username: username, password: pass});
@@ -54,6 +53,17 @@ async function getSensors() {
     return axios.get(API_HOST + `/users/${user.id}/sensors`, {headers: {Authorization: `jwt ${token}`}});
 }
 
-let api = {login, register, getDevices, getSensors}
-export {api, globalData}
+async function getDeviceSensors() {
+    return axios.get(API_HOST + `/users/${user.id}/devices/${globalData.device._id}/sensors`, {headers: {Authorization: `jwt ${token}`}});
+}
 
+async function getSensorData() {
+    console.log(`/users/${user.id}/devices/${globalData.device._id}/sensors/${globalData.sensor._id}`)
+    let res = axios.get(API_HOST + `/users/${user.id}/devices/${globalData.device._id}/sensors/${globalData.sensor._id}/data`, {headers: {Authorization: `jwt ${token}`}});
+    console.log('HEREEEEEEEEEEEEEEEEEEEEEEEE')
+    console.log(await res)
+    return res;
+}
+
+let api = {login, register, getDevices, getSensors, getDeviceSensors, getSensorData}
+export {api, globalData}
