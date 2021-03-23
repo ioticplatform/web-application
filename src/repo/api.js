@@ -62,5 +62,10 @@ async function getSensorData() {
     return res;
 }
 
-let api = {login, register, getDevices, getSensors, getDeviceSensors, getSensorData}
+async function editAccount(password) {
+    let res = axios.put(API_HOST + `/users/${user.id}`, {password: password}, {headers: {Authorization: `jwt ${token}`}});
+    return res;
+}
+
+let api = {login, register, getDevices, getSensors, getDeviceSensors, getSensorData, editAccount}
 export {api, globalData}
