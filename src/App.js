@@ -14,7 +14,8 @@ import Device from "./pages/device/Device";
 import Register from "./pages/register/Register";
 import Sensor from "./pages/sensor/Sensor";
 import Sensors from "./pages/sensors/Sensors";
-import {infoListItems, mainListItems, secondaryListItems} from "./components/listItems"
+import EditAccount from "./pages/editAccount/EditAccount";
+import {infoListItems, MainListItems, secondaryListItems} from "./components/ListItems"
 import List from "@material-ui/core/List";
 import clsx from "clsx";
 import IconButton from "@material-ui/core/IconButton";
@@ -159,7 +160,7 @@ function ShowAppBar() {
                 </IconButton>
             </div>
             <Divider />
-            <List>{mainListItems}</List>
+            <List><MainListItems /></List>
             <Divider />
             <List>{secondaryListItems}</List>
             <Divider />
@@ -201,6 +202,9 @@ function App() {
                     </Route>
                     <Route path="/register">
                         <Register/>
+                    </Route>
+                    <Route path="/account">
+                        <EditAccount/>
                     </Route>
                 </Switch>
             </div>

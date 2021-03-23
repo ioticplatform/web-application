@@ -5,12 +5,9 @@ import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import MenuIcon from '@material-ui/icons/Menu';
-// import Chart from './Chart';
 import FullScreenDialog from "../../components/FullScreenDialog"
 import Copyright from "../../components/Copyright";
 import ButtonBase from "../../components/ButtonBase";
-import { mainListItems, secondaryListItems, infoListItems } from '../../components/listItems';
 import Chart from "../../components/Chart";
 import Title from '../../components/Title';
 import {globalData} from "../../repo/api";
