@@ -4,6 +4,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import {api, globalData} from "../../repo/api.js"
 import "./Devices.scss"
 import Paper from "@material-ui/core/Paper";
+import { MDBContainer } from 'mdbreact';
 import {Redirect} from "react-router";
 
 import Grid from '@material-ui/core/Grid';
@@ -43,7 +44,7 @@ const StyledTableRow = withStyles((theme) => ({
 
 const useStyles = makeStyles({
     table: {
-        minWidth: 700,
+        paddingTop: '50',
     },
 });
 
@@ -65,6 +66,7 @@ export default function Devices() {
             let res = await api.getDevices();
             setLoading(false)
             setDevices(res.data.devices)
+            globalData.setTitle("Devices");
         }
         fetch()
     }, [])
@@ -75,11 +77,12 @@ export default function Devices() {
     }
 
     return (
-        <Grid item xs={12}>
-            <Paper className={classes.paper}>
-        <React.Fragment>
+        <MDBContainer>
+        <p className="ml-15 ml-lg-0">
+            <Title>' '</Title>
+            <Title>' '</Title>
             <Title>Devices</Title>
-            <Table size="large" stickyHeader="true">
+            <Table size="large" className={classes.table}>
                 <TableHead>
                     <TableRow>
                         <StyledTableCell>Name</StyledTableCell>
@@ -92,8 +95,7 @@ export default function Devices() {
                     {isLoading ? <CircularProgress/> : devices.map(it => <Device key={it.id} device={it} onClick={onDeviceClick} />)}
                 </TableBody>
             </Table>
-        </React.Fragment>
-            </Paper>
-        </Grid>
+        </p>
+        </MDBContainer>
     );
 }

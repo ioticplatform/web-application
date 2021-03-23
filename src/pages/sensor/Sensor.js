@@ -12,11 +12,13 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Title from '../../components/Title';
+import {MDBContainer} from "mdbreact";
 
 function Data({data, onClick}) {
     return <StyledTableRow onClick={() => onClick(data)} key={data._id}>
         <StyledTableCell>{data.value}</StyledTableCell>
         <StyledTableCell>{data.timestamp}</StyledTableCell>
+        <StyledTableCell>OK</StyledTableCell>
     </StyledTableRow>
 }
 
@@ -61,8 +63,7 @@ export default function Sensor() {
             let res = await api.getSensorData();
             setLoading(false)
             setSensorData(res.data.data)
-            console.log("************************************")
-            console.log(data.toString())
+            globalData.setTitle("Sensor " + globalData.sensor.type);
         }
         fetch()
     }, [])
@@ -73,25 +74,24 @@ export default function Sensor() {
     }
 
     return (
-        <Grid item xs={12}>
-            <Paper className={classes.paper}>
-                <React.Fragment>
-                    <Title>{globalData.sensor.type}</Title>
-                    <Table size="large" stickyHeader="true">
-                        <TableHead>
-                            <TableRow>
-                                <StyledTableCell>Type</StyledTableCell>
-                                <StyledTableCell>Unit</StyledTableCell>
-                                <StyledTableCell>Created</StyledTableCell>
-                                <StyledTableCell>State</StyledTableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {isLoading ? <CircularProgress/> : data.map(it => <Data key={it._id} data={it} onClick={onDataClick} />)}
-                        </TableBody>
-                    </Table>
-                </React.Fragment>
-            </Paper>
-        </Grid>
+        <MDBContainer>
+            <p className="mx-auto">
+                <Title>' '</Title>
+                <Title>' '</Title>
+                <Title>Data</Title>
+                <Table size="large" stickyHeader="true">
+                    <TableHead>
+                        <TableRow>
+                            <StyledTableCell>Type</StyledTableCell>
+                            <StyledTableCell>Time</StyledTableCell>
+                            <StyledTableCell>State</StyledTableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {isLoading ? <CircularProgress/> : data.map(it => <Data key={it._id} data={it} onClick={onDataClick} />)}
+                    </TableBody>
+                </Table>
+            </p>
+        </MDBContainer>
     );
 }

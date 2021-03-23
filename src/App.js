@@ -1,5 +1,6 @@
 import './App.scss';
 import React, {useEffect, useState} from "react";
+
 import {
     BrowserRouter as Router,
     Switch,
@@ -112,6 +113,9 @@ const useStyles = makeStyles((theme) => ({
 
 function ShowAppBar() {
     const classes = useStyles();
+    let [title, setTitle] = useState(false);
+    globalData.setTitle = setTitle
+
     const [open, setOpen] = React.useState(false);
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -133,7 +137,7 @@ function ShowAppBar() {
                     <MenuIcon />
                 </IconButton>
                 <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-                    Dashboard
+                    {title}
                 </Typography>
                 <IconButton color="inherit">
                     <Badge badgeContent={4} color="secondary">
@@ -168,10 +172,11 @@ function App() {
     let [isLoggedIn, setLoggedIn] = useState(false);
     globalData.setLoggedIn = setLoggedIn
 
+    document.body.style.background = "url('background-white.jpg') repeat center";
+
     return <div className="App">
         <Router>
             <div>{isLoggedIn && <ShowAppBar />}</div>
-            {console.log("Before set ++++++++++++++++++++++++++++++++++++++++++")}
             <div>
                 {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}

@@ -3,7 +3,7 @@ import {makeStyles} from '@material-ui/core/styles';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Typography from '@material-ui/core/Typography';
 import {Redirect} from "react-router";
-import Link from "@material-ui/core/Link";
+import FullScreenDialog from "./FullScreenDialog";
 
 const images = [
     {
@@ -129,33 +129,28 @@ export default function ButtonBases() {
     return (
         <div className={classes.root}>
             {images.map((image, index) => (
-                <ButtonBase
-                    focusRipple
-                    key={images[0].title}
+                <ButtonBase focusRipplekey={images[0].title}
                     className={classes.image}
                     focusVisibleClassName={classes.focusVisible}
                     style={{
                         width: image.width,
                     }}
-                    onClick={() => onButtonClick(index)}
-                >
-          <span
-              className={classes.imageSrc}
-              style={{
-                  backgroundImage: `url(${image.url})`,
-              }}
-          />
+                    onClick={() => onButtonClick(index)}>
+                      <span
+                          className={classes.imageSrc}
+                          style={{
+                              backgroundImage: `url(${image.url})`,
+                          }}/>
                     <span className={classes.imageBackdrop}/>
                     <span className={classes.imageButton}>
-            <Typography
-                component="span"
-                variant="subtitle1"
-                color="inherit"
-                className={classes.imageTitle}
-            >
-              {image.title}
-                <span className={classes.imageMarked}/>
-            </Typography>
+                <Typography
+                    component="span"
+                    variant="subtitle1"
+                    color="inherit"
+                    className={classes.imageTitle}>
+                  {image.title}
+                    <span className={classes.imageMarked}/>
+                </Typography>
           </span>
                 </ButtonBase>
             ))}

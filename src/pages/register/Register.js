@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import "./Register.scss"
-import {api} from "../../repo/api.js"
+import {api, globalData} from "../../repo/api.js"
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import {Redirect} from "react-router";
@@ -35,7 +35,6 @@ export default function Register() {
     let [username, setUsername] = useState("")
     let [password, setPassword] = useState("")
     let [email, setEmail] = useState("")
-
     let [error, setError] = useState("")
     let [registered, setRegistered] = useState(false)
 
@@ -43,6 +42,7 @@ export default function Register() {
         try {
             await api.register(username, password, email)
             setRegistered(true)
+            globalData.setLoggedIn(true);
         } catch (e){
             setError("Register Error")
         }

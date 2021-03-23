@@ -2,16 +2,15 @@ import React, {useEffect, useState} from "react";
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import {api, globalData} from "../../repo/api.js"
-import Paper from "@material-ui/core/Paper";
 import {Redirect} from "react-router";
 
-import Grid from '@material-ui/core/Grid';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Title from '../../components/Title';
+import {MDBContainer} from "mdbreact";
 
 function Sensor({sensor, onClick}) {
     return <StyledTableRow onClick={() => onClick(sensor)} key={sensor._id}>
@@ -64,6 +63,7 @@ export default function Device() {
             let res = await api.getDeviceSensors();
             setLoading(false)
             setDeviceSensors(res.data.sensors)
+            globalData.setTitle("Device " + globalData.device.name);
         }
         fetch()
     }, [])
@@ -74,25 +74,25 @@ export default function Device() {
     }
 
     return (
-        <Grid item xs={12}>
-            <Paper className={classes.paper}>
-                <React.Fragment>
-                    <Title>{globalData.device.name}</Title>
-                    <Table size="large" stickyHeader="true">
-                        <TableHead>
-                            <TableRow>
-                                <StyledTableCell>Type</StyledTableCell>
-                                <StyledTableCell>Unit</StyledTableCell>
-                                <StyledTableCell>Created</StyledTableCell>
-                                <StyledTableCell>State</StyledTableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {isLoading ? <CircularProgress/> : sensors.map(it => <Sensor key={it._id} sensor={it} onClick={onSensorClick} />)}
-                        </TableBody>
-                    </Table>
-                </React.Fragment>
-            </Paper>
-        </Grid>
+        <MDBContainer>
+            <p className="mx-auto">
+                <Title>' '</Title>
+                <Title>' '</Title>
+                <Title>{globalData.device.name}</Title>
+                <Table size="large" stickyHeader="true">
+                    <TableHead>
+                        <TableRow>
+                            <StyledTableCell>Type</StyledTableCell>
+                            <StyledTableCell>Unit</StyledTableCell>
+                            <StyledTableCell>Created</StyledTableCell>
+                            <StyledTableCell>State</StyledTableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {isLoading ? <CircularProgress/> : sensors.map(it => <Sensor key={it._id} sensor={it} onClick={onSensorClick} />)}
+                    </TableBody>
+                </Table>
+            </p>
+        </MDBContainer>
     );
 }

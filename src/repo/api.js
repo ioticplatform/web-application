@@ -58,10 +58,7 @@ async function getDeviceSensors() {
 }
 
 async function getSensorData() {
-    console.log(`/users/${user.id}/devices/${globalData.device._id}/sensors/${globalData.sensor._id}`)
     let res = axios.get(API_HOST + `/users/${user.id}/devices/${globalData.device._id}/sensors/${globalData.sensor._id}/data`, {headers: {Authorization: `jwt ${token}`}});
-    console.log('HEREEEEEEEEEEEEEEEEEEEEEEEE')
-    console.log(await res)
     return res;
 }
 

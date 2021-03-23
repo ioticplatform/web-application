@@ -1,23 +1,13 @@
 import React from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Drawer from '@material-ui/core/Drawer';
 import Box from '@material-ui/core/Box';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
-import Badge from '@material-ui/core/Badge';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import NotificationsIcon from '@material-ui/icons/Notifications';
 // import Chart from './Chart';
+import FullScreenDialog from "../../components/FullScreenDialog"
 import Copyright from "../../components/Copyright";
 import ButtonBase from "../../components/ButtonBase";
 import { mainListItems, secondaryListItems, infoListItems } from '../../components/listItems';
@@ -33,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
     },
     toolbar: {
-        paddingRight: 24, // keep right padding when drawer closed
+        paddingRight: 0, // keep right padding when drawer closed
     },
     toolbarIcon: {
         display: 'flex',
@@ -103,37 +93,40 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: 'column',
     },
     fixedHeight: {
-        height: 240,
+        height: 200,
+    },
+    fixedWidth: {
+        width: 1300,
     },
 }));
 
 export default function Menu() {
     const classes = useStyles();
     const [open, setOpen] = React.useState(true);
+
     const handleDrawerOpen = () => {
         setOpen(true);
     };
     const handleDrawerClose = () => {
         setOpen(false);
     };
-    const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+    const fixedDimPaper = clsx(classes.paper, classes.fixedHeight, classes.fixedWidth);
 
     return (
-            <main className={classes.content}>
+            <div className={classes.content}>
                 <div className={classes.appBarSpacer} />
                 <Container maxWidth="lg" className={classes.container}>
                     <div className="row">
                         <Title>Welcome, {globalData.user.username}!</Title>
                     </div>
                     <Grid container spacing={3}>
+                        {/*<Grid item xs={12} md={8} lg={9}>*/}
+                            {/*<Paper className={fixedHeightPaper}>*/}
+                            {/*    <Chart />*/}
+                            {/*</Paper>*/}
+                        {/*</Grid>*/}
                         <Grid item xs={12} md={8} lg={9}>
-                            <Paper className={fixedHeightPaper}>
-                                <Chart />
-                            </Paper>
-                        </Grid>
-                        <Grid item xs={12} md={8} lg={9}>
-                            <Paper className={fixedHeightPaper}
-                            >
+                            <Paper className={fixedDimPaper}>
                                 <ButtonBase />
                             </Paper>
                         </Grid>
@@ -142,6 +135,7 @@ export default function Menu() {
                         <Copyright />
                     </Box>
                 </Container>
-            </main>
+                <div><FullScreenDialog/></div>
+            </div>
     );
 }
