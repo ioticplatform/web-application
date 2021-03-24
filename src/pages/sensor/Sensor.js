@@ -2,10 +2,7 @@ import React, {useEffect, useState} from "react";
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import {api, globalData} from "../../repo/api.js"
-import Paper from "@material-ui/core/Paper";
 import {Redirect} from "react-router";
-
-import Grid from '@material-ui/core/Grid';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';

@@ -14,13 +14,22 @@ import {Redirect} from "react-router";
 
 export function MainListItems() {
     let [navigateAccount, setNavigateAccount] = useState(false)
+    let [navigateDashboard, setNavigateDashboard] = useState(false)
 
     async function onAccountClick() {
         setNavigateAccount(true)
     }
 
+    async function onDashboardClick() {
+        setNavigateDashboard(true)
+    }
+
     if (navigateAccount) {
         return <Redirect to={"/account"}/>
+    }
+
+    if (navigateDashboard) {
+        return <Redirect to={"/dashboard"}/>
     }
 
     return <div>
@@ -30,7 +39,7 @@ export function MainListItems() {
                 </ListItemIcon>
                 <ListItemText primary="My Account" />
             </ListItem>
-            <ListItem button>
+            <ListItem button onClick={onDashboardClick}>
                 <ListItemIcon>
                     <DashboardIcon />
                 </ListItemIcon>
@@ -57,8 +66,8 @@ export function MainListItems() {
         </div>
 }
 
-export const secondaryListItems = (
-    <div>
+export function SecondaryListItems() {
+    return (<div>
         <ListSubheader inset>Saved reports</ListSubheader>
         <ListItem button>
             <ListItemIcon>
@@ -78,11 +87,11 @@ export const secondaryListItems = (
             </ListItemIcon>
             <ListItemText primary="Current year" />
         </ListItem>
-    </div>
-);
+    </div>);
+}
 
-export const infoListItems = (
-    <div>
+export function InfoListItems() {
+    return (<div>
         <ListSubheader inset>Info</ListSubheader>
         <ListItem button>
             <ListItemIcon>
@@ -96,5 +105,5 @@ export const infoListItems = (
             </ListItemIcon>
             <ListItemText primary="Feedback" />
         </ListItem>
-    </div>
-)
+    </div>);
+}

@@ -49,7 +49,7 @@ export default function Register() {
     }
 
     if (registered){
-        return <Redirect to={"/home"}/>
+        return <Redirect to={"/dashboard"}/>
     }
 
     return <Container className={classes.paper} component="main" maxWidth="xs">

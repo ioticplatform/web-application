@@ -8,9 +8,15 @@ import Paper from '@material-ui/core/Paper';
 import FullScreenDialog from "../../components/FullScreenDialog"
 import Copyright from "../../components/Copyright";
 import ButtonBase from "../../components/ButtonBase";
-import Chart from "../../components/Chart";
+// import Chart from "../../components/Chart";
 import Title from '../../components/Title';
 import {globalData} from "../../repo/api";
+
+import Chatbot from "react-chatbot-kit";
+
+import config from "../../chatbot/config";
+import MessageParser from "../../chatbot/MessageParser";
+import ActionProvider from "../../chatbot/ActionProvider";
 
 
 const drawerWidth = 240;
@@ -97,7 +103,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function Menu() {
+export default function Dashboard() {
     const classes = useStyles();
     const [open, setOpen] = React.useState(true);
 
@@ -110,7 +116,7 @@ export default function Menu() {
     const fixedDimPaper = clsx(classes.paper, classes.fixedHeight, classes.fixedWidth);
 
     return (
-            <div className={classes.content}>
+            <div>
                 <div className={classes.appBarSpacer} />
                 <Container maxWidth="lg" className={classes.container}>
                     <div className="row">
@@ -128,11 +134,22 @@ export default function Menu() {
                             </Paper>
                         </Grid>
                     </Grid>
-                    <Box pt={4}>
-                        <Copyright />
-                    </Box>
                 </Container>
-                <div><FullScreenDialog/></div>
+                <Grid container spacing={3}>
+                    <Grid item xs={9}>
+                        <Box pt={4}>
+                            <Copyright />
+                        </Box>
+                    </Grid>
+                    <Grid item xs={3}>
+                        <Chatbot
+                            config={config}
+                            actionProvider={ActionProvider}
+                            messageParser={MessageParser}
+                        />
+                    </Grid>
+                </Grid>
+                {/*<div><FullScreenDialog/></div>*/}
             </div>
     );
 }

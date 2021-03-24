@@ -9,13 +9,13 @@ import {
 } from "react-router-dom";
 import Login from "./pages/login/Login";
 import Devices from "./pages/devices/Devices";
-import Menu from "./pages/menu/Menu";
+import Dashboard from "./pages/dashboard/Dashboard";
 import Device from "./pages/device/Device";
 import Register from "./pages/register/Register";
 import Sensor from "./pages/sensor/Sensor";
 import Sensors from "./pages/sensors/Sensors";
 import EditAccount from "./pages/editAccount/EditAccount";
-import {infoListItems, MainListItems, secondaryListItems} from "./components/ListItems"
+import {InfoListItems, MainListItems, SecondaryListItems} from "./components/ListItems"
 import List from "@material-ui/core/List";
 import clsx from "clsx";
 import IconButton from "@material-ui/core/IconButton";
@@ -162,9 +162,9 @@ function ShowAppBar() {
             <Divider />
             <List><MainListItems /></List>
             <Divider />
-            <List>{secondaryListItems}</List>
+            <List><SecondaryListItems /></List>
             <Divider />
-            <List>{infoListItems}</List>
+            <List><InfoListItems /></List>
         </Drawer>
     </div>
 }
@@ -185,8 +185,8 @@ function App() {
                     <Route path="/login">
                         <Login/>
                     </Route>
-                    <Route path="/home">
-                        <Menu/>
+                    <Route path="/dashboard">
+                        <Dashboard/>
                     </Route>
                     <Route path="/devices">
                         <Devices/>

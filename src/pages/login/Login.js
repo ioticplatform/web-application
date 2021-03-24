@@ -53,7 +53,7 @@ export default function Login() {
     }
 
     if(loggedIn){
-        return <Redirect to={"/home"}/>
+        return <Redirect to={"/dashboard"}/>
     }
 
     if(register){
