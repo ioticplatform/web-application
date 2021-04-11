@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {useState} from "react";
 
-let API_HOST = "http://52.29.155.35:5000/api"
+let API_HOST = "http://192.168.100.111:5000/api"
 
 let token = localStorage.getItem("token") || "";
 
@@ -58,7 +58,7 @@ async function getDeviceSensors() {
 }
 
 async function getSensorData() {
-    let res = axios.get(API_HOST + `/users/${user.id}/devices/${globalData.device._id}/sensors/${globalData.sensor._id}/data`, {headers: {Authorization: `jwt ${token}`}});
+    let res = axios.get(API_HOST + `/users/${user.id}/devices/${globalData.sensor.id_device}/sensors/${globalData.sensor._id}/data`, {headers: {Authorization: `jwt ${token}`}});
     return res;
 }
 
