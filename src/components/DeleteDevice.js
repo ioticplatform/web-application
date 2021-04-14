@@ -50,7 +50,6 @@ export default function DeleteDevice({device}) {
             setError("Could not delete this device.");
         }
         handleClose();
-        // window.location.reload();
     }
 
     return (

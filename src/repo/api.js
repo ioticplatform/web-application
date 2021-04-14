@@ -73,5 +73,10 @@ async function deleteDevice(device) {
     return res;
 }
 
-let api = {login, register, getDevices, getSensors, getDeviceSensors, getSensorData, editAccount, deleteDevice}
+async function editDevice(device, name, description) {
+    let res = axios.put(API_HOST + `/users/${user.id}/devices/${device._id}`, {name: name, description: description}, {headers: {Authorization: `jwt ${token}`}});
+    return res;
+}
+
+let api = {login, register, getDevices, getSensors, getDeviceSensors, getSensorData, editAccount, deleteDevice, editDevice}
 export {api, globalData}
