@@ -98,7 +98,13 @@ export default function Sensor() {
     };
 
     let [data, setSensorData] = useState([]);
+
     let [chart_data, setChartSensorData] = useState([]);
+
+    let [normalValues, setNormalValues] = useState([]);
+    let [lowerValues, setLowerValues] = useState([]);
+    let [higherValues, setHigherValues] = useState([]);
+
     let [isLoading, setLoading] = useState(false);
     let [dataClicked, setDataClicked] = useState(false);
 
@@ -113,6 +119,11 @@ export default function Sensor() {
             setLoading(false)
             setSensorData(res.data.data)
             setChartSensorData(res.data.data.map(x => ["Date(" + x.timestamp + ")", x.value]))
+
+            setHigherValues(res.data.data.filter(x => x.value > 600));
+            setLowerValues(res.data.data.filter(x => x.value < 200));
+            setNormalValues(res.data.data.filter(x => x.value >= 200 && x.value <= 400));
+
             globalData.setTitle("Sensor " + globalData.sensor.type);
         }
         fetch()
@@ -175,15 +186,15 @@ export default function Sensor() {
                 </TabPanel>
                 <TabPanel value={value} index={2}>
                     {isLoading ? <CircularProgress/> : <Chart
-                        width={'500px'}
-                        height={'300px'}
+                        width={'1000px'}
+                        height={'600px'}
                         chartType="PieChart"
                         loader={<div>Loading Chart</div>}
                         data={[
-                            ['Task', 'Hours per Day'],
-                            ['Normal', 11],
-                            ['Lower', 2],
-                            ['Higher', 2],
+                            ['Data', 'Level'],
+                            ['Normal', normalValues.length],
+                            ['Lower', lowerValues.length],
+                            ['Higher', higherValues.length],
                         ]}
                         options={{
                             title: 'Levels',
@@ -193,8 +204,6 @@ export default function Sensor() {
                                 2: {color: 'Red'},
                             }
                         }}
-
-                        rootProps={{'data-testid': '1'}}
                     />}
                 </TabPanel>
             </p>
