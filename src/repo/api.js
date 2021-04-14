@@ -67,5 +67,11 @@ async function editAccount(password) {
     return res;
 }
 
-let api = {login, register, getDevices, getSensors, getDeviceSensors, getSensorData, editAccount}
+async function deleteDevice(device) {
+    let res = axios.delete(API_HOST + `/users/${user.id}/devices/${device._id}`,{headers: {Authorization: `jwt ${token}`}});
+    console.log(res)
+    return res;
+}
+
+let api = {login, register, getDevices, getSensors, getDeviceSensors, getSensorData, editAccount, deleteDevice}
 export {api, globalData}

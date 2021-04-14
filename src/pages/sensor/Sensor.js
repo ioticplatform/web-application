@@ -138,7 +138,6 @@ export default function Sensor() {
         <MDBContainer>
             <p className="mx-auto">
                 <Title>' '</Title>
-                <Title>' '</Title>
                 <Title>Data</Title>
                 <AppBar position="static" color="default">
                     <Tabs

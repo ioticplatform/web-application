@@ -3,7 +3,7 @@ import {makeStyles} from '@material-ui/core/styles';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Typography from '@material-ui/core/Typography';
 import {Redirect} from "react-router";
-import FullScreenDialog from "./FullScreenDialog";
+import EditDevice from "./EditDevice";
 
 const images = [
     {

@@ -78,7 +78,6 @@ export default function Sensors() {
         <MDBContainer>
             <p className="ml-15 ml-lg-0">
                 <Title>' '</Title>
-                <Title>' '</Title>
                 <Title>Sensors</Title>
                 <Table size="large" className={classes.table}>
                     <TableHead>

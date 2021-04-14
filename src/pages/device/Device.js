@@ -77,7 +77,6 @@ export default function Device() {
         <MDBContainer>
             <p className="mx-auto">
                 <Title>' '</Title>
-                <Title>' '</Title>
                 <Title>{globalData.device.name}</Title>
                 <Table size="large" stickyHeader="true">
                     <TableHead>

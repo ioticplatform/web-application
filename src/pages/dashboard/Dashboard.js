@@ -5,7 +5,7 @@ import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import FullScreenDialog from "../../components/FullScreenDialog"
+import EditDevice from "../../components/EditDevice"
 import Copyright from "../../components/Copyright";
 import ButtonBase from "../../components/ButtonBase";
 import Title from '../../components/Title';
@@ -96,7 +96,7 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: 'column',
     },
     fixedHeight: {
-        height: 200,
+        height: 240,
     },
     fixedWidth: {
         width: 1300,
@@ -126,11 +126,6 @@ export default function Dashboard() {
                     </div>
                     <Grid container spacing={3}>
                         <Grid item xs={12} md={8} lg={9}>
-                            <Paper className={fixedHeightPaper}>
-                                <Chart />
-                            </Paper>
-                        </Grid>
-                        <Grid item xs={12} md={8} lg={9}>
                             <Paper className={fixedDimPaper}>
                                 <ButtonBase />
                             </Paper>
@@ -151,7 +146,6 @@ export default function Dashboard() {
                         />
                     </Grid>
                 </Grid>
-                {/*<div><FullScreenDialog/></div>*/}
             </div>
     );
 }
