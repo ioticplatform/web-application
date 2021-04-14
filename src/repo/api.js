@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {useState} from "react";
 
-let API_HOST = "http://192.168.100.111:5000/api"
+let API_HOST = "http://65.21.110.202:5000/api"
 
 let token = localStorage.getItem("token") || "";
 

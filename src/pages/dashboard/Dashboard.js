@@ -8,9 +8,9 @@ import Paper from '@material-ui/core/Paper';
 import FullScreenDialog from "../../components/FullScreenDialog"
 import Copyright from "../../components/Copyright";
 import ButtonBase from "../../components/ButtonBase";
-// import Chart from "../../components/Chart";
 import Title from '../../components/Title';
 import {globalData} from "../../repo/api";
+import Chart from "../../components/Chart"
 
 import Chatbot from "react-chatbot-kit";
 
@@ -100,7 +100,7 @@ const useStyles = makeStyles((theme) => ({
     },
     fixedWidth: {
         width: 1300,
-    },
+    }
 }));
 
 export default function Dashboard() {
@@ -115,6 +115,8 @@ export default function Dashboard() {
     };
     const fixedDimPaper = clsx(classes.paper, classes.fixedHeight, classes.fixedWidth);
 
+    const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+
     return (
             <div>
                 <div className={classes.appBarSpacer} />
@@ -123,11 +125,11 @@ export default function Dashboard() {
                         <Title>Welcome, {globalData.user.username}!</Title>
                     </div>
                     <Grid container spacing={3}>
-                        {/*<Grid item xs={12} md={8} lg={9}>*/}
-                            {/*<Paper className={fixedHeightPaper}>*/}
-                            {/*    <Chart />*/}
-                            {/*</Paper>*/}
-                        {/*</Grid>*/}
+                        <Grid item xs={12} md={8} lg={9}>
+                            <Paper className={fixedHeightPaper}>
+                                <Chart />
+                            </Paper>
+                        </Grid>
                         <Grid item xs={12} md={8} lg={9}>
                             <Paper className={fixedDimPaper}>
                                 <ButtonBase />
