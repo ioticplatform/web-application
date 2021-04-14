@@ -24,6 +24,7 @@ const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
+        height: "400px"
     },
     toolbar: {
         paddingRight: 0, // keep right padding when drawer closed
@@ -89,6 +90,10 @@ const useStyles = makeStyles((theme) => ({
         paddingTop: theme.spacing(4),
         paddingBottom: theme.spacing(4),
     },
+    container2: {
+        height: '2vh',
+        paddingLeft: theme.spacing(135),
+    },
     paper: {
         padding: theme.spacing(2),
         display: 'flex',
@@ -132,20 +137,16 @@ export default function Dashboard() {
                         </Grid>
                     </Grid>
                 </Container>
-                <Grid container spacing={3}>
-                    <Grid item xs={9}>
-                        <Box pt={4}>
-                            <Copyright />
-                        </Box>
-                    </Grid>
-                    <Grid item xs={3}>
+                <Container className={classes.container2}>
+                    <Grid>
                         <Chatbot
                             config={config}
                             actionProvider={ActionProvider}
                             messageParser={MessageParser}
                         />
                     </Grid>
-                </Grid>
+                </Container>
+                <Copyright />
             </div>
     );
 }

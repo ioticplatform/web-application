@@ -35,7 +35,7 @@ const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        display: 'flex',
+        display: 'flex'
     },
     toolbar: {
         paddingRight: 24, // keep right padding when drawer closed

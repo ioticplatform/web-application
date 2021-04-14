@@ -60,7 +60,8 @@ export default function Login() {
         return <Redirect to={"/register"}/>
     }
 
-    return  <Container className={classes.paper} component="main" maxWidth="xs">
+    return  <div>
+        <Container className={classes.paper} component="main" maxWidth="xs">
         <CssBaseline />
         <div className={classes.paper}>
             <div className="row">
@@ -120,8 +121,7 @@ export default function Login() {
                 </Grid>
             </form>
         </div>
-        <Box mt={8}>
-            <Copyright />
-        </Box>
     </Container>
+        <Copyright />
+    </div>
 }
