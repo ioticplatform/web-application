@@ -29,7 +29,7 @@ import Typography from "@material-ui/core/Typography";
 import Badge from "@material-ui/core/Badge";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import AppBar from "@material-ui/core/AppBar";
-import {api, globalData} from "./repo/api";
+import {globalData} from "./repo/api";
 
 const drawerWidth = 240;
 

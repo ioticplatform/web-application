@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import { withStyles, makeStyles } from '@material-ui/core/styles';
+import {withStyles, makeStyles, useTheme} from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import {api, globalData} from "../../repo/api.js"
 import {Redirect} from "react-router";
@@ -22,6 +22,8 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 
 import Chart from "react-google-charts";
+import DataChart from "../../components/Chart";
+import {Label, Line, LineChart, Legend, XAxis, YAxis, CartesianGrid, Tooltip, PieChart, Pie, Cell} from "recharts";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -90,6 +92,8 @@ const useStyles = makeStyles({
 
 export default function Sensor() {
     const classes = useStyles();
+    const theme = useTheme();
+    const colors = ["#99FF66", "#42edff", "#ff6666"]
 
     const [value, setValue] = React.useState(0);
 
@@ -100,6 +104,8 @@ export default function Sensor() {
     let [data, setSensorData] = useState([]);
 
     let [chart_data, setChartSensorData] = useState([]);
+
+    let [rechart_data, setReChartSensorData] = useState([]);
 
     let [normalValues, setNormalValues] = useState([]);
     let [lowerValues, setLowerValues] = useState([]);
@@ -118,6 +124,10 @@ export default function Sensor() {
             let res = await api.getSensorData();
             setLoading(false)
             setSensorData(res.data.data)
+
+            console.log(res.data.data)
+            setReChartSensorData(res.data.data.map(x => ({time: x.timestamp, value: x.value})))
+
             setChartSensorData(res.data.data.map(x => ["Date(" + x.timestamp + ")", x.value]))
 
             setHigherValues(res.data.data.filter(x => x.value > 600));
@@ -169,22 +179,47 @@ export default function Sensor() {
                     </Table>
                 </TabPanel>
                 <TabPanel value={value} index={1}>
-                    {isLoading ? <CircularProgress/> : <Chart
-                        width={'100%'}
-                        height={'500px'}
-                        chartType="AreaChart"
-                        loader={<div>Loading Chart</div>}
-                        data={[...[['Date', 'value']], ...chart_data]}
-                        options={{
-                            title: 'Variation',
-                            hAxis: { title: 'time', titleTextStyle: { color: '#333' } },
-                            vAxis: { title: 'value'},
-                            chartArea: { width: '50%', height: '70%' },
-                        }}
-                    />}
+                    {isLoading ? <CircularProgress/> :
+                        // <Chart
+                        // width={'100%'}
+                        // height={'500px'}
+                        // chartType="AreaChart"
+                        // loader={<div>Loading Chart</div>}
+                        // data={[...[['Date', 'value']], ...chart_data]}
+                        // options={{
+                        //     title: 'Variation',
+                        //     hAxis: { title: 'time', titleTextStyle: { color: '#333' } },
+                        //     vAxis: { title: 'value'},
+                        //     chartArea: { width: '50%', height: '70%' },
+                        // }}
+                        // />
+                        <div align={"center"}>
+                        <LineChart
+                            width={1200}
+                            height={500}
+                            data={rechart_data}
+                            margin={{ top: 100, right: 20, left: 30, bottom: 100 }}
+                        >
+                            <CartesianGrid strokeDasharray="3 3" />
+                            <XAxis dataKey="time"  tick={false} ><Label >Time</Label></XAxis>
+                            <YAxis stroke={theme.palette.text.secondary}>
+                                <Label
+                                    angle={270}
+                                    position="left"
+                                    style={{ textAnchor: 'middle', fill: theme.palette.text.primary }} >
+                                    {globalData.sensor.type} ({globalData.sensor.measure_unit})
+                                </Label>
+                            </YAxis>
+                            <Tooltip />
+                            <Line type="monotone" dataKey="value" stroke={theme.palette.primary.main}  />
+                        </LineChart>
+                        </div>
+                    }
                 </TabPanel>
                 <TabPanel value={value} index={2}>
-                    {isLoading ? <CircularProgress/> : <Chart
+                    {isLoading ? <CircularProgress/> :
+                        <div align={"center"}>
+                        <Chart
                         width={'1000px'}
                         height={'600px'}
                         chartType="PieChart"
@@ -198,12 +233,29 @@ export default function Sensor() {
                         options={{
                             title: 'Levels',
                             slices: {
-                                0: {color: 'Green'},
-                                1: {color: 'Blue'},
-                                2: {color: 'Red'},
-                            }
+                                0: {color: colors[0]},
+                                1: {color: colors[1]},
+                                2: {color: colors[2]},
+                            },
+                            backgroundColor: 'transparent'
                         }}
-                    />}
+                    /></div> }
+                    {/*<PieChart width={500} height={500}>*/}
+                    {/*    <Pie data={[{name: 'Normal', value:normalValues.length},*/}
+                    {/*                {name: 'Lower', value: lowerValues.length},*/}
+                    {/*                {name: 'Higher', value: higherValues.length}]}*/}
+                    {/*         dataKey="value"*/}
+                    {/*         nameKey="name"*/}
+                    {/*         cx="70%" cy="50%" outerRadius={150} label={true} >*/}
+                    {/*        {*/}
+                    {/*            data.map((entry, index) => (*/}
+                    {/*                <Cell key={`cell-${index}`} fill={colors[index]}/>*/}
+                    {/*            ))*/}
+                    {/*        }*/}
+                    {/*    </Pie>*/}
+                    {/*    <Tooltip />*/}
+                    {/*    {<Legend width={50} />}*/}
+                    {/*</PieChart>*/}
                 </TabPanel>
             </p>
         </MDBContainer>
