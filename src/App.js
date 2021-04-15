@@ -30,6 +30,8 @@ import Badge from "@material-ui/core/Badge";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import AppBar from "@material-ui/core/AppBar";
 import {globalData} from "./repo/api";
+import ForgotPassword from "./pages/forgotPassword/ForgotPassword";
+import ResetPassword from "./pages/forgotPassword/ResetPassword";
 
 const drawerWidth = 240;
 
@@ -205,6 +207,12 @@ function App() {
                     </Route>
                     <Route path="/account">
                         <EditAccount/>
+                    </Route>
+                    <Route path="/forgotPassword">
+                        <ForgotPassword/>
+                    </Route>
+                    <Route path="/resetPassword">
+                        <ResetPassword/>
                     </Route>
                 </Switch>
             </div>

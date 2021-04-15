@@ -36,6 +36,7 @@ export default function Login() {
     let [error, setError] = useState("")
     let [loggedIn, setLoggedIn] = useState(false)
     let [register, setRegister] = useState(false)
+    let [forgotPassword, setForgotPassword] = useState(false)
 
     async function onLoginClick(){
         try{
@@ -52,6 +53,10 @@ export default function Login() {
         setRegister(true)
     }
 
+    async function onForgotPasswordClick(){
+        setForgotPassword(true)
+    }
+
     if(loggedIn){
         return <Redirect to={"/dashboard"}/>
     }
@@ -60,13 +65,14 @@ export default function Login() {
         return <Redirect to={"/register"}/>
     }
 
+    if(forgotPassword){
+        return <Redirect to={"/forgotPassword"}/>
+    }
+
     return  <div>
         <Container className={classes.paper} component="main" maxWidth="xs">
         <CssBaseline />
         <div className={classes.paper}>
-            <div className="row">
-                <p className="error">{error}</p>
-            </div>
             <paper variant="outlined">
                 <img src="circle-cropped.png" />
             </paper>
@@ -94,6 +100,9 @@ export default function Login() {
                     fullWidth
                     autoComplete="current-password"
                 />
+                <div className="row">
+                    <p className="error">{error}</p>
+                </div>
                 <FormControlLabel
                     control={<Checkbox value="remember" color="primary" />}
                     label="Remember me"
@@ -106,8 +115,11 @@ export default function Login() {
                 >Login</Button>
                 <Grid container>
                     <Grid item xs>
-                        <Link href="#" variant="body2">
-                            Forgot password?
+                        <Link
+                            component="buttonForgotPassword"
+                            variant="body2"
+                            onClick={onForgotPasswordClick}>
+                            {"Forgot password?"}
                         </Link>
                     </Grid>
                     <Grid item>

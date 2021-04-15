@@ -1,7 +1,8 @@
 import axios from 'axios';
 import {useState} from "react";
 
-let API_HOST = "http://65.21.110.202:5000/api"
+// let API_HOST = "http://65.21.110.202:5000/api"
+let API_HOST = "http://127.0.0.1:5000/api"
 
 let token = localStorage.getItem("token") || "";
 
@@ -78,5 +79,20 @@ async function editDevice(device, name, description) {
     return res;
 }
 
-let api = {login, register, getDevices, getSensors, getDeviceSensors, getSensorData, editAccount, deleteDevice, editDevice}
+async function forgotPassword(credential) {
+    let res = await axios.post(API_HOST + "/users/forgotPassword", {credential: credential});
+    return res;
+}
+
+async function resetPassword(credential, newPassword, resetPasswordCode) {
+    let res = await axios.post(API_HOST + "/users/resetPassword", {credential: credential,
+                                                                            newPassword: newPassword,
+                                                                            resetPasswordCode: resetPasswordCode});
+    return res;
+}
+
+let api = {
+    login, register, getDevices, getSensors, getDeviceSensors,
+    getSensorData, editAccount, deleteDevice, editDevice,
+    forgotPassword, resetPassword}
 export {api, globalData}
