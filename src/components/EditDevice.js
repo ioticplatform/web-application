@@ -28,7 +28,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function EditDevice({device}) {
+export default function EditDevice({device, onFinishEdit}) {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
 
@@ -50,6 +50,7 @@ export default function EditDevice({device}) {
         try{
             await api.editDevice(device, name, description)
             handleClose();
+            onFinishEdit();
         } catch (e){
             setError("Info Error.")
         }
