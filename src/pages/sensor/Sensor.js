@@ -167,17 +167,21 @@ export default function Sensor() {
                         scrollButtons="on"
                         indicatorColor="primary"
                         textColor="primary"
-                        aria-label="scrollable force tabs example"
-                    >
+                        aria-label="scrollable force tabs example">
                         <Tab label="Received Data" icon={<StorageIcon />} {...a11yProps(0)} />
                         <Tab label="Charts" icon={<FavoriteIcon />} {...a11yProps(1)} />
                         <Tab label="PieChart" icon={<PersonPinIcon />} {...a11yProps(2)} />
                     </Tabs>
                 </AppBar>
                 <TabPanel value={value} index={0}>
-                    <div style={{maxWidth: '100%', marginTop: "20px"}}>
+                    <div style={{maxWidth: '100%'}}>
                         <MaterialTable
                             columns={[
+                                {
+                                    title: '#',
+                                    render: (it) => <p>{it.tableData.id + 1}</p>,
+                                    headerStyle: {width: "20px"}
+                                },
                                 {
                                     title: 'Value',
                                     field: 'value',
@@ -206,15 +210,18 @@ export default function Sensor() {
                                 }
                             ]}
                             data={data}
-                            options={{
-                                filtering: true
-                            }}
                             isLoading={isLoading}
                             title={globalData.sensor.type + " - Data"}
                             options={{
+                                filtering: true,
                                 headerStyle: {
                                     backgroundColor: '#E8E8F0',
                                     fontSize: 20
+                                },
+                                rowStyle: x => {
+                                    if (x.tableData.id % 2) {
+                                        return {backgroundColor: "#f7f7fa"}
+                                    }
                                 }
                             }}
                         />
@@ -279,7 +286,10 @@ export default function Sensor() {
                                 1: {color: colors[1]},
                                 2: {color: colors[2]},
                             },
-                            backgroundColor: 'transparent'
+                            backgroundColor: 'transparent',
+                            filterCellStyle: {
+                                backgroundColor: '#E8E8F0'
+                            }
                         }}
                     /></div> }
                 </TabPanel>

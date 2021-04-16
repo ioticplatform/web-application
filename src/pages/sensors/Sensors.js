@@ -38,6 +38,11 @@ export default function Sensors() {
         <MaterialTable
             columns={[
                 {
+                    title: '#',
+                    render: (it) => <p>{it.tableData.id + 1}</p>,
+                    headerStyle: {width: "20px"}
+                },
+                {
                     title: 'Type',
                     field: 'type',
                     render: (sensor) => <p onClick={() => onSensorClick(sensor)}>{sensor.type}</p>,
@@ -62,20 +67,23 @@ export default function Sensors() {
                     render: (rowData) => <DeleteSensor sensor={rowData} onFinishDelete={() => loadSensors()}/>}
             ]}
             data={sensors}
-            options={{
-                filtering: true
-            }}
             isLoading={isLoading}
             title="Sensors"
             onRowClick={((evt, selectedRow) => setSelectedRow(selectedRow.tableData.id))}
             options={{
+                filtering: true,
                 headerStyle: {
                     backgroundColor: '#E8E8F0',
                     fontSize: 20
                 },
-                rowStyle: rowData => ({
-                    backgroundColor: (selectedRow === rowData.tableData.id) ? '#EEE' : '#FFF'
-                })
+                rowStyle: x => {
+                    if (x.tableData.id % 2) {
+                        return {backgroundColor: "#f7f7fa"}
+                    }
+                },
+                filterCellStyle: {
+                    backgroundColor: '#E8E8F0'
+                }
             }}
         />
     </div>

@@ -121,9 +121,9 @@ export default function EditSensor({sensor, onFinishEdit}) {
                                 value={measureUnit}
                                 onChange={(it) => setMeasureUnit(it.target.value)}
                                 helperText="Please select one of the above."
-                                variant="outlined"
-                            >
-                                {[
+                                variant="outlined">
+                                {
+                                    [
                                     {
                                         value: 'Celsius',
                                         label: 'Celsius',

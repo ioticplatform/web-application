@@ -36,9 +36,14 @@ export default function Device() {
         setSensorClicked(true)
     }
 
-    return <div style={{maxWidth: '100%', marginTop: "60px"}}>
+    return <div style={{marginTop: "60px"}}>
         <MaterialTable
             columns={[
+                {
+                    title: '#',
+                    render: (it) => <p>{it.tableData.id + 1}</p>,
+                    headerStyle: {width: "20px"}
+                },
                 {
                     title: 'Type',
                     field: 'type',
@@ -64,21 +69,25 @@ export default function Device() {
                     render: (rowData) => <DeleteSensor sensor={rowData} onFinishDelete={() => loadSensors()}/>}
             ]}
             data={sensors}
-            options={{
-                filtering: true
-            }}
             isLoading={isLoading}
             title={globalData.device.name + " - Sensors"}
             onRowClick={((evt, selectedRow) => setSelectedRow(selectedRow.tableData.id))}
             options={{
+                filtering: true,
                 headerStyle: {
                     backgroundColor: '#E8E8F0',
                     fontSize: 20
                 },
-                rowStyle: rowData => ({
-                    backgroundColor: (selectedRow === rowData.tableData.id) ? '#EEE' : '#FFF'
-                })
-            }}
+                rowStyle: x => {
+                    if (x.tableData.id % 2) {
+                        return {backgroundColor: "#f7f7fa"}
+                    }
+                },
+                filterCellStyle: {
+                    backgroundColor: '#E8E8F0'
+                }
+            }
+            }
         />
     </div>
 }

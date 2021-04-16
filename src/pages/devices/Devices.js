@@ -38,6 +38,11 @@ export default function Devices() {
         <MaterialTable
             columns={[
                 {
+                    title: '#',
+                    render: (it) => <p>{it.tableData.id + 1}</p>,
+                    headerStyle: {width: "20px"}
+                },
+                {
                     title: 'Name',
                     field: 'name',
                     render: (device) => <p onClick={() => onDeviceClick(device)}>{device.name}</p>,
@@ -63,20 +68,23 @@ export default function Devices() {
                     render: (rowData) => <DeleteDevice device={rowData} onFinishDelete={() => loadDevices()}/>}
             ]}
             data={devices}
-            options={{
-                filtering: true
-            }}
             isLoading={isLoading}
             title="Devices"
             onRowClick={((evt, selectedRow) => setSelectedRow(selectedRow.tableData.id))}
             options={{
+                filtering: true,
                 headerStyle: {
                     backgroundColor: '#E8E8F0',
                     fontSize: 20
                 },
-                rowStyle: rowData => ({
-                    backgroundColor: (selectedRow === rowData.tableData.id) ? '#EEE' : '#FFF'
-                })
+                rowStyle: x => {
+                    if (x.tableData.id % 2) {
+                        return {backgroundColor: "#f7f7fa"}
+                    }
+                },
+                filterCellStyle: {
+                    backgroundColor: '#E8E8F0'
+                }
             }}
         />
     </div>
