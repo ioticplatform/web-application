@@ -42,18 +42,18 @@ export default function Devices() {
                     field: 'name',
                     render: (device) => <p onClick={() => onDeviceClick(device)}>{device.name}</p>,
                     cellStyle: {
-                        backgroundColor: '#E8E8F0'
+                        backgroundColor: '#f2f2f7'
                     }
                 },
                 {
                     title: 'Description',
                     field: 'description',
-                    render: (device) => <p onClick={() => onDeviceClick(device)}>{device.name}</p>
+                    render: (device) => <p onClick={() => onDeviceClick(device)}>{device.description}</p>
                 },
                 {
-                    title: 'Timestamp',
+                    title: 'Created',
                     field: 'timestamp',
-                    render: ({timestamp}) => moment(timestamp).format("MM/DD HH:mm")
+                    render: ({timestamp}) => moment(timestamp).format("DD/MM/YY HH:mm")
                 },
                 {
                     title: 'Edit',
@@ -71,8 +71,8 @@ export default function Devices() {
             onRowClick={((evt, selectedRow) => setSelectedRow(selectedRow.tableData.id))}
             options={{
                 headerStyle: {
-                    backgroundColor: '#000000',
-                    color: '#FFF'
+                    backgroundColor: '#E8E8F0',
+                    fontSize: 20
                 },
                 rowStyle: rowData => ({
                     backgroundColor: (selectedRow === rowData.tableData.id) ? '#EEE' : '#FFF'

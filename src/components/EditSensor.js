@@ -13,6 +13,7 @@ import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import Paper from "@material-ui/core/Paper";
 import {api} from "../repo/api";
+import MenuItem from '@material-ui/core/MenuItem';
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
@@ -28,12 +29,12 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function EditDevice({device, onFinishEdit}) {
+export default function EditSensor({sensor, onFinishEdit}) {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
 
     let [name, setName] = useState("")
-    let [description, setDescription] = useState("")
+    let [measureUnit, setMeasureUnit] = useState("")
 
     let [error, setError] = useState("")
 
@@ -47,17 +48,15 @@ export default function EditDevice({device, onFinishEdit}) {
 
     async function onUpdateClick(){
         try{
-            if (!name)
-                name = device.name;
-            if (!description)
-                description = device.description;
-            await api.editDevice(device, name, description)
+            await api.editSensor(sensor, measureUnit)
             handleClose();
             onFinishEdit();
         } catch (e){
             setError("Info Error.")
         }
     }
+
+    console.log(sensor)
 
     return (
         <div>
@@ -71,7 +70,7 @@ export default function EditDevice({device, onFinishEdit}) {
                             <CloseIcon />
                         </IconButton>
                         <Typography variant="h6" className={classes.title}>
-                            EDIT DEVICE
+                            EDIT SENSOR
                         </Typography>
                         <Button autoFocus color="inherit" onClick={onUpdateClick}>
                             OK
@@ -79,15 +78,30 @@ export default function EditDevice({device, onFinishEdit}) {
                     </Toolbar>
                 </AppBar>
                 <div style={{maxWidth: '50%', marginLeft: "25%", marginTop: "10%"}}>
-                    <Grid container spacing={5}>
-                        <Grid item xs={6}>
+                <Grid container spacing={3}>
+                        <Grid item xs={12}>
                             <h3>
                                 Id:
                             </h3>
                             <TextField
                                 fullWidth
-                                label="You can not modify the device Id"
-                                defaultValue={device._id}
+                                label="You can not modify the sensor Id"
+                                defaultValue={sensor._id}
+                                disabled={true}
+                                InputProps={{
+                                    readOnly: true,
+                                }}
+                                variant="filled"
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <h3>
+                                Type:
+                            </h3>
+                            <TextField
+                                fullWidth
+                                label="You can not modify the sensor type"
+                                defaultValue={sensor.type}
                                 disabled={true}
                                 InputProps={{
                                     readOnly: true,
@@ -97,36 +111,34 @@ export default function EditDevice({device, onFinishEdit}) {
                         </Grid>
                         <Grid item xs={6}>
                             <h3>
-                                Name:
+                                Measurement Unit:
                             </h3>
                             <TextField
-                                id="name"
-                                name="name"
-                                label={device.name}
-                                variant="filled"
+                                id="outlined-select-currency"
+                                select
                                 fullWidth
-                                value={name} onChange={(it) => setName(it.target.value)}
-                            />
+                                label="Select measurement unit"
+                                value={measureUnit}
+                                onChange={(it) => setMeasureUnit(it.target.value)}
+                                helperText="Please select one of the above."
+                                variant="outlined"
+                            >
+                                {[
+                                    {
+                                        value: 'Celsius',
+                                        label: 'Celsius',
+                                    },
+                                    {
+                                        value: 'Fahrenheit',
+                                        label: 'Fahrenheit',
+                                    }
+                                ].map((option) => (
+                                    <MenuItem key={option.value} value={option.value}>
+                                        {option.label}
+                                    </MenuItem>
+                                ))}
+                            </TextField>
                         </Grid>
-                        <Grid item xs={12}>
-                            <h3>
-                                Description:
-                            </h3>
-                            <TextField
-                                id="description"
-                                name="description"
-                                label={device.description? device.description:"Write a short description" +
-                                    " for your device..."}
-                                multiline
-                                rows={4}
-                                fullWidth
-                                variant="filled"
-                                value={description} onChange={(it) => setDescription(it.target.value)}
-                            />
-                        </Grid>
-                        <div className="row">
-                            <p className="error">{error}</p>
-                        </div>
                     </Grid>
                 </div>
             </Dialog>

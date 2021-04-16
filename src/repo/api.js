@@ -69,13 +69,30 @@ async function editAccount(password) {
 }
 
 async function deleteDevice(device) {
-    let res = axios.delete(API_HOST + `/users/${user.id}/devices/${device._id}`,{headers: {Authorization: `jwt ${token}`}});
+    let res = axios.delete(API_HOST + `/users/${device.id_user}/devices/${device._id}`,{headers: {Authorization: `jwt ${token}`}});
+    console.log(res)
+    return res;
+}
+
+async function deleteSensor(sensor) {
+    let res = axios.delete(API_HOST + `/users/${sensor.id_user}/devices/${sensor.id_device}/sensors/${sensor._id}`,{headers: {Authorization: `jwt ${token}`}});
+    console.log(res)
+    return res;
+}
+
+async function deleteData(data) {
+    let res = axios.delete(API_HOST + `/users/${data.id_user}/devices/${data.id_device}/sensors/${data.id_sensor}/data/${data._id}`,{headers: {Authorization: `jwt ${token}`}});
     console.log(res)
     return res;
 }
 
 async function editDevice(device, name, description) {
     let res = axios.put(API_HOST + `/users/${user.id}/devices/${device._id}`, {name: name, description: description}, {headers: {Authorization: `jwt ${token}`}});
+    return res;
+}
+
+async function editSensor(sensor, measurementUnit) {
+    let res = axios.put(API_HOST + `/users/${sensor.id_user}/devices/${sensor.id_device}/sensors/${sensor._id}`, {measure_unit: measurementUnit}, {headers: {Authorization: `jwt ${token}`}});
     return res;
 }
 
@@ -93,6 +110,6 @@ async function resetPassword(credential, newPassword, resetPasswordCode) {
 
 let api = {
     login, register, getDevices, getSensors, getDeviceSensors,
-    getSensorData, editAccount, deleteDevice, editDevice,
-    forgotPassword, resetPassword}
+    getSensorData, editAccount, deleteDevice, editDevice, editSensor,
+    forgotPassword, resetPassword, deleteData, deleteSensor}
 export {api, globalData}

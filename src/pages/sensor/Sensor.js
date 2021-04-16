@@ -15,15 +15,17 @@ import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import PhoneIcon from '@material-ui/icons/Storage';
+import StorageIcon from '@material-ui/icons/Storage';
 import FavoriteIcon from '@material-ui/icons/Timeline';
 import PersonPinIcon from '@material-ui/icons/PieChart';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 
 import Chart from "react-google-charts";
-import DataChart from "../../components/Chart";
-import {Label, Line, LineChart, Legend, XAxis, YAxis, CartesianGrid, Tooltip, PieChart, Pie, Cell} from "recharts";
+import {Label, Line, LineChart, Legend, XAxis, YAxis, CartesianGrid, Tooltip,} from "recharts";
+import MaterialTable from "material-table";
+import moment from "moment";
+import DeleteData from "../../components/DeleteData";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -118,30 +120,38 @@ export default function Sensor() {
         setDataClicked(true)
     }
 
+    async function loadData() {
+        setLoading(true)
+        let res = await api.getSensorData();
+        setLoading(false)
+        setSensorData(res.data.data)
+
+        console.log(res.data.data)
+        setReChartSensorData(res.data.data.map(x => ({time: x.timestamp, value: x.value})))
+
+        setChartSensorData(res.data.data.map(x => ["Date(" + x.timestamp + ")", x.value]))
+
+        setHigherValues(res.data.data.filter(x => x.value > 600));
+        setLowerValues(res.data.data.filter(x => x.value < 200));
+        setNormalValues(res.data.data.filter(x => x.value >= 200 && x.value <= 400));
+
+    }
+
     useEffect(() => {
-        async function fetch(){
-            setLoading(true)
-            let res = await api.getSensorData();
-            setLoading(false)
-            setSensorData(res.data.data)
-
-            console.log(res.data.data)
-            setReChartSensorData(res.data.data.map(x => ({time: x.timestamp, value: x.value})))
-
-            setChartSensorData(res.data.data.map(x => ["Date(" + x.timestamp + ")", x.value]))
-
-            setHigherValues(res.data.data.filter(x => x.value > 600));
-            setLowerValues(res.data.data.filter(x => x.value < 200));
-            setNormalValues(res.data.data.filter(x => x.value >= 200 && x.value <= 400));
-
-            globalData.setTitle("Sensor " + globalData.sensor.type);
-        }
-        fetch()
+        loadData()
     }, [])
 
 
     if(dataClicked){
         return <Redirect to="/data"/>
+    }
+
+    function level(val, minVal, maxVal){
+        if (val < minVal)
+            return "low"
+        else if (val > maxVal)
+            return "high"
+        else return "normal"
     }
 
     return (
@@ -159,24 +169,56 @@ export default function Sensor() {
                         textColor="primary"
                         aria-label="scrollable force tabs example"
                     >
-                        <Tab label="Received Data" icon={<PhoneIcon />} {...a11yProps(0)} />
+                        <Tab label="Received Data" icon={<StorageIcon />} {...a11yProps(0)} />
                         <Tab label="Charts" icon={<FavoriteIcon />} {...a11yProps(1)} />
                         <Tab label="PieChart" icon={<PersonPinIcon />} {...a11yProps(2)} />
                     </Tabs>
                 </AppBar>
                 <TabPanel value={value} index={0}>
-                    <Table size="large" stickyHeader="true">
-                        <TableHead>
-                            <TableRow>
-                                <StyledTableCell>Type</StyledTableCell>
-                                <StyledTableCell>Time</StyledTableCell>
-                                <StyledTableCell>State</StyledTableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {isLoading ? <CircularProgress/> : data.map(it => <Data key={it._id} data={it} onClick={onDataClick} />)}
-                        </TableBody>
-                    </Table>
+                    <div style={{maxWidth: '100%', marginTop: "20px"}}>
+                        <MaterialTable
+                            columns={[
+                                {
+                                    title: 'Value',
+                                    field: 'value',
+                                    cellStyle: {
+                                        backgroundColor: '#f2f2f7',
+                                    }
+                                },
+                                {
+                                    title: 'Day',
+                                    field: 'timestamp',
+                                    render: ({timestamp}) => moment(timestamp).format("DD/MM/YY")
+                                },
+                                {
+                                    title: 'Time',
+                                    field: 'timestamp',
+                                    render: ({timestamp}) => moment(timestamp).format("HH:mm:ss")
+                                },
+                                {
+                                    title: 'Level',
+                                    field: 'value',
+                                    render: ({value}) => level(value, 200, 500),
+                                },
+                                {
+                                    title: 'Delete',
+                                    render: (rowData) => <DeleteData data={rowData} onFinishDelete={() => loadData()}/>
+                                }
+                            ]}
+                            data={data}
+                            options={{
+                                filtering: true
+                            }}
+                            isLoading={isLoading}
+                            title={globalData.sensor.type + " - Data"}
+                            options={{
+                                headerStyle: {
+                                    backgroundColor: '#E8E8F0',
+                                    fontSize: 20
+                                }
+                            }}
+                        />
+                    </div>
                 </TabPanel>
                 <TabPanel value={value} index={1}>
                     {isLoading ? <CircularProgress/> :
@@ -240,22 +282,6 @@ export default function Sensor() {
                             backgroundColor: 'transparent'
                         }}
                     /></div> }
-                    {/*<PieChart width={500} height={500}>*/}
-                    {/*    <Pie data={[{name: 'Normal', value:normalValues.length},*/}
-                    {/*                {name: 'Lower', value: lowerValues.length},*/}
-                    {/*                {name: 'Higher', value: higherValues.length}]}*/}
-                    {/*         dataKey="value"*/}
-                    {/*         nameKey="name"*/}
-                    {/*         cx="70%" cy="50%" outerRadius={150} label={true} >*/}
-                    {/*        {*/}
-                    {/*            data.map((entry, index) => (*/}
-                    {/*                <Cell key={`cell-${index}`} fill={colors[index]}/>*/}
-                    {/*            ))*/}
-                    {/*        }*/}
-                    {/*    </Pie>*/}
-                    {/*    <Tooltip />*/}
-                    {/*    {<Legend width={50} />}*/}
-                    {/*</PieChart>*/}
                 </TabPanel>
             </p>
         </MDBContainer>

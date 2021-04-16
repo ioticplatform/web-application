@@ -1,97 +1,84 @@
 import React, {useEffect, useState} from "react";
-import { withStyles, makeStyles } from '@material-ui/core/styles';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import {api, globalData} from "../../repo/api.js"
 import {Redirect} from "react-router";
-
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Title from '../../components/Title';
-import {MDBContainer} from "mdbreact";
-
-function Sensor({sensor, onClick}) {
-    return <StyledTableRow onClick={() => onClick(sensor)} key={sensor._id}>
-        <StyledTableCell>{sensor.type}</StyledTableCell>
-        <StyledTableCell>{sensor.measure_unit}</StyledTableCell>
-        <StyledTableCell>{sensor.timestamp}</StyledTableCell>
-        <StyledTableCell>Connected</StyledTableCell>
-    </StyledTableRow>
-}
-
-const StyledTableCell = withStyles((theme) => ({
-    head: {
-        backgroundColor: theme.palette.common.black,
-        color: theme.palette.common.white,
-    },
-    body: {
-        fontSize: 14,
-    },
-}))(TableCell);
-
-const StyledTableRow = withStyles((theme) => ({
-    root: {
-        '&:nth-of-type(odd)': {
-            backgroundColor: theme.palette.action.hover,
-        },
-    },
-}))(TableRow);
-
-const useStyles = makeStyles({
-    table: {
-        minWidth: 700,
-    },
-});
+import MaterialTable from "material-table";
+import moment from "moment";
+import EditDevice from "../../components/EditSensor";
+import DeleteDevice from "../../components/DeleteSensor";
+import EditSensor from "../../components/EditSensor";
+import DeleteSensor from "../../components/DeleteSensor";
 
 export default function Device() {
-    const classes = useStyles();
-
     let [sensors, setDeviceSensors] = useState([]);
     let [isLoading, setLoading] = useState(false);
     let [sensorClicked, setSensorClicked] = useState(false);
+    const [selectedRow, setSelectedRow] = useState(null);
 
-    function onSensorClick(sensor){
-        globalData.sensor = sensor;
-        setSensorClicked(true)
+
+    async function loadSensors() {
+        setLoading(true)
+        let res = await api.getDeviceSensors();
+        setLoading(false)
+        setDeviceSensors(res.data.sensors)
+        // globalData.setTitle("Device " + globalData.device.name);
     }
 
     useEffect(() => {
-        async function fetch(){
-            setLoading(true)
-            let res = await api.getDeviceSensors();
-            setLoading(false)
-            setDeviceSensors(res.data.sensors)
-            globalData.setTitle("Device " + globalData.device.name);
-        }
-        fetch()
+        loadSensors()
     }, [])
 
-
-    if(sensorClicked){
+    if (sensorClicked) {
         return <Redirect to="/sensor"/>
     }
 
-    return (
-        <MDBContainer>
-            <p className="mx-auto">
-                <Title>' '</Title>
-                <Title>{globalData.device.name}</Title>
-                <Table size="large" stickyHeader="true">
-                    <TableHead>
-                        <TableRow>
-                            <StyledTableCell>Type</StyledTableCell>
-                            <StyledTableCell>Unit</StyledTableCell>
-                            <StyledTableCell>Created</StyledTableCell>
-                            <StyledTableCell>State</StyledTableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {isLoading ? <CircularProgress/> : sensors.map(it => <Sensor key={it._id} sensor={it} onClick={onSensorClick} />)}
-                    </TableBody>
-                </Table>
-            </p>
-        </MDBContainer>
-    );
+    function onDeviceClick(device) {
+        globalData.sensor = device;
+        setSensorClicked(true)
+    }
+
+    return <div style={{maxWidth: '100%', marginTop: "60px"}}>
+        <MaterialTable
+            columns={[
+                {
+                    title: 'Type',
+                    field: 'type',
+                    render: (sensor) => <p onClick={() => onDeviceClick(sensor)}>{sensor.type}</p>,
+                    cellStyle: {
+                        backgroundColor: '#f2f2f7'
+                    }
+                },
+                {
+                    title: 'Measurement Unit',
+                    field: 'measure_unit',
+                },
+                {
+                    title: 'Created',
+                    field: 'timestamp',
+                    render: ({timestamp}) => moment(timestamp).format("DD/MM/YY HH:mm")
+                },
+                {
+                    title: 'Edit',
+                    render: (rowData) => <EditSensor sensor={rowData} onFinishEdit={() => loadSensors()}/>},
+                {
+                    title: 'Delete',
+                    render: (rowData) => <DeleteSensor sensor={rowData} onFinishDelete={() => loadSensors()}/>}
+            ]}
+            data={sensors}
+            options={{
+                filtering: true
+            }}
+            isLoading={isLoading}
+            title={globalData.device.name + " - Sensors"}
+            onRowClick={((evt, selectedRow) => setSelectedRow(selectedRow.tableData.id))}
+            options={{
+                headerStyle: {
+                    backgroundColor: '#E8E8F0',
+                    fontSize: 20
+                },
+                rowStyle: rowData => ({
+                    backgroundColor: (selectedRow === rowData.tableData.id) ? '#EEE' : '#FFF'
+                })
+            }}
+        />
+    </div>
 }
