@@ -25,7 +25,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function DeleteDevice({device}) {
+export default function DeleteDevice({device, onFinishDelete}) {
     const classes = useStyles();
     let [error, setError] = useState("")
     const [open, setOpen] = React.useState(false);
@@ -41,6 +41,7 @@ export default function DeleteDevice({device}) {
     async function onDeleteClick(){
         try{
             await api.deleteDevice(device);
+            onFinishDelete();
         } catch (e){
             setError("Could not delete this device.");
         }

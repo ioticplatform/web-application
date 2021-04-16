@@ -38,15 +38,27 @@ export default function Devices() {
     return <div style={{maxWidth: '100%'}}>
         <MaterialTable
             columns={[
-                {title: 'Name', render: (device) => <p onClick={() => onDeviceClick(device)}>{device.name}</p>},
-                {title: 'Description', field: 'description'},
+                {
+                    title: 'Name',
+                    field: 'name',
+                    render: (device) => <p onClick={() => onDeviceClick(device)}>{device.name}</p>
+                },
+                {
+                    title: 'Description',
+                    field: 'description',
+                    render: (device) => <p onClick={() => onDeviceClick(device)}>{device.name}</p>
+                },
                 {
                     title: 'Timestamp',
                     field: 'timestamp',
                     render: ({timestamp}) => moment(timestamp).format("MM/DD HH:mm")
                 },
-                {title: 'edit', render: (rowData) => <EditDevice device={rowData} onFinishEdit={() => loadDevices()}/>},
-                {title: 'delete', render: (rowData) => <DeleteDevice device={rowData}/>}
+                {
+                    title: 'Edit',
+                    render: (rowData) => <EditDevice device={rowData} onFinishEdit={() => loadDevices()}/>},
+                {
+                    title: 'Delete',
+                    render: (rowData) => <DeleteDevice device={rowData} onFinishDelete={() => loadDevices()}/>}
             ]}
             data={devices}
             options={{
