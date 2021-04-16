@@ -1,9 +1,7 @@
 import React, {useEffect, useState} from "react";
-import {withStyles, makeStyles, lighten} from '@material-ui/core/styles';
 import {api, globalData} from "../../repo/api.js"
 import "./Devices.scss"
 import {Redirect} from "react-router";
-
 import MaterialTable from "material-table";
 import EditDevice from "../../components/EditDevice";
 import moment from "moment";
@@ -13,6 +11,7 @@ export default function Devices() {
     let [devices, setDevices] = useState([]);
     let [isLoading, setLoading] = useState(false);
     let [deviceClicked, setDeviceClicked] = useState(false);
+    const [selectedRow, setSelectedRow] = useState(null);
 
 
     async function loadDevices() {
@@ -35,13 +34,16 @@ export default function Devices() {
         setDeviceClicked(true)
     }
 
-    return <div style={{maxWidth: '100%'}}>
+    return <div style={{maxWidth: '100%', marginTop: "60px"}}>
         <MaterialTable
             columns={[
                 {
                     title: 'Name',
                     field: 'name',
-                    render: (device) => <p onClick={() => onDeviceClick(device)}>{device.name}</p>
+                    render: (device) => <p onClick={() => onDeviceClick(device)}>{device.name}</p>,
+                    cellStyle: {
+                        backgroundColor: '#E8E8F0'
+                    }
                 },
                 {
                     title: 'Description',
@@ -66,6 +68,16 @@ export default function Devices() {
             }}
             isLoading={isLoading}
             title="Devices"
+            onRowClick={((evt, selectedRow) => setSelectedRow(selectedRow.tableData.id))}
+            options={{
+                headerStyle: {
+                    backgroundColor: '#000000',
+                    color: '#FFF'
+                },
+                rowStyle: rowData => ({
+                    backgroundColor: (selectedRow === rowData.tableData.id) ? '#EEE' : '#FFF'
+                })
+            }}
         />
     </div>
 }
