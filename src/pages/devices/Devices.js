@@ -4,18 +4,6 @@ import {api, globalData} from "../../repo/api.js"
 import "./Devices.scss"
 import {Redirect} from "react-router";
 
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import TableSortLabel from "@material-ui/core/TableSortLabel";
-import PropTypes from "prop-types";
-import Toolbar from "@material-ui/core/Toolbar";
-import clsx from "clsx";
-import Typography from "@material-ui/core/Typography";
-import Tooltip from "@material-ui/core/Tooltip";
-import IconButton from "@material-ui/core/IconButton";
-import DeleteIcon from "@material-ui/icons/Delete";
-import FilterListIcon from "@material-ui/icons/FilterList";
 import MaterialTable from "material-table";
 import EditDevice from "../../components/EditDevice";
 import moment from "moment";
