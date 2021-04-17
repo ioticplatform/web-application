@@ -1,11 +1,10 @@
 import './App.scss';
 import React, {useEffect, useState} from "react";
-
 import {
     BrowserRouter as Router,
     Switch,
     Route,
-    Link
+    useLocation
 } from "react-router-dom";
 import Login from "./pages/login/Login";
 import Devices from "./pages/devices/Devices";
@@ -35,6 +34,9 @@ import ResetPassword from "./pages/forgotPassword/ResetPassword";
 import FirstPage from "./pages/firstPage/FirstPage";
 import HowItStarted from "./pages/firstPage/articles/HowItStarted";
 import DIY from "./pages/firstPage/articles/DIY";
+
+import ReactGA from "react-ga";
+import InitializeReactGA from "./helper/googleAnalytics";
 
 const drawerWidth = 240;
 
@@ -121,7 +123,6 @@ function ShowAppBar() {
     const classes = useStyles();
     let [title, setTitle] = useState(false);
     globalData.setTitle = setTitle
-
     const [open, setOpen] = React.useState(false);
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -174,15 +175,83 @@ function ShowAppBar() {
     </div>
 }
 
+function usePageViews() {
+    // 'G-LM4H5B69Y3'
+
+    let location = useLocation();
+    useEffect(() => {
+        if (!window.GA_INITIALIZED) {
+            ReactGA.initialize('G-LM4H5B69Y3');
+            window.GA_INITIALIZED = true;
+        }
+        InitializeReactGA(ReactGA);
+        ReactGA.set({ page: location.pathname });
+        ReactGA.pageview(location.pathname);
+    }, [location]);
+}
+
 function App() {
+    // usePageViews()
+
     let [isLoggedIn, setLoggedIn] = useState(false);
     globalData.setLoggedIn = setLoggedIn
 
     document.body.style.background = "url('background-white.jpg') repeat center";
 
-    return <div className="App">
-        <Router>
-            <div>{isLoggedIn && <ShowAppBar />}</div>
+    if (isLoggedIn) {
+        return <div className="App">
+            <Router>
+                <div>{isLoggedIn && <ShowAppBar/>}</div>
+                <div>
+                    <Switch>
+                        <Route path="/firstPage">
+                            <FirstPage/>
+                        </Route>
+                        <Route path="/login">
+                            <Login/>
+                        </Route>
+                        <Route path="/dashboard">
+                            <Dashboard/>
+                        </Route>
+                        <Route path="/devices">
+                            <Devices/>
+                        </Route>
+                        <Route path="/device">
+                            <Device/>
+                        </Route>
+                        <Route path="/sensors">
+                            <Sensors/>
+                        </Route>
+                        <Route path="/sensor">
+                            <Sensor/>
+                        </Route>
+                        <Route path="/register">
+                            <Register/>
+                        </Route>
+                        <Route path="/account">
+                            <EditAccount/>
+                        </Route>
+                        <Route path="/forgotPassword">
+                            <ForgotPassword/>
+                        </Route>
+                        <Route path="/resetPassword">
+                            <ResetPassword/>
+                        </Route>
+                        <Route path="/howItStarted">
+                            <HowItStarted/>
+                        </Route>
+                        <Route path="/diy">
+                            <DIY/>
+                        </Route>
+                    </Switch>
+                </div>
+            </Router>
+        </div>
+    }
+    else {
+        return <div className="App">
+            <Router>
+            <div>{isLoggedIn && <ShowAppBar/>}</div>
             <div>
                 <Switch>
                     <Route path="/firstPage">
@@ -191,26 +260,8 @@ function App() {
                     <Route path="/login">
                         <Login/>
                     </Route>
-                    <Route path="/dashboard">
-                        <Dashboard/>
-                    </Route>
-                    <Route path="/devices">
-                        <Devices/>
-                    </Route>
-                    <Route path="/device">
-                        <Device/>
-                    </Route>
-                    <Route path="/sensors">
-                        <Sensors/>
-                    </Route>
-                    <Route path="/sensor">
-                        <Sensor/>
-                    </Route>
                     <Route path="/register">
                         <Register/>
-                    </Route>
-                    <Route path="/account">
-                        <EditAccount/>
                     </Route>
                     <Route path="/forgotPassword">
                         <ForgotPassword/>
@@ -228,6 +279,7 @@ function App() {
             </div>
         </Router>
     </div>
+    }
 
 }
 
