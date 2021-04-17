@@ -3,14 +3,10 @@ import {withStyles, makeStyles, useTheme} from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import {api, globalData} from "../../repo/api.js"
 import {Redirect} from "react-router";
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Title from '../../components/Title';
 import {MDBContainer} from "mdbreact";
-
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
@@ -26,6 +22,8 @@ import {Label, Line, LineChart, Legend, XAxis, YAxis, CartesianGrid, Tooltip,} f
 import MaterialTable from "material-table";
 import moment from "moment";
 import DeleteData from "../../components/DeleteData";
+
+// import Report from 'react-data-report';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -171,6 +169,7 @@ export default function Sensor() {
                         <Tab label="Received Data" icon={<StorageIcon />} {...a11yProps(0)} />
                         <Tab label="Charts" icon={<FavoriteIcon />} {...a11yProps(1)} />
                         <Tab label="PieChart" icon={<PersonPinIcon />} {...a11yProps(2)} />
+                        <Tab label="Reports" icon={<PersonPinIcon />} {...a11yProps(3)} />
                     </Tabs>
                 </AppBar>
                 <TabPanel value={value} index={0}>
@@ -292,6 +291,9 @@ export default function Sensor() {
                             }
                         }}
                     /></div> }
+                </TabPanel>
+                <TabPanel value={value} index={3}>
+                    {/*<Report data={data}/>*/}
                 </TabPanel>
             </p>
         </MDBContainer>

@@ -32,6 +32,7 @@ import AppBar from "@material-ui/core/AppBar";
 import {globalData} from "./repo/api";
 import ForgotPassword from "./pages/forgotPassword/ForgotPassword";
 import ResetPassword from "./pages/forgotPassword/ResetPassword";
+import FirstPage from "./pages/firstPage/FirstPage";
 
 const drawerWidth = 240;
 
@@ -184,6 +185,9 @@ function App() {
                 {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
                 <Switch>
+                    <Route path="/firstPage">
+                        <FirstPage/>
+                    </Route>
                     <Route path="/login">
                         <Login/>
                     </Route>

@@ -12,6 +12,8 @@ import Chatbot from "react-chatbot-kit";
 import config from "../../chatbot/config";
 import MessageParser from "../../chatbot/MessageParser";
 import ActionProvider from "../../chatbot/ActionProvider";
+import TotalData from "../../components/TotalData";
+import Footer from "../firstPage/Footer";
 
 
 const drawerWidth = 240;
@@ -86,8 +88,16 @@ const useStyles = makeStyles((theme) => ({
         paddingBottom: theme.spacing(4),
     },
     container2: {
-        height: '2vh',
-        paddingLeft: theme.spacing(135),
+        position: "absolute",
+        bottom: 0,
+        left: 0,
+    },
+    container3: {
+        position: "absolute",
+        bottom: 0,
+        width: "20%",
+        left:1130,
+        zIndex: 99
     },
     paper: {
         padding: theme.spacing(2),
@@ -118,30 +128,31 @@ export default function Dashboard() {
     const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
     return (
-            <div>
-                <div className={classes.appBarSpacer} />
-                <Container maxWidth="lg" className={classes.container}>
-                    <div className="row">
-                        <Title>Welcome, {globalData.user.username}!</Title>
-                    </div>
-                    <Grid container spacing={3}>
-                        <Grid item xs={12} md={8} lg={9}>
-                            <Paper className={fixedDimPaper}>
-                                <ButtonBase />
-                            </Paper>
-                        </Grid>
-                    </Grid>
-                </Container>
-                <Container className={classes.container2}>
-                    <Grid>
-                        <Chatbot
-                            config={config}
-                            actionProvider={ActionProvider}
-                            messageParser={MessageParser}
-                        />
-                    </Grid>
-                </Container>
-                <Copyright />
-            </div>
+        <React.Fragment>
+            <div className={classes.appBarSpacer} />
+            <Container maxWidth="lg" className={classes.container}>
+                <div className="row">
+                    <Title>Welcome, {globalData.user.username}!</Title>
+                </div>
+                <Grid container spacing={1}>
+                        <Paper className={fixedDimPaper}>
+                            <ButtonBase />
+                        </Paper>
+                </Grid>
+                <Grid item xs={12} md={4} lg={3}>
+                    <Paper className={fixedHeightPaper}>
+                        <TotalData />
+                    </Paper>
+                </Grid>
+            </Container>
+            <Container className={classes.container3}>
+                    <Chatbot
+                        config={config}
+                        actionProvider={ActionProvider}
+                        messageParser={MessageParser}
+                    />
+            </Container>
+            <Footer description="Thank you for choosing IoTIC!"/>
+        </React.Fragment>
     );
 }

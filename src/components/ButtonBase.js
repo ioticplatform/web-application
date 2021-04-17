@@ -101,14 +101,6 @@ export default function ButtonBases() {
     let [devices, setDevices] = useState(false)
     let [sensors, setSensors] = useState(false)
 
-    async function onDevicesClick() {
-        setDevices(true)
-    }
-
-    async function onSensorsClick() {
-        setSensors(true)
-    }
-
     function onButtonClick(idx){
         if(idx === 0){
             setDevices(true)

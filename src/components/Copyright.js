@@ -19,18 +19,8 @@ function Cpr() {
 }
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        display: 'flex',
-        flexDirection: 'column',
-        minHeight: '30vh',
-    },
-    main: {
-        marginTop: theme.spacing(8),
-        marginBottom: theme.spacing(2),
-    },
     footer: {
         padding: theme.spacing(3, 2),
-        marginTop: 'auto',
         backgroundColor:
             theme.palette.type === 'light' ? theme.palette.grey[200] : theme.palette.grey[800],
     },
@@ -40,14 +30,9 @@ export default function Copyright() {
     const classes = useStyles();
 
     return (
-        <div className={classes.root}>
-            <CssBaseline />
-            <footer className={classes.footer}>
-                <Container maxWidth="sm">
-                    <Typography variant="body1">Thank you for choosing IoTIC.</Typography>
-                    <Cpr />
-                </Container>
-            </footer>
-        </div>
+        <footer className={classes.footer}>
+                <Typography variant="body2">Thank you for choosing IoTIC.</Typography>
+                <Cpr />
+        </footer>
     );
 }
