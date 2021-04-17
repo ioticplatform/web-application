@@ -42,6 +42,7 @@ const featuredPosts = [
         description:
             'We are two computer science students passionate about...',
         image: 'how_it_started.jpg',
+        url: "http://localhost:3000/howItStarted"
     },
     {
         title: 'DIY',
@@ -49,13 +50,14 @@ const featuredPosts = [
         description:
             'If you want to try building your own system at home...',
         image: 'diy.jpg',
+        url: "http://localhost:3000/diy"
     },
 ];
 
 const sidebar = {
     title: 'About',
     description:
-        'This is an open-source IoT project.',
+        'This is an open-source IoT project developed by Teia Vava and Valentin Vozian.',
     social: [
         { name: 'GitHub', icon: GitHubIcon , link: "https://github.com/teiavava/server"},
         { name: 'Instagram', icon: InstagramIcon , link: "http://instagram.com"},

@@ -33,6 +33,8 @@ import {globalData} from "./repo/api";
 import ForgotPassword from "./pages/forgotPassword/ForgotPassword";
 import ResetPassword from "./pages/forgotPassword/ResetPassword";
 import FirstPage from "./pages/firstPage/FirstPage";
+import HowItStarted from "./pages/firstPage/articles/HowItStarted";
+import DIY from "./pages/firstPage/articles/DIY";
 
 const drawerWidth = 240;
 
@@ -182,8 +184,6 @@ function App() {
         <Router>
             <div>{isLoggedIn && <ShowAppBar />}</div>
             <div>
-                {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
                 <Switch>
                     <Route path="/firstPage">
                         <FirstPage/>
@@ -217,6 +217,12 @@ function App() {
                     </Route>
                     <Route path="/resetPassword">
                         <ResetPassword/>
+                    </Route>
+                    <Route path="/howItStarted">
+                        <HowItStarted/>
+                    </Route>
+                    <Route path="/diy">
+                        <DIY/>
                     </Route>
                 </Switch>
             </div>
