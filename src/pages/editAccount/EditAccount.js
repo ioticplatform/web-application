@@ -103,7 +103,7 @@ export default function EditAccount() {
             <AppBar position="absolute" color="default" className={classes.appBar}>
                 <Toolbar>
                     <Typography variant="h6" color="inherit" noWrap>
-                        Company name
+                        Edit Account
                     </Typography>
                 </Toolbar>
             </AppBar>

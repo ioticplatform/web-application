@@ -1,5 +1,4 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
@@ -13,12 +12,6 @@ import Main from './Main';
 import Sidebar from './Sidebar';
 import Footer from './Footer';
 import Market from "./Market";
-
-const useStyles = makeStyles((theme) => ({
-    mainGrid: {
-        marginTop: theme.spacing(3),
-    },
-}));
 
 const sections = [
     { title: 'Smart Home', url: '#' },
@@ -66,8 +59,6 @@ const sidebar = {
 };
 
 export default function FirstPage() {
-    const classes = useStyles();
-
     return (
         <React.Fragment>
             <CssBaseline />
@@ -80,7 +71,7 @@ export default function FirstPage() {
                             <FeaturedPost key={post.title} post={post} />
                         ))}
                     </Grid>
-                    <Grid container spacing={2} className={classes.mainGrid}>
+                    <Grid container spacing={2} className="mainGrid">
                         <Main/>
                         <Grid item xs={12} md={4}>
                             <Market store="android" url='https://play.google.com/store/apps'/>

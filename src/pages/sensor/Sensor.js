@@ -2,7 +2,6 @@ import React, {useEffect, useState} from "react";
 import {withStyles, makeStyles, useTheme} from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import {api, globalData} from "../../repo/api.js"
-import {Redirect} from "react-router";
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import Title from '../../components/Title';
@@ -14,16 +13,16 @@ import Tab from '@material-ui/core/Tab';
 import StorageIcon from '@material-ui/icons/Storage';
 import FavoriteIcon from '@material-ui/icons/Timeline';
 import PersonPinIcon from '@material-ui/icons/PieChart';
+import LibraryBooks from '@material-ui/icons/LibraryBooks';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-
 import Chart from "react-google-charts";
 import {Label, Line, LineChart, Legend, XAxis, YAxis, CartesianGrid, Tooltip,} from "recharts";
 import MaterialTable from "material-table";
 import moment from "moment";
 import DeleteData from "../../components/DeleteData";
 
-// import Report from 'react-data-report';
+import Report from 'react-data-report';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -84,17 +83,9 @@ const StyledTableRow = withStyles((theme) => ({
     },
 }))(TableRow);
 
-const useStyles = makeStyles({
-    table: {
-        minWidth: 700,
-    },
-});
-
 export default function Sensor() {
-    const classes = useStyles();
     const theme = useTheme();
-    const colors = ["#99FF66", "#42edff", "#ff6666"]
-
+    const colors = ["#009933", "#0099FF", "#FF6666"]
     const [value, setValue] = React.useState(0);
 
     const handleChange = (event, newValue) => {
@@ -102,33 +93,21 @@ export default function Sensor() {
     };
 
     let [data, setSensorData] = useState([]);
-
     let [chart_data, setChartSensorData] = useState([]);
-
     let [rechart_data, setReChartSensorData] = useState([]);
-
     let [normalValues, setNormalValues] = useState([]);
     let [lowerValues, setLowerValues] = useState([]);
     let [higherValues, setHigherValues] = useState([]);
 
     let [isLoading, setLoading] = useState(false);
-    let [dataClicked, setDataClicked] = useState(false);
-
-    function onDataClick(data){
-        setDataClicked(true)
-    }
 
     async function loadData() {
         setLoading(true)
         let res = await api.getSensorData();
         setLoading(false)
         setSensorData(res.data.data)
-
-        console.log(res.data.data)
         setReChartSensorData(res.data.data.map(x => ({time: x.timestamp, value: x.value})))
-
         setChartSensorData(res.data.data.map(x => ["Date(" + x.timestamp + ")", x.value]))
-
         setHigherValues(res.data.data.filter(x => x.value > 600));
         setLowerValues(res.data.data.filter(x => x.value < 200));
         setNormalValues(res.data.data.filter(x => x.value >= 200 && x.value <= 400));
@@ -138,11 +117,6 @@ export default function Sensor() {
     useEffect(() => {
         loadData()
     }, [])
-
-
-    if(dataClicked){
-        return <Redirect to="/data"/>
-    }
 
     function level(val, minVal, maxVal){
         if (val < minVal)
@@ -155,7 +129,6 @@ export default function Sensor() {
     return (
         <MDBContainer>
             <p className="mx-auto">
-                <Title>' '</Title>
                 <Title>Data</Title>
                 <AppBar position="static" color="default">
                     <Tabs
@@ -169,7 +142,7 @@ export default function Sensor() {
                         <Tab label="Received Data" icon={<StorageIcon />} {...a11yProps(0)} />
                         <Tab label="Charts" icon={<FavoriteIcon />} {...a11yProps(1)} />
                         <Tab label="PieChart" icon={<PersonPinIcon />} {...a11yProps(2)} />
-                        <Tab label="Reports" icon={<PersonPinIcon />} {...a11yProps(3)} />
+                        <Tab label="Reports" icon={<LibraryBooks />} {...a11yProps(3)} />
                     </Tabs>
                 </AppBar>
                 <TabPanel value={value} index={0}>
@@ -241,7 +214,7 @@ export default function Sensor() {
                         //     chartArea: { width: '50%', height: '70%' },
                         // }}
                         // />
-                        <div align={"center"}>
+                        <div align={"center"} style={{backgroundColor: "white"}}>
                         <LineChart
                             width={1200}
                             height={500}
@@ -266,7 +239,7 @@ export default function Sensor() {
                 </TabPanel>
                 <TabPanel value={value} index={2}>
                     {isLoading ? <CircularProgress/> :
-                        <div align={"center"}>
+                        <div align={"center"} style={{backgroundColor: "white"}}>
                         <Chart
                         width={'1000px'}
                         height={'600px'}

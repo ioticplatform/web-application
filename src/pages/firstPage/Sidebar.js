@@ -9,11 +9,7 @@ import Link from '@material-ui/core/Link';
 const useStyles = makeStyles((theme) => ({
   sidebarAboutBox: {
     padding: theme.spacing(2),
-    backgroundColor: theme.palette.grey[200],
-  },
-  sidebarSection: {
-    marginTop: theme.spacing(3),
-  },
+  }
 }));
 
 export default function Sidebar(props) {
@@ -28,11 +24,11 @@ export default function Sidebar(props) {
         </Typography>
         <Typography>{description}</Typography>
       </Paper>
-      <Typography variant="h6" gutterBottom className={classes.sidebarSection}>
+      <Typography variant="h6" style={{color: "white"}}>
         Social
       </Typography>
       {social.map((network) => (
-        <Link display="block" variant="body1" href={network.link} key={network}>
+        <Link display="block" variant="body1" href={network.link} key={network} style={{color: "white", paddingLeft: "20%"}}>
           <Grid container direction="row" spacing={1} alignItems="center">
             <Grid item>
               <network.icon />

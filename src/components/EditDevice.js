@@ -11,7 +11,6 @@ import Slide from '@material-ui/core/Slide';
 import EditIcon from '@material-ui/icons/Edit';
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
-import Paper from "@material-ui/core/Paper";
 import {api} from "../repo/api";
 
 const useStyles = makeStyles((theme) => ({

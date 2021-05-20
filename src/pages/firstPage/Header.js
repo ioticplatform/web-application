@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import SearchIcon from '@material-ui/icons/Search';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 import {Redirect} from "react-router";
@@ -17,11 +15,17 @@ const useStyles = makeStyles((theme) => ({
     flex: 1,
     fontSize: 50,
     paddingTop: 20,
-    paddingBottom: 20
+    paddingBottom: 20,
+    color: '#ff5050',
+    fontWeight: 'bold',
+    fontFamily: 'serif'
+
   },
   toolbarSecondary: {
     justifyContent: 'space-between',
     overflowX: 'auto',
+    backgroundColor: '#597a59',
+    color: 'white'
   },
   toolbarLink: {
     padding: theme.spacing(1),
@@ -56,8 +60,8 @@ export default function Header(props) {
         >
           {title}
         </Typography>
-        <Button variant="outlined" size="small" onClick={onRegisterClick}>
-          Sign up
+        <Button variant="outlined" type="button" style={{color: "red"}} size="medium" onClick={onRegisterClick}>
+          <b>Sign up</b>
         </Button>
       </Toolbar>
       <Toolbar component="nav" variant="dense" className={classes.toolbarSecondary}>

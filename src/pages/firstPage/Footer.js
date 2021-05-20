@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
+import "./FirstPage.css"
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
@@ -18,20 +18,11 @@ function Copyright() {
   );
 }
 
-const useStyles = makeStyles((theme) => ({
-  footer: {
-    backgroundColor: "lightgray",
-    padding: theme.spacing(3, 0),
-    bottom:0,
-  },
-}));
-
 export default function Footer(props) {
-  const classes = useStyles();
   const { description } = props;
 
   return (
-    <footer className={classes.footer}>
+    <footer className="footer">
       <Container maxWidth="lg">
         <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
           {description}

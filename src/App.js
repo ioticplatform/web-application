@@ -34,6 +34,7 @@ import ResetPassword from "./pages/forgotPassword/ResetPassword";
 import FirstPage from "./pages/firstPage/FirstPage";
 import HowItStarted from "./pages/firstPage/articles/HowItStarted";
 import DIY from "./pages/firstPage/articles/DIY";
+import { useTranslation } from 'react-i18next';
 
 import ReactGA from "react-ga";
 import InitializeReactGA from "./helper/googleAnalytics";
@@ -55,6 +56,7 @@ const useStyles = makeStyles((theme) => ({
         ...theme.mixins.toolbar,
     },
     appBar: {
+        backgroundColor: "#355e35",
         zIndex: theme.zIndex.drawer + 1,
         transition: theme.transitions.create(['width', 'margin'], {
             easing: theme.transitions.easing.sharp,
@@ -141,9 +143,9 @@ function ShowAppBar() {
                     onClick={handleDrawerOpen}
                     className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
                 >
-                    <MenuIcon />
+                    <MenuIcon/>
                 </IconButton>
-                <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
+                <Typography component="h1" variant="h6" noWrap className={classes.title}>
                     {title}
                 </Typography>
                 <IconButton color="inherit">
@@ -192,14 +194,18 @@ function usePageViews() {
 
 function App() {
     // usePageViews()
+    const { t } = useTranslation();
+
 
     let [isLoggedIn, setLoggedIn] = useState(false);
     globalData.setLoggedIn = setLoggedIn
 
-    document.body.style.background = "url('background-white.jpg') repeat center";
+    // document.body.style.background = "url('background-white.jpg') repeat center";
+    document.body.style.background = "url('background-black.jpg') repeat center";
 
     if (isLoggedIn) {
         return <div className="App">
+            <h1>{t('this_is_an_example')}</h1>
             <Router>
                 <div>{isLoggedIn && <ShowAppBar/>}</div>
                 <div>
