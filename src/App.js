@@ -38,6 +38,7 @@ import { useTranslation } from 'react-i18next';
 
 import ReactGA from "react-ga";
 import InitializeReactGA from "./helper/googleAnalytics";
+import ContactUs from "./pages/contactUs/ContactUs";
 
 const drawerWidth = 240;
 
@@ -236,6 +237,9 @@ function App() {
                         </Route>
                         <Route path="/account">
                             <EditAccount/>
+                        </Route>
+                        <Route path="/contact">
+                            <ContactUs/>
                         </Route>
                         <Route path="/forgotPassword">
                             <ForgotPassword/>

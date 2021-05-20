@@ -17,11 +17,10 @@ import LibraryBooks from '@material-ui/icons/LibraryBooks';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Chart from "react-google-charts";
-import {Label, Line, LineChart, Legend, XAxis, YAxis, CartesianGrid, Tooltip,} from "recharts";
+import {Label, Line, LineChart, XAxis, YAxis, CartesianGrid, Tooltip,} from "recharts";
 import MaterialTable from "material-table";
 import moment from "moment";
 import DeleteData from "../../components/DeleteData";
-
 import Report from 'react-data-report';
 
 function TabPanel(props) {
@@ -266,7 +265,10 @@ export default function Sensor() {
                     /></div> }
                 </TabPanel>
                 <TabPanel value={value} index={3}>
-                    {/*<Report data={data}/>*/}
+                    {
+                        <div style={{backgroundColor: "white"}}>
+                            <Report data={rechart_data}/>
+                        </div>}
                 </TabPanel>
             </p>
         </MDBContainer>

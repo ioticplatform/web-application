@@ -91,9 +91,19 @@ export function SecondaryListItems() {
 }
 
 export function InfoListItems() {
+    let [navigateContactUs, setNavigateContactUs] = useState(false)
+
+    async function onContactUsClick() {
+        setNavigateContactUs(true)
+    }
+
+    if (navigateContactUs) {
+        return <Redirect to={"/contact"}/>
+    }
+
     return (<div>
         <ListSubheader inset>Info</ListSubheader>
-        <ListItem button>
+        <ListItem button onClick={onContactUsClick}>
             <ListItemIcon>
                 <EmailOutlined />
             </ListItemIcon>

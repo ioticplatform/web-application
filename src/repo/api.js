@@ -110,8 +110,18 @@ async function resetPassword(credential, newPassword, resetPasswordCode) {
     return res;
 }
 
+async function sendMessage(username, subject, phone, text) {
+    let res = await axios.post(API_HOST + "/users/sendMessage", {username: username,
+        subject: subject,
+        phone: phone,
+        text: text
+    });
+    return res;
+}
+
 let api = {
     login, register, getDevices, getSensors, getDeviceSensors,
     getSensorData, editAccount, deleteDevice, editDevice, editSensor,
-    forgotPassword, resetPassword, deleteData, deleteSensor}
+    forgotPassword, resetPassword, deleteData, deleteSensor,
+    sendMessage}
 export {api, globalData}
