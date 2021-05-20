@@ -18,7 +18,7 @@ export default function ContactUs() {
 
     async function onSendClick(){
         try{
-            await api.sendMessage(subject, phone, text)
+            await api.sendMessage(globalData.user.username, subject, phone, text)
             setSent(true);
         } catch (e){
             setError("Please complete all the required fields!")

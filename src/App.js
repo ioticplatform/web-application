@@ -35,10 +35,11 @@ import FirstPage from "./pages/firstPage/FirstPage";
 import HowItStarted from "./pages/firstPage/articles/HowItStarted";
 import DIY from "./pages/firstPage/articles/DIY";
 import { useTranslation } from 'react-i18next';
-
+import Admin from "./pages/admin/Admin";
 import ReactGA from "react-ga";
 import InitializeReactGA from "./helper/googleAnalytics";
 import ContactUs from "./pages/contactUs/ContactUs";
+import Support from "./pages/support/Support";
 
 const drawerWidth = 240;
 
@@ -214,6 +215,12 @@ function App() {
                         <Route path="/firstPage">
                             <FirstPage/>
                         </Route>
+                        <Route path="/admin">
+                            <Admin/>
+                        </Route>
+                        <Route path="/support">
+                            <Support/>
+                        </Route>
                         <Route path="/login">
                             <Login/>
                         </Route>
@@ -264,6 +271,12 @@ function App() {
             <div>{isLoggedIn && <ShowAppBar/>}</div>
             <div>
                 <Switch>
+                    <Route path="/admin">
+                        <Admin/>
+                    </Route>
+                    <Route path="/support">
+                        <Support/>
+                    </Route>
                     <Route path="/firstPage">
                         <FirstPage/>
                     </Route>

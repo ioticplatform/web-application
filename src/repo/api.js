@@ -111,7 +111,7 @@ async function resetPassword(credential, newPassword, resetPasswordCode) {
 }
 
 async function sendMessage(username, subject, phone, text) {
-    let res = await axios.post(API_HOST + "/users/sendMessage", {username: username,
+    let res = await axios.post(API_HOST + "/users/messages", {username: username,
         subject: subject,
         phone: phone,
         text: text
@@ -119,9 +119,17 @@ async function sendMessage(username, subject, phone, text) {
     return res;
 }
 
+async function getUsers() {
+    return axios.get(API_HOST + `/users`, {headers: {Authorization: `jwt eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MjE1NzUxNjgsImlhdCI6MTYyMTUzOTE2OCwibmJmIjoxNjIxNTM5MTY4LCJpZGVudGl0eSI6IjI2OTNiMWVlYTVkMjQxZjBiYWE1ZmIzMjMyYmRiNTUxIn0.8g9KyTYAm4YnbPhde4bdIL1b9K8Q6yB3akEGcX-PFe0`}});
+}
+
+async function getMessages() {
+    return axios.get(API_HOST + `/messages`, {headers: {Authorization: `jwt eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MjE1NzUxNjgsImlhdCI6MTYyMTUzOTE2OCwibmJmIjoxNjIxNTM5MTY4LCJpZGVudGl0eSI6IjI2OTNiMWVlYTVkMjQxZjBiYWE1ZmIzMjMyYmRiNTUxIn0.8g9KyTYAm4YnbPhde4bdIL1b9K8Q6yB3akEGcX-PFe0`}});
+}
+
 let api = {
     login, register, getDevices, getSensors, getDeviceSensors,
     getSensorData, editAccount, deleteDevice, editDevice, editSensor,
     forgotPassword, resetPassword, deleteData, deleteSensor,
-    sendMessage}
+    sendMessage, getUsers, getMessages}
 export {api, globalData}

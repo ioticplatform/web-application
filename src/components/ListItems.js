@@ -11,7 +11,6 @@ import AssignmentIcon from '@material-ui/icons/Assignment';
 import {EmailOutlined, FeedbackOutlined, PersonRounded} from "@material-ui/icons";
 import {Redirect} from "react-router";
 
-
 export function MainListItems() {
     let [navigateAccount, setNavigateAccount] = useState(false)
     let [navigateDashboard, setNavigateDashboard] = useState(false)
@@ -113,7 +112,7 @@ export function InfoListItems() {
             <ListItemIcon>
                 <FeedbackOutlined />
             </ListItemIcon>
-            <ListItemText primary="Feedback" />
+            <ListItemText primary="FAQ" />
         </ListItem>
     </div>);
 }
