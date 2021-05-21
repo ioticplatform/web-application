@@ -40,6 +40,7 @@ import ReactGA from "react-ga";
 import InitializeReactGA from "./helper/googleAnalytics";
 import ContactUs from "./pages/contactUs/ContactUs";
 import Support from "./pages/support/Support";
+import FAQ from "./pages/FAQ/FAQ";
 
 const drawerWidth = 240;
 
@@ -248,6 +249,9 @@ function App() {
                         <Route path="/contact">
                             <ContactUs/>
                         </Route>
+                        <Route path="/faq">
+                            <FAQ/>
+                        </Route>
                         <Route path="/forgotPassword">
                             <ForgotPassword/>
                         </Route>
@@ -276,6 +280,9 @@ function App() {
                     </Route>
                     <Route path="/support">
                         <Support/>
+                    </Route>
+                    <Route path="/faq">
+                        <FAQ/>
                     </Route>
                     <Route path="/firstPage">
                         <FirstPage/>

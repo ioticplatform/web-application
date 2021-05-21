@@ -25,7 +25,7 @@ export default function ContactUs() {
         }
     }
 
-    if(sent){
+    if (sent){
         return <Redirect to={"/dashboard"}/>
     }
 
@@ -41,7 +41,7 @@ export default function ContactUs() {
                         country={'ro'}
                         fullWidth
                         value={phone}
-                        onChange={it => setPhone(it.value)}
+                        onChange={it => setPhone(it)}
                     />
                     <TextField
                         variant="outlined"

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {withStyles} from '@material-ui/core/styles';
 import EmailIcon from '@material-ui/icons/Email';
-import {api, globalData} from "../../repo/api.js"
+import {api} from "../../repo/api.js"
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import Title from '../../components/Title';
@@ -13,7 +13,9 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import MaterialTable from "material-table";
-import DeleteData from "../../components/DeleteData";
+import DeleteMessage from "../../components/DeleteMessage";
+import FAQMessage from "../../components/FAQMessage";
+import ResponseMessage from "../../components/ResponseMessage";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -140,15 +142,19 @@ export default function Support() {
                                 },
                                 {
                                     title: 'Message',
-                                    field: 'message',
+                                    field: 'text',
+                                },
+                                {
+                                    title: 'Answer',
+                                    render: (rowData) => <ResponseMessage message={rowData} onFinishEdit={() => loadData()}/>
                                 },
                                 {
                                     title: 'FAQ',
-                                    render: (rowData) => <DeleteData data={rowData} onFinishDelete={() => loadData()}/>
+                                    render: (rowData) => <FAQMessage message={rowData} onFinishFAQ={() => loadData()}/>
                                 },
                                 {
                                     title: 'Delete',
-                                    render: (rowData) => <DeleteData data={rowData} onFinishDelete={() => loadData()}/>
+                                    render: (rowData) => <DeleteMessage message={rowData} onFinishDelete={() => loadData()}/>
                                 }
                             ]}
                             data={messages}

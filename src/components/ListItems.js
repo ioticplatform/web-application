@@ -91,13 +91,22 @@ export function SecondaryListItems() {
 
 export function InfoListItems() {
     let [navigateContactUs, setNavigateContactUs] = useState(false)
+    let [navigateFAQ, setNavigateFAQ] = useState(false)
 
     async function onContactUsClick() {
         setNavigateContactUs(true)
     }
 
+    async function onFAQClick() {
+        setNavigateFAQ(true)
+    }
+
     if (navigateContactUs) {
         return <Redirect to={"/contact"}/>
+    }
+
+    if (navigateFAQ) {
+        return <Redirect to={"/faq"}/>
     }
 
     return (<div>
@@ -108,7 +117,7 @@ export function InfoListItems() {
             </ListItemIcon>
             <ListItemText primary="Contact Us" />
         </ListItem>
-        <ListItem button>
+        <ListItem button onClick={onFAQClick}>
             <ListItemIcon>
                 <FeedbackOutlined />
             </ListItemIcon>

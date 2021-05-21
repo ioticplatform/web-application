@@ -39,6 +39,10 @@ export default function Login() {
     }
 
     if(loggedIn){
+        if (globalData.user.role == "admin")
+            return <Redirect to={"/admin"}/>
+        else if (globalData.user.role == "support")
+            return <Redirect to={"/support"}/>
         return <Redirect to={"/dashboard"}/>
     }
 

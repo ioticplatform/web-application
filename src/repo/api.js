@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {useState} from "react";
 
-let IP = "65.21.110.202";
+let IP = "127.0.0.1";
 let PORT = "5000"
 let API_HOST = "http://" + IP + ":" + PORT + "/api"
 // let API_HOST = "http://127.0.0.1:5000/api"
@@ -23,7 +23,8 @@ async function login(username, pass) {
         user = {
             id: res.data._id,
             email: res.data.email,
-            username: res.data.username
+            username: res.data.username,
+            role: res.data.role
         }
         localStorage.setItem("token", token);
         localStorage.setItem("user", JSON.stringify(user));
@@ -111,7 +112,7 @@ async function resetPassword(credential, newPassword, resetPasswordCode) {
 }
 
 async function sendMessage(username, subject, phone, text) {
-    let res = await axios.post(API_HOST + "/users/messages", {username: username,
+    let res = await axios.post(API_HOST + "/messages", {username: username,
         subject: subject,
         phone: phone,
         text: text
@@ -120,16 +121,36 @@ async function sendMessage(username, subject, phone, text) {
 }
 
 async function getUsers() {
-    return axios.get(API_HOST + `/users`, {headers: {Authorization: `jwt eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MjE1NzUxNjgsImlhdCI6MTYyMTUzOTE2OCwibmJmIjoxNjIxNTM5MTY4LCJpZGVudGl0eSI6IjI2OTNiMWVlYTVkMjQxZjBiYWE1ZmIzMjMyYmRiNTUxIn0.8g9KyTYAm4YnbPhde4bdIL1b9K8Q6yB3akEGcX-PFe0`}});
+    return axios.get(API_HOST + `/users`, {headers: {Authorization: `jwt ${token}`}});
 }
 
 async function getMessages() {
-    return axios.get(API_HOST + `/messages`, {headers: {Authorization: `jwt eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MjE1NzUxNjgsImlhdCI6MTYyMTUzOTE2OCwibmJmIjoxNjIxNTM5MTY4LCJpZGVudGl0eSI6IjI2OTNiMWVlYTVkMjQxZjBiYWE1ZmIzMjMyYmRiNTUxIn0.8g9KyTYAm4YnbPhde4bdIL1b9K8Q6yB3akEGcX-PFe0`}});
+    return axios.get(API_HOST + `/messages`, {headers: {Authorization: `jwt ${token}`}});
+}
+
+async function deleteMessage(message) {
+    let res = axios.delete(API_HOST + `/messages/${message._id}`,{headers: {Authorization: `jwt ${token}`}});
+    return res;
+}
+
+async function addFAQMessage(message) {
+    let res = axios.put(API_HOST + `/messages/faq/${message._id}`,{}, {headers: {Authorization: `jwt ${token}`}});
+    return res;
+}
+
+async function editMessage(message, answer) {
+    let res = axios.put(API_HOST + `/messages/${message._id}`,{answer: answer}, {headers: {Authorization: `jwt ${token}`}});
+    return res;
+}
+
+async function getFAQ() {
+    return axios.get(API_HOST + `/messages/faq`, {headers: {Authorization: `jwt ${token}`}});
 }
 
 let api = {
     login, register, getDevices, getSensors, getDeviceSensors,
     getSensorData, editAccount, deleteDevice, editDevice, editSensor,
     forgotPassword, resetPassword, deleteData, deleteSensor,
-    sendMessage, getUsers, getMessages}
+    sendMessage, getUsers, getMessages, deleteMessage, addFAQMessage,
+    editMessage, getFAQ}
 export {api, globalData}
