@@ -20,6 +20,7 @@ import Box from '@material-ui/core/Box';
 import MaterialTable from "material-table";
 import moment from "moment";
 import DeleteData from "../../components/DeleteData";
+import GoogleAnalytics from "./GoogleAnalytics";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -170,6 +171,9 @@ export default function Admin() {
                             }}
                         />
                     </div>
+                </TabPanel>
+                <TabPanel value={value} index={1}>
+                    <GoogleAnalytics/>
                 </TabPanel>
             </p>
         </MDBContainer>

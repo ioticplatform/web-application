@@ -41,6 +41,7 @@ import Admin from "./pages/admin/Admin";
 import ContactUs from "./pages/contactUs/ContactUs";
 import Support from "./pages/support/Support";
 import FAQ from "./pages/FAQ/FAQ";
+import GoogleAnalytics from "./pages/admin/GoogleAnalytics"
 
 const drawerWidth = 240;
 
@@ -304,6 +305,9 @@ function App() {
                     </Route>
                     <Route path="/diy">
                         <DIY/>
+                    </Route>
+                    <Route path="/googleAnalytics">
+                        <GoogleAnalytics/>
                     </Route>
                 </Switch>
             </div>
