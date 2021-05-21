@@ -17,7 +17,7 @@ export default function Dashboard() {
     return (
         <React.Fragment>
             <Title>Welcome, {globalData.user.username}!</Title>
-            <div style={{height: "16vh"}}/>
+            <div style={{height: "14vh"}}/>
             <Container>
                 <Grid container spacing={1}>
                         <Paper className="fixedDimPaper">

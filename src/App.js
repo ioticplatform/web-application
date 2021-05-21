@@ -36,8 +36,8 @@ import HowItStarted from "./pages/firstPage/articles/HowItStarted";
 import DIY from "./pages/firstPage/articles/DIY";
 import { useTranslation } from 'react-i18next';
 import Admin from "./pages/admin/Admin";
-import ReactGA from "react-ga";
-import InitializeReactGA from "./helper/googleAnalytics";
+// import ReactGA from "react-ga";
+// import InitializeReactGA from "./helper/googleAnalytics";
 import ContactUs from "./pages/contactUs/ContactUs";
 import Support from "./pages/support/Support";
 import FAQ from "./pages/FAQ/FAQ";
@@ -180,20 +180,20 @@ function ShowAppBar() {
     </div>
 }
 
-function usePageViews() {
-    // 'G-LM4H5B69Y3'
-
-    let location = useLocation();
-    useEffect(() => {
-        if (!window.GA_INITIALIZED) {
-            ReactGA.initialize('G-LM4H5B69Y3');
-            window.GA_INITIALIZED = true;
-        }
-        InitializeReactGA(ReactGA);
-        ReactGA.set({ page: location.pathname });
-        ReactGA.pageview(location.pathname);
-    }, [location]);
-}
+// function usePageViews() {
+//     // 'G-LM4H5B69Y3'
+//
+//     let location = useLocation();
+//     useEffect(() => {
+//         if (!window.GA_INITIALIZED) {
+//             ReactGA.initialize('G-LM4H5B69Y3');
+//             window.GA_INITIALIZED = true;
+//         }
+//         InitializeReactGA(ReactGA);
+//         ReactGA.set({ page: location.pathname });
+//         ReactGA.pageview(location.pathname);
+//     }, [location]);
+// }
 
 function App() {
     // usePageViews()

@@ -1,0 +1,13 @@
+.footer {
+    position: static;
+    width: 100%;
+    bottom: 0;
+    background-color: #728e72;
+    height: 10vh;
+    text-align: center;
+    padding: 2vh;
+}
+
+.mainGrid {
+    marginTop: 3vh,
+}
