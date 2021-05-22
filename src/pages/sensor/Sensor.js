@@ -22,6 +22,7 @@ import MaterialTable from "material-table";
 import moment from "moment";
 import DeleteData from "../../components/DeleteData";
 import Report from 'react-data-report';
+import {useTranslation} from "react-i18next";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -86,6 +87,7 @@ export default function Sensor() {
     const theme = useTheme();
     const colors = ["#009933", "#0099FF", "#FF6666"]
     const [value, setValue] = React.useState(0);
+    const [t] = useTranslation('common');
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -138,10 +140,10 @@ export default function Sensor() {
                         indicatorColor="primary"
                         textColor="primary"
                         aria-label="scrollable force tabs example">
-                        <Tab label="Received Data" icon={<StorageIcon />} {...a11yProps(0)} />
-                        <Tab label="Charts" icon={<FavoriteIcon />} {...a11yProps(1)} />
-                        <Tab label="PieChart" icon={<PersonPinIcon />} {...a11yProps(2)} />
-                        <Tab label="Reports" icon={<LibraryBooks />} {...a11yProps(3)} />
+                        <Tab label={t('sensor.receivedData', {framework:'React'})} icon={<StorageIcon />} {...a11yProps(0)} />
+                        <Tab label={t('sensor.charts', {framework:'React'})} icon={<FavoriteIcon />} {...a11yProps(1)} />
+                        <Tab label={t('sensor.piecharts', {framework:'React'})} icon={<PersonPinIcon />} {...a11yProps(2)} />
+                        <Tab label={t('sensor.reports', {framework:'React'})} icon={<LibraryBooks />} {...a11yProps(3)} />
                     </Tabs>
                 </AppBar>
                 <TabPanel value={value} index={0}>
@@ -154,35 +156,35 @@ export default function Sensor() {
                                     headerStyle: {width: "20px"}
                                 },
                                 {
-                                    title: 'Value',
+                                    title: t('sensor.value', {framework:'React'}),
                                     field: 'value',
                                     cellStyle: {
                                         backgroundColor: '#f2f2f7',
                                     }
                                 },
                                 {
-                                    title: 'Day',
+                                    title: t('sensor.day', {framework:'React'}),
                                     field: 'timestamp',
                                     render: ({timestamp}) => moment(timestamp).format("DD/MM/YY")
                                 },
                                 {
-                                    title: 'Time',
+                                    title: t('sensor.time', {framework:'React'}),
                                     field: 'timestamp',
                                     render: ({timestamp}) => moment(timestamp).format("HH:mm:ss")
                                 },
                                 {
-                                    title: 'Level',
+                                    title: t('sensor.level', {framework:'React'}),
                                     field: 'value',
                                     render: ({value}) => level(value, 200, 500),
                                 },
                                 {
-                                    title: 'Delete',
+                                    title: t('sensor.delete', {framework:'React'}),
                                     render: (rowData) => <DeleteData data={rowData} onFinishDelete={() => loadData()}/>
                                 }
                             ]}
                             data={data}
                             isLoading={isLoading}
-                            title={globalData.sensor.type + " - Data"}
+                            title={globalData.sensor.type + " - " + t('sensor.title', {framework:'React'})}
                             options={{
                                 filtering: true,
                                 headerStyle: {

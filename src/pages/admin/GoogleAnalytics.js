@@ -78,7 +78,9 @@ function GoogleAnalytics() {
             {!isSignedIn ? (
                 <div id="signin-button"></div>
             ) : (
-                <Report />
+                <div style={{backgroundColor: "white"}}>
+                    <Report />
+                </div>
             )}
         </div>
     );

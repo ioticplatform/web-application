@@ -6,13 +6,14 @@ import MaterialTable from "material-table";
 import EditDevice from "../../components/EditDevice";
 import moment from "moment";
 import DeleteDevice from "../../components/DeleteDevice";
+import {useTranslation} from "react-i18next";
 
 export default function Devices() {
     let [devices, setDevices] = useState([]);
     let [isLoading, setLoading] = useState(false);
     let [deviceClicked, setDeviceClicked] = useState(false);
     const [selectedRow, setSelectedRow] = useState(null);
-
+    const [t] = useTranslation('common');
 
     async function loadDevices() {
         setLoading(true)
@@ -43,7 +44,7 @@ export default function Devices() {
                     headerStyle: {width: "20px"}
                 },
                 {
-                    title: 'Name',
+                    title: t('devices.name', {framework:'React'}),
                     field: 'name',
                     render: (device) => <p onClick={() => onDeviceClick(device)}>{device.name}</p>,
                     cellStyle: {
@@ -51,25 +52,25 @@ export default function Devices() {
                     }
                 },
                 {
-                    title: 'Description',
+                    title: t('devices.description', {framework:'React'}),
                     field: 'description',
                     render: (device) => <p onClick={() => onDeviceClick(device)}>{device.description}</p>
                 },
                 {
-                    title: 'Created',
+                    title: t('devices.created', {framework:'React'}),
                     field: 'timestamp',
                     render: ({timestamp}) => moment(timestamp).format("DD/MM/YY HH:mm")
                 },
                 {
-                    title: 'Edit',
+                    title: t('devices.edit', {framework:'React'}),
                     render: (rowData) => <EditDevice device={rowData} onFinishEdit={() => loadDevices()}/>},
                 {
-                    title: 'Delete',
+                    title: t('devices.delete', {framework:'React'}),
                     render: (rowData) => <DeleteDevice device={rowData} onFinishDelete={() => loadDevices()}/>}
             ]}
             data={devices}
             isLoading={isLoading}
-            title="Devices"
+            title={t('devices.title', {framework:'React'})}
             onRowClick={((evt, selectedRow) => setSelectedRow(selectedRow.tableData.id))}
             options={{
                 filtering: true,

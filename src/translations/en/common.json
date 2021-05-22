@@ -48,5 +48,33 @@
     "contactUs": "Contact us",
     "myQuestions": "My questions",
     "buy": "Buy devices"
+  },
+  "devices": {
+    "title": "Devices",
+    "name": "Name",
+    "description": "Description",
+    "created": "Created",
+    "edit": "Edit",
+    "delete": "Delete"
+  },
+  "sensors": {
+    "title": "Sensors",
+    "type": "Sensor type",
+    "unit": "Measurement unit",
+    "created": "Created",
+    "edit": "Edit",
+    "delete": "Delete"
+  },
+  "sensor": {
+    "title": "Data",
+    "receivedData": "Received data",
+    "charts": "Charts",
+    "piecharts": "Piechart",
+    "reports": "Reports",
+    "value": "Value",
+    "day": "Day",
+    "time": "Time",
+    "level": "Level",
+    "delete": "Delete"
   }
 }

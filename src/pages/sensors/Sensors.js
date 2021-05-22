@@ -5,13 +5,14 @@ import MaterialTable from "material-table";
 import moment from "moment";
 import EditSensor from "../../components/EditSensor";
 import DeleteSensor from "../../components/DeleteSensor";
+import {useTranslation} from "react-i18next";
 
 export default function Sensors() {
     let [sensors, setSensors] = useState([]);
     let [isLoading, setLoading] = useState(false);
     let [sensorClicked, setSensorClicked] = useState(false);
     const [selectedRow, setSelectedRow] = useState(null);
-
+    const [t] = useTranslation('common');
 
     async function loadSensors() {
         setLoading(true)
@@ -43,7 +44,7 @@ export default function Sensors() {
                     headerStyle: {width: "20px"}
                 },
                 {
-                    title: 'Type',
+                    title: t('sensors.type', {framework:'React'}),
                     field: 'type',
                     render: (sensor) => <p onClick={() => onSensorClick(sensor)}>{sensor.type}</p>,
                     cellStyle: {
@@ -51,24 +52,24 @@ export default function Sensors() {
                     }
                 },
                 {
-                    title: 'Measurement Unit',
+                    title: t('sensors.unit', {framework:'React'}),
                     field: 'measure_unit',
                 },
                 {
-                    title: 'Created',
+                    title: t('sensors.created', {framework:'React'}),
                     field: 'timestamp',
                     render: ({timestamp}) => moment(timestamp).format("DD/MM/YY HH:mm")
                 },
                 {
-                    title: 'Edit',
+                    title: t('sensors.edit', {framework:'React'}),
                     render: (rowData) => <EditSensor sensor={rowData} onFinishEdit={() => loadSensors()}/>},
                 {
-                    title: 'Delete',
+                    title: t('sensors.delete', {framework:'React'}),
                     render: (rowData) => <DeleteSensor sensor={rowData} onFinishDelete={() => loadSensors()}/>}
             ]}
             data={sensors}
             isLoading={isLoading}
-            title="Sensors"
+            title={t('sensors.title', {framework:'React'})}
             onRowClick={((evt, selectedRow) => setSelectedRow(selectedRow.tableData.id))}
             options={{
                 filtering: true,

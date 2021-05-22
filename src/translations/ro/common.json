@@ -48,5 +48,33 @@
     "contactUs": "Contactează-ne",
     "myQuestions": "Întrebările mele",
     "buy": "Cumpără dispozitive"
+  },
+  "devices": {
+    "title": "Dispozitive",
+    "name": "Nume",
+    "description": "Descriere",
+    "created": "Creat la",
+    "edit": "Editează",
+    "delete": "Șterge"
+  },
+  "sensors": {
+    "title": "Senzori",
+    "type": "Tipul senzorului",
+    "unit": "Unitate de măsură",
+    "created": "Creat la",
+    "edit": "Editează",
+    "delete": "Șterge"
+  },
+  "sensor": {
+    "title": "Date",
+    "receivedData": "Date primite",
+    "charts": "Grafice",
+    "piecharts": "Statistici",
+    "reports": "Rapoarte",
+    "value": "Valoare",
+    "day": "Zi",
+    "time": "Oră",
+    "level": "Nivel",
+    "delete": "Șterge"
   }
 }
