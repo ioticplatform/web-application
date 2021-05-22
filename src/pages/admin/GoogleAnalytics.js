@@ -13,6 +13,9 @@ import {
 import CustomDatePicker from "./datepicker";
 import { queryReport } from "./queryReport";
 import { formatDate } from "./utils";
+import PageviewsReport from "./pageviewReport";
+import SourceReport from "./sourceReport";
+import DevicesReport from "./devicesReport";
 
 function GoogleAnalytics() {
     const [isSignedIn, setIsSignedIn] = useState(false);
@@ -157,6 +160,9 @@ function GoogleAnalytics() {
                             </ChartWrapper>
                         )}
                     </ReportWrapper>
+                    <PageviewsReport/>
+                    <DevicesReport/>
+                    <SourceReport/>
                 </div>
             )}
         </div>

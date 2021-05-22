@@ -16,6 +16,7 @@ import {api} from "../repo/api";
 const useStyles = makeStyles((theme) => ({
     appBar: {
         position: 'relative',
+        backgroundColor: "#355e35"
     },
     title: {
         marginLeft: theme.spacing(2),

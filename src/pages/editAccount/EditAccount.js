@@ -27,6 +27,9 @@ function Copyright() {
 const useStyles = makeStyles((theme) => ({
     appBar: {
         position: 'relative',
+        backgroundColor: "black",
+        color: "white",
+        alignItems: "center"
     },
     layout: {
         width: 'auto',

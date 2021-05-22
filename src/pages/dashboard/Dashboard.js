@@ -18,9 +18,10 @@ export default function Dashboard() {
     const [t] = useTranslation('common');
 
     return (
-        <React.Fragment>
+        <div>
+            <div style={{height: "3vh"}}/>
             <Title>{t('dashboard.welcome', {framework:'React'})}, {globalData.user.username}!</Title>
-            <div style={{height: "16vh"}}/>
+            <div style={{height: "4vh"}}/>
             <Container>
                 <Grid container spacing={1}>
                         <Paper className="fixedDimPaper">
@@ -32,6 +33,7 @@ export default function Dashboard() {
                         <TotalData />
                     </Paper>
                 </Grid>
+                <div style={{height: "12vh"}}/>
             </Container>
             <Footer description={t('welcome.thankYou', {framework:'React'})}/>
             <Container className="containerChatbot">
@@ -41,6 +43,6 @@ export default function Dashboard() {
                         messageParser={MessageParser}
                     />
             </Container>
-        </React.Fragment>
+        </div>
     );
 }

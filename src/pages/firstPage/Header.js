@@ -63,8 +63,10 @@ export default function Header(props) {
           {t('welcome.title', {framework:'React'})}
         </Typography>
 
-        <button onClick={() => i18n.changeLanguage('ro')}><img className="photo" src={"ro.png"}/></button>
-        <button onClick={() => i18n.changeLanguage('en')}><img className="photo" src={"en.png"}/></button>
+        <button style={{backgroundColor: "black", border: "black"}}
+                onClick={() => i18n.changeLanguage('ro')}><img className="photo" src={"ro.png"}/></button>
+        <button style={{backgroundColor: "black", border: "black"}}
+                onClick={() => i18n.changeLanguage('en')}><img className="photo" src={"en.png"}/></button>
 
         <Button variant="outlined" type="button" style={{color: "red"}} size="medium" onClick={onRegisterClick}>
           <b>{t('welcome.signUp', {framework:'React'})}</b>

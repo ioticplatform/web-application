@@ -57,6 +57,7 @@ const useStyles = makeStyles((theme) => ({
         padding: '0 8px',
         ...theme.mixins.toolbar,
     },
+
     appBar: {
         backgroundColor: "#355e35",
         zIndex: theme.zIndex.drawer + 1,
@@ -152,8 +153,10 @@ function ShowAppBar() {
                 <Typography component="h1" variant="h6" noWrap className={classes.title}>
                     {title}
                 </Typography>
-                <button onClick={() => i18n.changeLanguage('ro')}><img className="photo" src={"ro.png"}/></button>
-                <button onClick={() => i18n.changeLanguage('en')}><img className="photo" src={"en.png"}/></button>
+                <button style={{backgroundColor: "#355e35", border: "#355e35"}}
+                        onClick={() => i18n.changeLanguage('ro')}><img className="photo" src={"ro.png"}/></button>
+                <button style={{backgroundColor: "#355e35", border: "#355e35"}}
+                        onClick={() => i18n.changeLanguage('en')}><img className="photo" src={"en.png"}/></button>
                 <IconButton color="inherit">
                     <Badge badgeContent={4} color="secondary">
                         <NotificationsIcon />
@@ -181,21 +184,6 @@ function ShowAppBar() {
         </Drawer>
     </div>
 }
-
-// function usePageViews() {
-//     // 'G-LM4H5B69Y3'
-//
-//     let location = useLocation();
-//     useEffect(() => {
-//         if (!window.GA_INITIALIZED) {
-//             ReactGA.initialize('G-LM4H5B69Y3');
-//             window.GA_INITIALIZED = true;
-//         }
-//         InitializeReactGA(ReactGA);
-//         ReactGA.set({ page: location.pathname });
-//         ReactGA.pageview(location.pathname);
-//     }, [location]);
-// }
 
 function App() {
     // usePageViews()

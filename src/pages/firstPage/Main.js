@@ -5,6 +5,7 @@ import Title from '../../components/Title';
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import clsx from "clsx";
+import {Subtitle} from "../admin/styles";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -30,10 +31,12 @@ export default function Main() {
 
     return (
             <Grid item xs={12} md={4}>
-                <Paper className={fixedHeightPaper}>
-                    <Title>Total users</Title>
+                <Paper className={fixedHeightPaper} style={{backgroundColor: "#985b80"}}>
+                    <Title>
+                            Total users
+                    </Title>
                     <Typography component="p" variant="h4">
-                        3,024.00
+                        3024
                     </Typography>
                     <Typography color="textSecondary" className={classes.depositContext}>
                         on {new Date().toLocaleDateString("en-US", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }).toString()}

@@ -18,6 +18,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 const useStyles = makeStyles((theme) => ({
     appBar: {
         position: 'relative',
+        backgroundColor: "#355e35"
     },
     title: {
         marginLeft: theme.spacing(2),
