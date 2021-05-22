@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
+import HelpIcon from '@material-ui/icons/Help';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import DashboardIcon from '@material-ui/icons/Dashboard';
@@ -10,10 +11,12 @@ import LayersIcon from '@material-ui/icons/Layers';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import {EmailOutlined, FeedbackOutlined, PersonRounded} from "@material-ui/icons";
 import {Redirect} from "react-router";
+import {useTranslation} from "react-i18next";
 
 export function MainListItems() {
     let [navigateAccount, setNavigateAccount] = useState(false)
     let [navigateDashboard, setNavigateDashboard] = useState(false)
+    const [t] = useTranslation('common');
 
     async function onAccountClick() {
         setNavigateAccount(true)
@@ -36,7 +39,7 @@ export function MainListItems() {
                 <ListItemIcon>
                     <PersonRounded />
                 </ListItemIcon>
-                <ListItemText primary="My Account" />
+                <ListItemText primary={t('dashboard.myAccount', {framework:'React'})} />
             </ListItem>
             <ListItem button onClick={onDashboardClick}>
                 <ListItemIcon>
@@ -48,7 +51,7 @@ export function MainListItems() {
                 <ListItemIcon>
                     <ShoppingCartIcon />
                 </ListItemIcon>
-                <ListItemText primary="Buy Devices" />
+                <ListItemText primary={t('dashboard.buy', {framework:'React'})} />
             </ListItem>
             <ListItem button>
                 <ListItemIcon>
@@ -92,6 +95,9 @@ export function SecondaryListItems() {
 export function InfoListItems() {
     let [navigateContactUs, setNavigateContactUs] = useState(false)
     let [navigateFAQ, setNavigateFAQ] = useState(false)
+    let [navigateMyQuestions, setNavigateMyQuestions] = useState(false)
+
+    const [t] = useTranslation('common');
 
     async function onContactUsClick() {
         setNavigateContactUs(true)
@@ -99,6 +105,14 @@ export function InfoListItems() {
 
     async function onFAQClick() {
         setNavigateFAQ(true)
+    }
+
+    async function onMyQuestionsClick() {
+        setNavigateMyQuestions(true)
+    }
+
+    if (navigateMyQuestions) {
+        return <Redirect to={"/myQuestions"}/>
     }
 
     if (navigateContactUs) {
@@ -115,13 +129,19 @@ export function InfoListItems() {
             <ListItemIcon>
                 <EmailOutlined />
             </ListItemIcon>
-            <ListItemText primary="Contact Us" />
+            <ListItemText primary={t('dashboard.contactUs', {framework:'React'})} />
         </ListItem>
         <ListItem button onClick={onFAQClick}>
             <ListItemIcon>
                 <FeedbackOutlined />
             </ListItemIcon>
             <ListItemText primary="FAQ" />
+        </ListItem>
+        <ListItem button onClick={onMyQuestionsClick}>
+            <ListItemIcon>
+                <HelpIcon />
+            </ListItemIcon>
+            <ListItemText primary={t('dashboard.myQuestions', {framework:'React'})} />
         </ListItem>
     </div>);
 }

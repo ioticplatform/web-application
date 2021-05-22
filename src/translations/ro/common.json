@@ -1,0 +1,52 @@
+{
+  "welcome": {
+    "title": "Bun venit pe platforma IoTIC!",
+    "signUp": "Înregistrează-te",
+    "thankYou": "Mulțumim că ai ales IoTIC."
+  },
+  "sections": {
+    "SmartHome": "Casă inteligentă",
+    "SmartFarming": "Agricultură inteligentă",
+    "LowCosts": "Costuri mici",
+    "OpenSource": "OpenSource"
+  },
+  "about": {
+    "about": "Despre",
+    "description": "Aceste este un proiect open-source dezvoltat de Teia Vava și Valentin Vozian."
+  },
+  "mainFeaturedPost": {
+    "title": "Managementul dispozitivelor, colectarea datelor, procesare și vizualizare pentru soluțiile IoT",
+    "description": "IoTIC este o platformă IoT open-source pentru procesare, vizualizare, automatizare și managementul dispozitivelor."
+  },
+  "featuredPost": {
+    "title1": "Cum a început totul?",
+    "description1": "Suntem doi studenți care...",
+    "title2": "Mai ușor ca niciodată",
+    "description2": "Dacă vrei să îți construiești acasă propriul sistem IoT, însă nu știi deloc programare...",
+    "continue": "Citește în continuare..."
+  },
+  "loginPage": {
+    "loginButton": "Loghează-te",
+    "title": "Înregistrare",
+    "forgot": "Ai uitat parola?",
+    "remember": "Reține datele de login",
+    "signUp": "Încă nu ai cont? Creează-ți cont"
+  },
+  "forgotPassword": {
+    "title": "Găsește-ți contul IoTIC",
+    "searchButton": "Caută",
+    "resetButton": "Resetează",
+    "reset": "Resetează parola"
+  },
+  "dashboard": {
+    "welcome": "Bun venit",
+    "devices": "Dispozitive",
+    "sensors": "Sensori",
+    "data": "Date",
+    "receivedData": "Date primite",
+    "myAccount": "Contul meu",
+    "contactUs": "Contactează-ne",
+    "myQuestions": "Întrebările mele",
+    "buy": "Cumpără dispozitive"
+  }
+}

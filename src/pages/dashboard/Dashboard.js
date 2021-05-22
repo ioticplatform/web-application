@@ -12,11 +12,14 @@ import ActionProvider from "../../chatbot/ActionProvider";
 import TotalData from "../../components/TotalData";
 import Footer from "../firstPage/Footer";
 import "./Dashboard.scss";
+import {useTranslation} from "react-i18next";
 
 export default function Dashboard() {
+    const [t] = useTranslation('common');
+
     return (
         <React.Fragment>
-            <Title>Welcome, {globalData.user.username}!</Title>
+            <Title>{t('dashboard.welcome', {framework:'React'})}, {globalData.user.username}!</Title>
             <div style={{height: "16vh"}}/>
             <Container>
                 <Grid container spacing={1}>
@@ -30,7 +33,7 @@ export default function Dashboard() {
                     </Paper>
                 </Grid>
             </Container>
-            <Footer description="Thank you for choosing IoTIC!"/>
+            <Footer description={t('welcome.thankYou', {framework:'React'})}/>
             <Container className="containerChatbot">
                     <Chatbot
                         config={config}

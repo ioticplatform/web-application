@@ -130,7 +130,7 @@ export default function EditSensor({sensor, onFinishEdit}) {
                                     },
                                     {
                                         value: 'Fahrenheit',
-                                        label: '',
+                                        label: 'Fahrenheit',
                                     }
                                 ].map((option) => (
                                     <MenuItem key={option.value} value={option.value}>

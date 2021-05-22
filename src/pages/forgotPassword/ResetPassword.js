@@ -3,13 +3,11 @@ import {api, globalData} from "../../repo/api.js"
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import {Redirect} from "react-router";
-
 import CssBaseline from '@material-ui/core/CssBaseline';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import {useTranslation} from "react-i18next";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -30,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ResetPassword() {
     const classes = useStyles();
+    const [t] = useTranslation('common');
 
     let [newPassword, setNewPassword] = useState("")
     let [resetPasswordCode, setResetPasswordCode] = useState("")
@@ -55,11 +54,12 @@ export default function ResetPassword() {
             <div className="row">
                 <p className="error">{error}</p>
             </div>
-            <Typography component="h1" variant="h3">
-                Reset password
+            <Typography component="h1" variant="h3" style={{color: "white"}}>
+                {t('forgotPassword.reset', {framework:'React'})}
             </Typography>
             <form className={classes.form} noValidate>
                 <TextField
+                    style={{backgroundColor: "white"}}
                     variant="outlined"
                     type="password"
                     margin="normal"
@@ -70,6 +70,7 @@ export default function ResetPassword() {
                     autoFocus
                 />
                 <TextField
+                    style={{backgroundColor: "white"}}
                     variant="outlined"
                     margin="normal"
                     required
@@ -80,10 +81,12 @@ export default function ResetPassword() {
                 />
                 <Button
                     onClick={onSearchClick}
-                    fullWidth
                     variant="contained"
-                    color="primary"
-                >Reset</Button>
+                    className="button"
+                    style={{  backgroundColor: '#ffe680' }}
+                >
+                    {t('forgotPassword.resetButton', {framework:'React'})}
+                </Button>
             </form>
         </div>
     </Container>

@@ -3,24 +3,8 @@ import {makeStyles} from '@material-ui/core/styles';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Typography from '@material-ui/core/Typography';
 import {Redirect} from "react-router";
+import {useTranslation} from "react-i18next";
 
-const images = [
-    {
-        url: 'devices.jpg',
-        title: 'Devices',
-        width: '34%',
-    },
-    {
-        url: 'sensors.jpg',
-        title: 'Sensors',
-        width: '33%',
-    },
-    {
-        url: 'data.jpg',
-        title: 'Data',
-        width: '33%',
-    },
-];
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -96,6 +80,26 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function ButtonBases() {
+    const [t] = useTranslation('common');
+
+    const images = [
+        {
+            url: 'devices.jpg',
+            title: t('dashboard.devices', {framework:'React'}),
+            width: '34%',
+        },
+        {
+            url: 'sensors.jpg',
+            title: t('dashboard.sensors', {framework:'React'}),
+            width: '33%',
+        },
+        {
+            url: 'data.jpg',
+            title: t('dashboard.data', {framework:'React'}),
+            width: '33%',
+        },
+    ];
+
     const classes = useStyles();
     let [devices, setDevices] = useState(false)
     let [sensors, setSensors] = useState(false)

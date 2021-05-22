@@ -1,0 +1,52 @@
+{
+  "welcome": {
+    "title": "Welcome to IoTIC!",
+    "signUp": "Sign up",
+    "thankYou": "Thank you for choosing IoTIC."
+  },
+  "sections": {
+    "SmartHome": "Smart Home",
+    "SmartFarming": "Smart Farming",
+    "LowCosts": "Low Costs",
+    "OpenSource": "OpenSource"
+  },
+  "about": {
+    "about": "About",
+    "description": "This is an open-source IoT project developed by Teia Vava and Valentin Vozian."
+  },
+  "mainFeaturedPost": {
+    "title": "Device management, data collection, processing and visualization for your IoT solution",
+    "description": "IoTIC is an open-source IoT platform for data collection, processing, visualization, automation and device management."
+  },
+  "featuredPost": {
+    "title1": "How it started?",
+    "description1": "We are two computer science students passionate about...",
+    "title2": "Easier than ever",
+    "description2": "If you want to build your own system at home, but you don't know how to program...",
+    "continue": "Continue reading..."
+  },
+  "loginPage": {
+    "loginButton": "Login",
+    "title": "Sign in",
+    "forgot": "Forgot password?",
+    "remember": "Remember me",
+    "signUp": "Don't have an account? Sign up"
+  },
+  "forgotPassword": {
+    "title": "Find your IoTIC account",
+    "searchButton": "Search",
+    "resetButton": "Reset",
+    "reset": "Reset password"
+  },
+  "dashboard": {
+    "welcome": "Welcome",
+    "devices": "Devices",
+    "sensors": "Sensors",
+    "data": "Data",
+    "receivedData": "Received data",
+    "myAccount": "My Account",
+    "contactUs": "Contact us",
+    "myQuestions": "My questions",
+    "buy": "Buy devices"
+  }
+}

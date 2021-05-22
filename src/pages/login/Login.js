@@ -10,6 +10,7 @@ import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
+import {useTranslation} from "react-i18next";
 
 export default function Login() {
     let [username, setUsername] = useState("")
@@ -18,6 +19,7 @@ export default function Login() {
     let [loggedIn, setLoggedIn] = useState(false)
     let [register, setRegister] = useState(false)
     let [forgotPassword, setForgotPassword] = useState(false)
+    const [t] = useTranslation('common');
 
     async function onLoginClick(){
         try{
@@ -61,7 +63,7 @@ export default function Login() {
                     <img src="circle-cropped.png" />
                 </paper>
                 <Typography component="h1" variant="h4" style={{color: "white"}}>
-                    Sign in
+                    {t('loginPage.title', {framework:'React'})}
                 </Typography>
                 <form className="form" noValidate>
                     <TextField
@@ -90,7 +92,7 @@ export default function Login() {
                     </div>
                     <FormControlLabel
                         control={<Checkbox value="remember" style={{color: "white", textColor:"white"}} />}
-                        label=<h5 style={{color: "white", fontWeight: "lighter"}}>Remember me</h5>
+                        label=<h5 style={{color: "white", fontWeight: "lighter"}}>{t('loginPage.remember', {framework:'React'})}</h5>
                     />
                     <Button
                         onClick={onLoginClick}
@@ -98,7 +100,7 @@ export default function Login() {
                         className="button"
                         style={{  backgroundColor: '#ffe680' }}
                     >
-                        <b>Login</b>
+                        <b>{t('loginPage.loginButton', {framework:'React'})}</b>
                     </Button>
                     <Grid container style={{bottom: "0"}}>
                         <Grid item xs>
@@ -107,7 +109,7 @@ export default function Login() {
                                 variant="body2"
                                 style={{color: "lightBlue"}}
                                 onClick={onForgotPasswordClick}>
-                                {"Forgot password?"}
+                                {t('loginPage.forgot', {framework:'React'})}
                             </Link>
                         </Grid>
                         <Grid item>
@@ -116,7 +118,7 @@ export default function Login() {
                                 variant="body2"
                                 style={{color: "lightBlue"}}
                                 onClick={onRegisterClick}>
-                                {"Don't have an account? Sign Up"}
+                                {t('loginPage.signUp', {framework:'React'})}
                             </Link>
                         </Grid>
                     </Grid>

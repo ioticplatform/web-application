@@ -1,10 +1,9 @@
 import './App.scss';
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import {
     BrowserRouter as Router,
     Switch,
-    Route,
-    useLocation
+    Route
 } from "react-router-dom";
 import Login from "./pages/login/Login";
 import Devices from "./pages/devices/Devices";
@@ -34,14 +33,13 @@ import ResetPassword from "./pages/forgotPassword/ResetPassword";
 import FirstPage from "./pages/firstPage/FirstPage";
 import HowItStarted from "./pages/firstPage/articles/HowItStarted";
 import DIY from "./pages/firstPage/articles/DIY";
-import { useTranslation } from 'react-i18next';
 import Admin from "./pages/admin/Admin";
-// import ReactGA from "react-ga";
-// import InitializeReactGA from "./helper/googleAnalytics";
 import ContactUs from "./pages/contactUs/ContactUs";
 import Support from "./pages/support/Support";
 import FAQ from "./pages/FAQ/FAQ";
 import GoogleAnalytics from "./pages/admin/GoogleAnalytics"
+import {useTranslation} from "react-i18next";
+import MyQuestions from "./pages/MyQuestions/MyQuestions";
 
 const drawerWidth = 240;
 
@@ -130,6 +128,8 @@ function ShowAppBar() {
     let [title, setTitle] = useState(false);
     globalData.setTitle = setTitle
     const [open, setOpen] = React.useState(false);
+    const [t, i18n] = useTranslation('common');
+
     const handleDrawerOpen = () => {
         setOpen(true);
     };
@@ -152,6 +152,8 @@ function ShowAppBar() {
                 <Typography component="h1" variant="h6" noWrap className={classes.title}>
                     {title}
                 </Typography>
+                <button onClick={() => i18n.changeLanguage('ro')}><img className="photo" src={"ro.png"}/></button>
+                <button onClick={() => i18n.changeLanguage('en')}><img className="photo" src={"en.png"}/></button>
                 <IconButton color="inherit">
                     <Badge badgeContent={4} color="secondary">
                         <NotificationsIcon />
@@ -174,8 +176,7 @@ function ShowAppBar() {
             <Divider />
             <List><MainListItems /></List>
             <Divider />
-            <List><SecondaryListItems /></List>
-            <Divider />
+            {/*<List><SecondaryListItems /></List>*/}
             <List><InfoListItems /></List>
         </Drawer>
     </div>
@@ -264,6 +265,9 @@ function App() {
                         </Route>
                         <Route path="/diy">
                             <DIY/>
+                        </Route>
+                        <Route path="/myQuestions">
+                            <MyQuestions/>
                         </Route>
                     </Switch>
                 </div>

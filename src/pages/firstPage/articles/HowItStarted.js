@@ -37,7 +37,7 @@ export default function HowItStarted() {
         <React.Fragment>
             <CssBaseline />
             <Container maxWidth="lg">
-                <Header title="Welcome to IoTIC!" sections={sections} />
+                <Header sections={sections} />
                 <main>
                     <MainFeaturedPost post={mainFeaturedPost}/>
                     <Grid container spacing={2} className={classes.mainGrid}>

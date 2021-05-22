@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from "react";
-import "./FAQ.scss"
+import "../FAQ/FAQ.scss"
 import {api} from "../../repo/api.js"
 import Question from "../../components/Question";
 
-export default function FAQ() {
+export default function MyQuestions() {
     let [questions, setquestions] = useState([]);
     let [isLoading, setLoading] = useState(false);
 
@@ -20,7 +20,7 @@ export default function FAQ() {
 
     return (
         <div style={{paddingTop: "3%"}}>
-            <h3 style={{color: "gray"}}>{questions.length} frequently asked questions </h3>
+            <h3 style={{color: "gray"}}> My questions </h3>
             <div style={{paddingLeft: "30%"}}>
                 {questions.map(it => (
                     <Question text={it.text} answer={it.answer}></Question>

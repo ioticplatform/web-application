@@ -9,6 +9,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Hidden from '@material-ui/core/Hidden';
 import Link from "@material-ui/core/Link";
+import {useTranslation} from "react-i18next";
 
 const useStyles = makeStyles({
   card: {
@@ -25,6 +26,7 @@ const useStyles = makeStyles({
 export default function FeaturedPost(props) {
   const classes = useStyles();
   const { post } = props;
+  const [t] = useTranslation('common');
 
   return (
     <Grid item xs={12} md={6}>
@@ -41,7 +43,7 @@ export default function FeaturedPost(props) {
               <Typography variant="subtitle1" paragraph>
                 {post.description}
               </Typography>
-              <Link href={post.url}>Continue reading...</Link>
+              <Link href={post.url}>{t('featuredPost.continue', {framework:'React'})}</Link>
             </CardContent>
           </div>
           <Hidden xsDown>

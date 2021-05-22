@@ -3,15 +3,16 @@ import {api, globalData} from "../../repo/api.js"
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import {Redirect} from "react-router";
-import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import '../login/Login.scss'
+import {useTranslation} from "react-i18next";
 
 export default function ForgotPassword() {
     let [credential, setCredential] = useState("")
     let [error, setError] = useState("")
     let [searched, setSearched] = useState(false)
+    const [t] = useTranslation('common');
 
     async function onSearchClick(){
         try {
@@ -30,7 +31,7 @@ export default function ForgotPassword() {
     return <Container className="paper" component="main" maxWidth="xs">
         <div className="paper" style={{paddingTop: "50%"}}>
             <Typography component="h1" variant="h4" style={{color: "white"}}>
-                Find your IoTIC account
+                {t('forgotPassword.title', {framework:'React'})}
             </Typography>
             <form className="form" noValidate>
                 <TextField
@@ -51,7 +52,9 @@ export default function ForgotPassword() {
                     variant="contained"
                     className="button"
                     style={{  backgroundColor: '#ffe680' }}
-                >Search</Button>
+                >
+                    {t('forgotPassword.searchButton', {framework:'React'})}
+                </Button>
             </form>
         </div>
     </Container>

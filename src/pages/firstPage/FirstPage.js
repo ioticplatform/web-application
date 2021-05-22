@@ -12,58 +12,57 @@ import Main from './Main';
 import Sidebar from './Sidebar';
 import Footer from './Footer';
 import Market from "./Market";
-
-const sections = [
-    { title: 'Smart Home', url: '#' },
-    { title: 'Smart Farming', url: '#' },
-    { title: 'Low Costs', url: '#' },
-    { title: 'OpenSource', url: '#' },
-];
-
-const mainFeaturedPost = {
-    title: 'Did you ever think how it would be to...',
-    description:
-        "Multiple lines of text that form the lede, informing new readers quickly and efficiently about what's most interesting in this post's contents.",
-    image: 'featured_article.jpg',
-    imgText: 'main image description',
-};
-
-const featuredPosts = [
-    {
-        title: 'How it started?',
-        date: 'Apr 14',
-        description:
-            'We are two computer science students passionate about...',
-        image: 'how_it_started.jpg',
-        url: "http://localhost:3000/howItStarted"
-    },
-    {
-        title: 'DIY',
-        date: 'Apr 17',
-        description:
-            'If you want to try building your own system at home...',
-        image: 'diy.jpg',
-        url: "http://localhost:3000/diy"
-    },
-];
-
-const sidebar = {
-    title: 'About',
-    description:
-        'This is an open-source IoT project developed by Teia Vava and Valentin Vozian.',
-    social: [
-        { name: 'GitHub', icon: GitHubIcon , link: "https://github.com/teiavava/server"},
-        { name: 'Instagram', icon: InstagramIcon , link: "http://instagram.com"},
-        { name: 'Facebook', icon: FacebookIcon, link: "http://facebook.com" },
-    ],
-};
+import {useTranslation} from "react-i18next";
 
 export default function FirstPage() {
+    const [t] = useTranslation('common');
+
+    const sections = [
+        { title: t('sections.SmartHome', {framework:'React'}), url: '#' },
+        { title: t('sections.SmartFarming', {framework:'React'}), url: '#' },
+        { title: t('sections.LowCosts', {framework:'React'}), url: '#' },
+        { title: t('sections.OpenSource', {framework:'React'}), url: '#' }
+    ];
+
+    const mainFeaturedPost = {
+        title: t('mainFeaturedPost.title', {framework:'React'}),
+        description: t('mainFeaturedPost.description', {framework:'React'}),
+        image: 'featured_article.jpg',
+        imgText: 'main image description',
+    };
+
+    const featuredPosts = [
+        {
+            title: t('featuredPost.title1', {framework:'React'}),
+            date: 'Apr 14',
+            description:t('featuredPost.description1', {framework:'React'}),
+            image: 'how_it_started.jpg',
+            url: "http://localhost:3000/howItStarted"
+        },
+        {
+            title: t('featuredPost.title2', {framework:'React'}),
+            date: 'Apr 17',
+            description:t('featuredPost.description2', {framework:'React'}),
+            image: 'diy.jpg',
+            url: "http://localhost:3000/diy"
+        },
+    ];
+
+    const sidebar = {
+        title: t('about.about', {framework:'React'}),
+        description: t('about.description', {framework:'React'}),
+        social: [
+            { name: 'GitHub', icon: GitHubIcon , link: "https://github.com/teiavava/server"},
+            { name: 'Instagram', icon: InstagramIcon , link: "http://instagram.com"},
+            { name: 'Facebook', icon: FacebookIcon, link: "http://facebook.com" },
+        ],
+    };
+
     return (
         <React.Fragment>
             <CssBaseline />
             <Container maxWidth="lg">
-                <Header title="Welcome to IoTIC!" sections={sections} />
+                <Header sections={sections} />
                 <main>
                     <MainFeaturedPost post={mainFeaturedPost} />
                     <Grid container spacing={4}>
@@ -85,7 +84,7 @@ export default function FirstPage() {
                     </Grid>
                 </main>
             </Container>
-            <Footer description="Thank you for choosing IoTIC!" />
+            <Footer description={t('welcome.thankYou', {framework:'React'})} />
         </React.Fragment>
     );
 }
