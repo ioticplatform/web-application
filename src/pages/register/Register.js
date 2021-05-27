@@ -21,15 +21,16 @@ export default function Register() {
         try {
             await api.register(username, password, email)
             setRegistered(true)
-            globalData.setLoggedIn(true);
+            // globalData.setLoggedIn(true);
+            setError("We sent you an email. Please confirm your account and then login.")
         } catch (e){
             setError("Register Error")
         }
     }
 
-    if (registered){
-        return <Redirect to={"/dashboard"}/>
-    }
+    // if (registered){
+    //     return <Redirect to={"/dashboard"}/>
+    // }
 
     return <Container className="paper" component="main" maxWidth="xs">
         <CssBaseline />

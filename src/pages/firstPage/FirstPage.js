@@ -42,7 +42,7 @@ export default function FirstPage() {
         {
             title: t('featuredPost.title2', {framework:'React'}),
             date: 'Apr 17',
-            description:t('featuredPost.description2', {framework:'React'}),
+            description:t('featuredPo127st.description2', {framework:'React'}),
             image: 'diy.jpg',
             url: "http://localhost:3000/diy"
         },

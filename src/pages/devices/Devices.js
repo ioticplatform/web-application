@@ -7,6 +7,7 @@ import EditDevice from "../../components/EditDevice";
 import moment from "moment";
 import DeleteDevice from "../../components/DeleteDevice";
 import {useTranslation} from "react-i18next";
+import {Link} from "react-router-dom";
 
 export default function Devices() {
     let [devices, setDevices] = useState([]);
@@ -36,6 +37,9 @@ export default function Devices() {
     }
 
     return <div style={{maxWidth: '100%', marginTop: "60px"}}>
+        <h4 style={{color: "white"}}>In order to add a new device, please follow this
+            <Link to="/instructions-new-device" style={{margin: "20px", color: "red"}}>instructions</Link>.
+        </h4>
         <MaterialTable
             columns={[
                 {

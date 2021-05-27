@@ -40,6 +40,9 @@ import FAQ from "./pages/FAQ/FAQ";
 import GoogleAnalytics from "./pages/admin/GoogleAnalytics"
 import {useTranslation} from "react-i18next";
 import MyQuestions from "./pages/MyQuestions/MyQuestions";
+import InstructionsDevice from "./pages/instructions/InstructionsDevice";
+import InstructionsSensor from "./pages/instructions/InstructionsSensor";
+import Maps from "./pages/maps/Maps";
 
 const drawerWidth = 240;
 
@@ -256,6 +259,15 @@ function App() {
                         </Route>
                         <Route path="/myQuestions">
                             <MyQuestions/>
+                        </Route>
+                        <Route path="/instructions-new-device">
+                            <InstructionsDevice/>
+                        </Route>
+                        <Route path="/instructions-new-sensor">
+                            <InstructionsSensor/>
+                        </Route>
+                        <Route path="/maps">
+                            <Maps/>
                         </Route>
                     </Switch>
                 </div>

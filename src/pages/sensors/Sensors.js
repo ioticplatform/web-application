@@ -6,6 +6,7 @@ import moment from "moment";
 import EditSensor from "../../components/EditSensor";
 import DeleteSensor from "../../components/DeleteSensor";
 import {useTranslation} from "react-i18next";
+import {Link} from "react-router-dom";
 
 export default function Sensors() {
     let [sensors, setSensors] = useState([]);
@@ -36,6 +37,9 @@ export default function Sensors() {
     }
 
     return <div style={{maxWidth: '100%', marginTop: "60px"}}>
+        <h4 style={{color: "white"}}>In order to add a new sensor, please follow this
+            <Link to="/instructions-new-sensor" style={{margin: "20px", color: "red"}}>instructions</Link>.
+        </h4>
         <MaterialTable
             columns={[
                 {

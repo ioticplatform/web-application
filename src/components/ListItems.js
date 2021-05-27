@@ -6,7 +6,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import BarChartIcon from '@material-ui/icons/BarChart';
+import RoomIcon from '@material-ui/icons/Room';
 import LayersIcon from '@material-ui/icons/Layers';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import {EmailOutlined, FeedbackOutlined, PersonRounded} from "@material-ui/icons";
@@ -16,10 +16,15 @@ import {useTranslation} from "react-i18next";
 export function MainListItems() {
     let [navigateAccount, setNavigateAccount] = useState(false)
     let [navigateDashboard, setNavigateDashboard] = useState(false)
+    let [navigateMaps, setNavigateMaps] = useState(false)
     const [t] = useTranslation('common');
 
     async function onAccountClick() {
         setNavigateAccount(true)
+    }
+
+    async function onMapsClick() {
+        setNavigateMaps(true)
     }
 
     async function onDashboardClick() {
@@ -28,6 +33,10 @@ export function MainListItems() {
 
     if (navigateAccount) {
         return <Redirect to={"/account"}/>
+    }
+
+    if (navigateMaps) {
+        return <Redirect to={"/maps"}/>
     }
 
     if (navigateDashboard) {
@@ -53,11 +62,11 @@ export function MainListItems() {
                 </ListItemIcon>
                 <ListItemText primary={t('dashboard.buy', {framework:'React'})} />
             </ListItem>
-            <ListItem button>
+            <ListItem button onClick={onMapsClick}>
                 <ListItemIcon>
-                    <BarChartIcon />
+                    <RoomIcon/>
                 </ListItemIcon>
-                <ListItemText primary="Statistics" />
+                <ListItemText primary="Maps" />
             </ListItem>
             <ListItem button>
                 <ListItemIcon>
