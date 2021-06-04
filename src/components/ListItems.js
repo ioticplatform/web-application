@@ -8,6 +8,7 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import RoomIcon from '@material-ui/icons/Room';
 import LayersIcon from '@material-ui/icons/Layers';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import {EmailOutlined, FeedbackOutlined, PersonRounded} from "@material-ui/icons";
 import {Redirect} from "react-router";
@@ -151,6 +152,12 @@ export function InfoListItems() {
                 <HelpIcon />
             </ListItemIcon>
             <ListItemText primary={t('dashboard.myQuestions', {framework:'React'})} />
+        </ListItem>
+        <ListItem>
+            <ListItemIcon>
+                <ExitToAppIcon />
+            </ListItemIcon>
+            <ListItemText primary={t('dashboard.logOut', {framework:'React'})} />
         </ListItem>
     </div>);
 }

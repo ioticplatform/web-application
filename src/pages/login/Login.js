@@ -11,6 +11,8 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import {useTranslation} from "react-i18next";
+import clientId from '../../utils'
+import GoogleLogin from 'react-google-login';
 
 export default function Login() {
     let [username, setUsername] = useState("")
@@ -21,6 +23,22 @@ export default function Login() {
     let [forgotPassword, setForgotPassword] = useState(false)
     const [t] = useTranslation('common');
 
+    async function onSuccess (res) {
+        console.log('login ', res);
+        try{
+            await api.loginWithGoogle(res.accessToken)
+            setLoggedIn(true);
+            globalData.setLoggedIn(true);
+            globalData.setTitle("Dashboard");
+        } catch (e){
+            setError("")
+        }
+    };
+
+    const onFailure = (res) => {
+        console.log('login failed', res);
+    };
+
     async function onLoginClick(){
         try{
             await api.login(username, password)
@@ -28,7 +46,8 @@ export default function Login() {
             globalData.setLoggedIn(true);
             globalData.setTitle("Dashboard");
         } catch (e){
-            setError("Login Error")
+            setError("Wrong Credentials.\n" +
+                "Invalid username or password")
         }
     }
 
@@ -41,9 +60,9 @@ export default function Login() {
     }
 
     if(loggedIn){
-        if (globalData.user.role == "admin")
+        if (globalData.user.role === "admin")
             return <Redirect to={"/admin"}/>
-        else if (globalData.user.role == "support")
+        else if (globalData.user.role === "support")
             return <Redirect to={"/support"}/>
         return <Redirect to={"/dashboard"}/>
     }
@@ -87,10 +106,8 @@ export default function Login() {
                         fullWidth
                         style={{backgroundColor: "white"}}
                     />
-                    <div className="row">
-                        <p className="error">{error}</p>
-                    </div>
-                    <FormControlLabel
+                    <p className="error">{error}</p>
+                    <FormControlLabel style={{height: '5px', paddingBottom: '20px'}}
                         control={<Checkbox value="remember" style={{color: "white", textColor:"white"}} />}
                         label=<h5 style={{color: "white", fontWeight: "lighter"}}>{t('loginPage.remember', {framework:'React'})}</h5>
                     />
@@ -98,10 +115,20 @@ export default function Login() {
                         onClick={onLoginClick}
                         variant="contained"
                         className="button"
-                        style={{  backgroundColor: '#ffe680' }}
+                        style={{  backgroundColor: '#ffe680', marginBottom: '20px'}}
                     >
                         <b>{t('loginPage.loginButton', {framework:'React'})}</b>
                     </Button>
+
+                    <GoogleLogin
+                        clientId={clientId}
+                        buttonText="Login with Google"
+                        onSuccess={onSuccess}
+                        onFailure={onFailure}
+                        isSignedIn={true}
+                        style={{  width: '100px' }}
+                    />
+
                     <Grid container style={{bottom: "0"}}>
                         <Grid item xs>
                             <Link

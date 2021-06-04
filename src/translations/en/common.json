@@ -42,12 +42,13 @@
     "welcome": "Welcome",
     "devices": "Devices",
     "sensors": "Sensors",
-    "data": "Data",
+    "data": "Actors",
     "receivedData": "Received data",
     "myAccount": "My Account",
     "contactUs": "Contact us",
     "myQuestions": "My questions",
-    "buy": "Buy devices"
+    "buy": "Buy devices",
+    "logOut": "Log out"
   },
   "devices": {
     "title": "Devices",

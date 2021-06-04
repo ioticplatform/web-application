@@ -8,6 +8,8 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
+import EmailIcon from '@material-ui/icons/Email';
+import PhoneIcon from '@material-ui/icons/Phone';
 
 export default function ContactUs() {
     let [subject, setSubject] = useState("")
@@ -15,6 +17,12 @@ export default function ContactUs() {
     let [text, setText] = useState("")
     let [sent, setSent] = useState(false)
     let [error, setError] = useState("")
+
+    const Mailto = ({ email, subject, body, children }) => {
+        return (
+            <a style={{color: "white", paddingBottom: "10px"}}href={`mailto:${email}?subject=${encodeURIComponent(subject) || ''}&body=${encodeURIComponent(body) || ''}`}>{children}</a>
+        );
+    };
 
     async function onSendClick(){
         try{
@@ -76,6 +84,14 @@ export default function ContactUs() {
                         <b>Send</b>
                     </Button>
                 </form>
+                <Mailto email="iotic.team@outlook.com"
+                        subject="Question"
+                        body="Please write your message here. We are thrilled to support! :)">
+                    <EmailIcon style={{color: "white", paddingTop: "20px"}}/> Send us an email
+                </Mailto>
+                <div style={{color: "white"}}>
+                    <PhoneIcon style={{paddingTop: "20px"}}/> +40 727975236
+                </div>
             </div>
         </Container>
     );

@@ -1,8 +1,6 @@
 import React, {useEffect, useState} from "react";
-import {withStyles, makeStyles, useTheme} from '@material-ui/core/styles';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import EmailIcon from '@material-ui/icons/Email';
-import {api, globalData} from "../../repo/api.js"
+import {withStyles} from '@material-ui/core/styles';
+import {api} from "../../repo/api.js"
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import Title from '../../components/Title';
@@ -13,12 +11,9 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import StorageIcon from '@material-ui/icons/Storage';
 import FavoriteIcon from '@material-ui/icons/Timeline';
-import PersonPinIcon from '@material-ui/icons/PieChart';
-import LibraryBooks from '@material-ui/icons/LibraryBooks';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import MaterialTable from "material-table";
-import moment from "moment";
 import DeleteData from "../../components/DeleteData";
 import GoogleAnalytics from "./GoogleAnalytics";
 

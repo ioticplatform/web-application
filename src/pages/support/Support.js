@@ -158,6 +158,7 @@ export default function Support() {
                                 }
                             ]}
                             data={messages}
+                            title="Customer Support"
                             isLoading={isLoading}
                             options={{
                                 filtering: true,

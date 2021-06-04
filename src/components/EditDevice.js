@@ -55,7 +55,7 @@ export default function EditDevice({device, onFinishEdit}) {
             handleClose();
             onFinishEdit();
         } catch (e){
-            setError("Info Error.")
+            setError("Please check the information again.")
         }
     }
 

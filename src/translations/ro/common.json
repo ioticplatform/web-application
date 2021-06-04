@@ -42,12 +42,13 @@
     "welcome": "Bun venit",
     "devices": "Dispozitive",
     "sensors": "Sensori",
-    "data": "Date",
+    "data": "Actori",
     "receivedData": "Date primite",
     "myAccount": "Contul meu",
     "contactUs": "Contactează-ne",
     "myQuestions": "Întrebările mele",
-    "buy": "Cumpără dispozitive"
+    "buy": "Cumpără dispozitive",
+    "logOut": "Deconectare"
   },
   "devices": {
     "title": "Dispozitive",

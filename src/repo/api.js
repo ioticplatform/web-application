@@ -1,7 +1,6 @@
 import axios from 'axios';
-import {useState} from "react";
-
-let IP = "65.21.110.202";
+// let IP = "65.21.110.202";
+let IP = "localhost";
 let PORT = "5000"
 let API_HOST = "http://" + IP + ":" + PORT + "/api"
 
@@ -17,6 +16,24 @@ let globalData = {user: {}}
 
 async function login(username, pass) {
     let res = await axios.post(API_HOST + "/users/login", {username: username, password: pass});
+
+    if (res.status === 201) {
+        token = res.data.access_token;
+        user = {
+            id: res.data._id,
+            email: res.data.email,
+            username: res.data.username,
+            role: res.data.role
+        }
+        localStorage.setItem("token", token);
+        localStorage.setItem("user", JSON.stringify(user));
+        globalData.user = user;
+    }
+    return res;
+}
+
+async function loginWithGoogle(access_token) {
+    let res = await axios.post(API_HOST + "/users/loginWithGoogle", {access_token: access_token});
     if (res.status === 201) {
         token = res.data.access_token;
         user = {
@@ -151,5 +168,5 @@ let api = {
     getSensorData, editAccount, deleteDevice, editDevice, editSensor,
     forgotPassword, resetPassword, deleteData, deleteSensor,
     sendMessage, getUsers, getMessages, deleteMessage, addFAQMessage,
-    editMessage, getFAQ}
+    editMessage, getFAQ, loginWithGoogle}
 export {api, globalData}

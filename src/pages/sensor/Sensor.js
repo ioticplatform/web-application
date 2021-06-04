@@ -17,7 +17,7 @@ import LibraryBooks from '@material-ui/icons/LibraryBooks';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Chart from "react-google-charts";
-import {Label, Line, LineChart, XAxis, YAxis, CartesianGrid, Tooltip,} from "recharts";
+import {Label, Line, LineChart, XAxis, YAxis, hAxis, vAxis, CartesianGrid, Tooltip,} from "recharts";
 import MaterialTable from "material-table";
 import moment from "moment";
 import DeleteData from "../../components/DeleteData";
@@ -112,7 +112,6 @@ export default function Sensor() {
         setHigherValues(res.data.data.filter(x => x.value > 600));
         setLowerValues(res.data.data.filter(x => x.value < 200));
         setNormalValues(res.data.data.filter(x => x.value >= 200 && x.value <= 400));
-
     }
 
     useEffect(() => {
@@ -229,7 +228,7 @@ export default function Sensor() {
                                     angle={270}
                                     position="left"
                                     style={{ textAnchor: 'middle', fill: theme.palette.text.primary }} >
-                                    {globalData.sensor.type} ({globalData.sensor.measure_unit})
+                                    {globalData.sensor.type + ' (' + globalData.sensor.measure_unit + ')'}
                                 </Label>
                             </YAxis>
                             <Tooltip />

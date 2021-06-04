@@ -20,7 +20,7 @@ export default function TotalData() {
                 {t('dashboard.receivedData', {framework:'React'})}
             </h4></Title>
             <Typography component="p" variant="h4">
-                3,024.00
+                3.930.862.087
             </Typography>
             <Typography color="textSecondary" className={classes.depositContext}>
                 on {new Date().toLocaleDateString("en-US", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }).toString()}

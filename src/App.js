@@ -62,6 +62,7 @@ const useStyles = makeStyles((theme) => ({
     },
 
     appBar: {
+        position: "fixed",
         backgroundColor: "#355e35",
         zIndex: theme.zIndex.drawer + 1,
         transition: theme.transitions.create(['width', 'margin'], {
