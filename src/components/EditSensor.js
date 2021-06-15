@@ -11,7 +11,6 @@ import Slide from '@material-ui/core/Slide';
 import EditIcon from '@material-ui/icons/Edit';
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
-import Paper from "@material-ui/core/Paper";
 import {api} from "../repo/api";
 import MenuItem from '@material-ui/core/MenuItem';
 
@@ -49,7 +48,9 @@ export default function EditSensor({sensor, onFinishEdit}) {
 
     async function onUpdateClick(){
         try{
-            await api.editSensor(sensor, measureUnit)
+            if (!name)
+                name = sensor.name;
+            await api.editSensor(sensor, measureUnit, name)
             handleClose();
             onFinishEdit();
         } catch (e){
@@ -108,6 +109,19 @@ export default function EditSensor({sensor, onFinishEdit}) {
                                     readOnly: true,
                                 }}
                                 variant="filled"
+                            />
+                        </Grid>
+                        <Grid item xs={6}>
+                            <h3>
+                                Name:
+                            </h3>
+                            <TextField
+                                id="name"
+                                name="name"
+                                label={sensor.name}
+                                variant="filled"
+                                fullWidth
+                                value={name} onChange={(it) => setName(it.target.value)}
                             />
                         </Grid>
                         <Grid item xs={6}>

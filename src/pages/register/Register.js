@@ -36,7 +36,7 @@ export default function Register() {
         <CssBaseline />
         <div className="paper">
             <div className="row">
-                <p className="error">{error}</p>
+                <p className="error" style={{color: "green"}}>{error}</p>
             </div>
             <paper variant="outlined">
                 <img src="anonymous-user.png" style={{height: "30vh", width: "30vh"}}/>

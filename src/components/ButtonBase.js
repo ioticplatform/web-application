@@ -103,6 +103,7 @@ export default function ButtonBases() {
     const classes = useStyles();
     let [devices, setDevices] = useState(false)
     let [sensors, setSensors] = useState(false)
+    let [actors, setActors] = useState(false)
 
     function onButtonClick(idx){
         if(idx === 0){
@@ -110,6 +111,9 @@ export default function ButtonBases() {
         }
         else if (idx === 1){
             setSensors(true)
+        }
+        else if (idx === 2){
+            setActors(true)
         }
     }
 
@@ -119,6 +123,10 @@ export default function ButtonBases() {
 
     if (sensors) {
         return <Redirect to={"/sensors"}/>
+    }
+
+    if (actors) {
+        return <Redirect to={"/actors"}/>
     }
 
     return (

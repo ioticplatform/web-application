@@ -60,8 +60,17 @@
   },
   "sensors": {
     "title": "Senzori",
+    "name": "Nume senzor",
     "type": "Tipul senzorului",
     "unit": "Unitate de măsură",
+    "created": "Creat la",
+    "edit": "Editează",
+    "delete": "Șterge"
+  },
+  "actors": {
+    "title": "Actori",
+    "name": "Nume senzor",
+    "type": "Tipul senzorului",
     "created": "Creat la",
     "edit": "Editează",
     "delete": "Șterge"

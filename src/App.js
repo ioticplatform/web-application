@@ -13,7 +13,7 @@ import Register from "./pages/register/Register";
 import Sensor from "./pages/sensor/Sensor";
 import Sensors from "./pages/sensors/Sensors";
 import EditAccount from "./pages/editAccount/EditAccount";
-import {InfoListItems, MainListItems, SecondaryListItems} from "./components/ListItems"
+import {InfoListItems, MainListItems} from "./components/ListItems"
 import List from "@material-ui/core/List";
 import clsx from "clsx";
 import IconButton from "@material-ui/core/IconButton";
@@ -43,6 +43,8 @@ import MyQuestions from "./pages/MyQuestions/MyQuestions";
 import InstructionsDevice from "./pages/instructions/InstructionsDevice";
 import InstructionsSensor from "./pages/instructions/InstructionsSensor";
 import Maps from "./pages/maps/Maps";
+import Actors from "./pages/actors/Actors";
+import Automation from "./pages/automation/Automation";
 
 const drawerWidth = 240;
 
@@ -181,18 +183,16 @@ function ShowAppBar() {
                 </IconButton>
             </div>
             <Divider />
-            <List><MainListItems /></List>
+            <List><MainListItems handleDrawerClose={handleDrawerClose}/></List>
             <Divider />
             {/*<List><SecondaryListItems /></List>*/}
-            <List><InfoListItems /></List>
+            <List><InfoListItems handleDrawerClose={handleDrawerClose}/></List>
         </Drawer>
     </div>
 }
 
 function App() {
-    // usePageViews()
     const { t } = useTranslation();
-
 
     let [isLoggedIn, setLoggedIn] = useState(false);
     globalData.setLoggedIn = setLoggedIn
@@ -230,6 +230,9 @@ function App() {
                         </Route>
                         <Route path="/sensors">
                             <Sensors/>
+                        </Route>
+                        <Route path="/actors">
+                            <Actors/>
                         </Route>
                         <Route path="/sensor">
                             <Sensor/>
@@ -269,6 +272,9 @@ function App() {
                         </Route>
                         <Route path="/maps">
                             <Maps/>
+                        </Route>
+                        <Route path="/automation">
+                            <Automation/>
                         </Route>
                     </Switch>
                 </div>

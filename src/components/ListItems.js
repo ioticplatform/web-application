@@ -11,25 +11,39 @@ import LayersIcon from '@material-ui/icons/Layers';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import {EmailOutlined, FeedbackOutlined, PersonRounded} from "@material-ui/icons";
-import {Redirect} from "react-router";
+import {Redirect, useHistory} from "react-router";
 import {useTranslation} from "react-i18next";
+import {globalData} from "../repo/api";
+import PropTypes from "prop-types";
 
-export function MainListItems() {
+export function MainListItems(props) {
+    const { handleDrawerClose } = props;
+
     let [navigateAccount, setNavigateAccount] = useState(false)
     let [navigateDashboard, setNavigateDashboard] = useState(false)
     let [navigateMaps, setNavigateMaps] = useState(false)
+    let [navigateAutomation, setAutomation] = useState(false)
     const [t] = useTranslation('common');
+    let history = useHistory();
 
     async function onAccountClick() {
         setNavigateAccount(true)
+        handleDrawerClose();
     }
 
     async function onMapsClick() {
         setNavigateMaps(true)
+        handleDrawerClose();
+    }
+
+    async function onAutomationClick() {
+        setAutomation(true)
+        handleDrawerClose();
     }
 
     async function onDashboardClick() {
         setNavigateDashboard(true)
+        handleDrawerClose();
     }
 
     if (navigateAccount) {
@@ -42,6 +56,12 @@ export function MainListItems() {
 
     if (navigateDashboard) {
         return <Redirect to={"/dashboard"}/>
+    }
+
+    if (navigateAutomation) {
+        // window.location.href = 'http://localhost:1880'
+        // return <div/>
+        return <Redirect to={"/automation"}/>
     }
 
     return <div>
@@ -69,14 +89,19 @@ export function MainListItems() {
                 </ListItemIcon>
                 <ListItemText primary="Maps" />
             </ListItem>
-            <ListItem button>
+            <ListItem button onClick={onAutomationClick}>
                 <ListItemIcon>
                     <LayersIcon />
                 </ListItemIcon>
-                <ListItemText primary="Integrations" />
+                <ListItemText primary="Automation"/>
             </ListItem>
         </div>
 }
+
+MainListItems.propTypes = {
+    handleDrawerClose: PropTypes.any
+};
+
 
 export function SecondaryListItems() {
     return (<div>
@@ -102,23 +127,33 @@ export function SecondaryListItems() {
     </div>);
 }
 
-export function InfoListItems() {
+export function InfoListItems(props) {
+    const { handleDrawerClose } = props;
+
     let [navigateContactUs, setNavigateContactUs] = useState(false)
     let [navigateFAQ, setNavigateFAQ] = useState(false)
     let [navigateMyQuestions, setNavigateMyQuestions] = useState(false)
+    let [navigateLogout, setNavigateLogout] = useState(false)
 
     const [t] = useTranslation('common');
 
     async function onContactUsClick() {
         setNavigateContactUs(true)
+        handleDrawerClose();
     }
 
     async function onFAQClick() {
         setNavigateFAQ(true)
+        handleDrawerClose();
     }
 
     async function onMyQuestionsClick() {
         setNavigateMyQuestions(true)
+        handleDrawerClose();
+    }
+
+    async function onLogoutClick() {
+        setNavigateLogout(true)
     }
 
     if (navigateMyQuestions) {
@@ -131,6 +166,11 @@ export function InfoListItems() {
 
     if (navigateFAQ) {
         return <Redirect to={"/faq"}/>
+    }
+
+    if (navigateLogout) {
+        globalData.setLoggedIn(false);
+        return <Redirect to={"/login"}/>
     }
 
     return (<div>
@@ -153,7 +193,7 @@ export function InfoListItems() {
             </ListItemIcon>
             <ListItemText primary={t('dashboard.myQuestions', {framework:'React'})} />
         </ListItem>
-        <ListItem>
+        <ListItem button onClick={onLogoutClick}>
             <ListItemIcon>
                 <ExitToAppIcon />
             </ListItemIcon>
@@ -161,3 +201,6 @@ export function InfoListItems() {
         </ListItem>
     </div>);
 }
+InfoListItems.propTypes = {
+    handleDrawerClose: PropTypes.any
+};

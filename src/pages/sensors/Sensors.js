@@ -48,6 +48,14 @@ export default function Sensors() {
                     headerStyle: {width: "20px"}
                 },
                 {
+                    title: t('sensors.name', {framework:'React'}),
+                    field: 'name',
+                    render: (sensor) => <p onClick={() => onSensorClick(sensor)}>{sensor.name}</p>,
+                    cellStyle: {
+                        backgroundColor: '#f2f2f7'
+                    }
+                },
+                {
                     title: t('sensors.type', {framework:'React'}),
                     field: 'type',
                     render: (sensor) => <p onClick={() => onSensorClick(sensor)}>{sensor.type}</p>,

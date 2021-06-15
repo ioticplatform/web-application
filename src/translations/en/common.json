@@ -60,8 +60,17 @@
   },
   "sensors": {
     "title": "Sensors",
-    "type": "Sensor type",
+    "name": "Sensor name",
+    "type": "Type",
     "unit": "Measurement unit",
+    "created": "Created",
+    "edit": "Edit",
+    "delete": "Delete"
+  },
+  "actors": {
+    "title": "Actors",
+    "name": "Actor name",
+    "type": "Type",
     "created": "Created",
     "edit": "Edit",
     "delete": "Delete"

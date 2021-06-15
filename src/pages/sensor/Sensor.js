@@ -109,9 +109,9 @@ export default function Sensor() {
         setSensorData(res.data.data)
         setReChartSensorData(res.data.data.map(x => ({time: x.timestamp, value: x.value})))
         setChartSensorData(res.data.data.map(x => ["Date(" + x.timestamp + ")", x.value]))
-        setHigherValues(res.data.data.filter(x => x.value > 600));
-        setLowerValues(res.data.data.filter(x => x.value < 200));
-        setNormalValues(res.data.data.filter(x => x.value >= 200 && x.value <= 400));
+        setHigherValues(res.data.data.filter(x => x.value > 90));
+        setLowerValues(res.data.data.filter(x => x.value < 25));
+        setNormalValues(res.data.data.filter(x => x.value >= 25 && x.value <= 90));
     }
 
     useEffect(() => {
@@ -129,7 +129,6 @@ export default function Sensor() {
     return (
         <MDBContainer>
             <p className="mx-auto">
-                <Title>Data</Title>
                 <AppBar position="static" color="default">
                     <Tabs
                         value={value}
@@ -174,7 +173,7 @@ export default function Sensor() {
                                 {
                                     title: t('sensor.level', {framework:'React'}),
                                     field: 'value',
-                                    render: ({value}) => level(value, 200, 500),
+                                    render: ({value}) => level(value, 25, 90),
                                 },
                                 {
                                     title: t('sensor.delete', {framework:'React'}),
@@ -183,7 +182,7 @@ export default function Sensor() {
                             ]}
                             data={data}
                             isLoading={isLoading}
-                            title={globalData.sensor.type + " - " + t('sensor.title', {framework:'React'})}
+                            title={globalData.sensor.name + " - " + t('sensor.title', {framework:'React'})}
                             options={{
                                 filtering: true,
                                 headerStyle: {
@@ -201,19 +200,6 @@ export default function Sensor() {
                 </TabPanel>
                 <TabPanel value={value} index={1}>
                     {isLoading ? <CircularProgress/> :
-                        // <Chart
-                        // width={'100%'}
-                        // height={'500px'}
-                        // chartType="AreaChart"
-                        // loader={<div>Loading Chart</div>}
-                        // data={[...[['Date', 'value']], ...chart_data]}
-                        // options={{
-                        //     title: 'Variation',
-                        //     hAxis: { title: 'time', titleTextStyle: { color: '#333' } },
-                        //     vAxis: { title: 'value'},
-                        //     chartArea: { width: '50%', height: '70%' },
-                        // }}
-                        // />
                         <div align={"center"} style={{backgroundColor: "white"}}>
                         <LineChart
                             width={1200}

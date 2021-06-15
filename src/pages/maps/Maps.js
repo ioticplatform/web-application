@@ -43,7 +43,7 @@ export const MapContainer = () => {
 
     return (
         <LoadScript
-            googleMapsApiKey='AIzaSyCWqu2GgRgmzaHiXzvHD8iGacOb5kY8rVA'>
+            googleMapsApiKey='AIzaSyCmVx3-oT0iEHLSP7SbOHbOW5xgeBVrsKg'>
             {
                 selected.location &&
                 (

@@ -13,6 +13,9 @@ import Container from '@material-ui/core/Container';
 import {useTranslation} from "react-i18next";
 import clientId from '../../utils'
 import GoogleLogin from 'react-google-login';
+import { InputAdornment, IconButton } from "@material-ui/core";
+import Visibility from "@material-ui/icons/Visibility";
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
 
 export default function Login() {
     let [username, setUsername] = useState("")
@@ -22,6 +25,10 @@ export default function Login() {
     let [register, setRegister] = useState(false)
     let [forgotPassword, setForgotPassword] = useState(false)
     const [t] = useTranslation('common');
+
+    const [showPassword, setShowPassword] = useState(false);
+    const handleClickShowPassword = () => setShowPassword(!showPassword);
+    const handleMouseDownPassword = () => setShowPassword(!showPassword);
 
     async function onSuccess (res) {
         console.log('login ', res);
@@ -96,15 +103,38 @@ export default function Login() {
                         autoFocus
                         style={{backgroundColor: "white"}}
                     />
+                    {/*<TextField*/}
+                    {/*    label="Password"*/}
+                    {/*    type="password"*/}
+                    {/*    value={password} onChange={(it) => setPassword(it.target.value)}*/}
+                    {/*    variant="outlined"*/}
+                    {/*    margin="normal"*/}
+                    {/*    required*/}
+                    {/*    fullWidth*/}
+                    {/*    style={{backgroundColor: "white"}}*/}
+                    {/*/>*/}
                     <TextField
-                        label="Password"
-                        type="password"
-                        value={password} onChange={(it) => setPassword(it.target.value)}
+                        label='Password'
                         variant="outlined"
                         margin="normal"
                         required
                         fullWidth
                         style={{backgroundColor: "white"}}
+                        type={showPassword ? "text" : "password"} // <-- This is where the magic happens
+                        onChange={(it) => setPassword(it.target.value)}
+                        InputProps={{ // <-- This is where the toggle button is added.
+                            endAdornment: (
+                                <InputAdornment position="end">
+                                    <IconButton
+                                        aria-label="toggle password visibility"
+                                        onClick={handleClickShowPassword}
+                                        onMouseDown={handleMouseDownPassword}
+                                    >
+                                        {showPassword ? <Visibility /> : <VisibilityOff />}
+                                    </IconButton>
+                                </InputAdornment>
+                            )
+                        }}
                     />
                     <p className="error">{error}</p>
                     <FormControlLabel style={{height: '5px', paddingBottom: '20px'}}
@@ -125,7 +155,7 @@ export default function Login() {
                         buttonText="Login with Google"
                         onSuccess={onSuccess}
                         onFailure={onFailure}
-                        isSignedIn={true}
+                        // isSignedIn={true}
                         style={{  width: '100px' }}
                     />
 

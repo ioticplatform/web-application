@@ -73,6 +73,10 @@ async function getSensors() {
     return axios.get(API_HOST + `/users/${user.id}/sensors`, {headers: {Authorization: `jwt ${token}`}});
 }
 
+async function getActors() {
+    return axios.get(API_HOST + `/users/${user.id}/actors`, {headers: {Authorization: `jwt ${token}`}});
+}
+
 async function getDeviceSensors() {
     return axios.get(API_HOST + `/users/${user.id}/devices/${globalData.device._id}/sensors`, {headers: {Authorization: `jwt ${token}`}});
 }
@@ -99,6 +103,12 @@ async function deleteSensor(sensor) {
     return res;
 }
 
+async function deleteActor(actor) {
+    let res = axios.delete(API_HOST + `/users/${actor.id_user}/devices/${actor.id_device}/sensors/${actor._id}`,{headers: {Authorization: `jwt ${token}`}});
+    console.log(res)
+    return res;
+}
+
 async function deleteData(data) {
     let res = axios.delete(API_HOST + `/users/${data.id_user}/devices/${data.id_device}/sensors/${data.id_sensor}/data/${data._id}`,{headers: {Authorization: `jwt ${token}`}});
     console.log(res)
@@ -110,8 +120,8 @@ async function editDevice(device, name, description) {
     return res;
 }
 
-async function editSensor(sensor, measurementUnit) {
-    let res = axios.put(API_HOST + `/users/${sensor.id_user}/devices/${sensor.id_device}/sensors/${sensor._id}`, {measure_unit: measurementUnit}, {headers: {Authorization: `jwt ${token}`}});
+async function editSensor(sensor, measurementUnit, name) {
+    let res = axios.put(API_HOST + `/users/${sensor.id_user}/devices/${sensor.id_device}/sensors/${sensor._id}`, {measure_unit: measurementUnit, name: name}, {headers: {Authorization: `jwt ${token}`}});
     return res;
 }
 
@@ -168,5 +178,5 @@ let api = {
     getSensorData, editAccount, deleteDevice, editDevice, editSensor,
     forgotPassword, resetPassword, deleteData, deleteSensor,
     sendMessage, getUsers, getMessages, deleteMessage, addFAQMessage,
-    editMessage, getFAQ, loginWithGoogle}
+    editMessage, getFAQ, loginWithGoogle, getActors, deleteActor}
 export {api, globalData}
