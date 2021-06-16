@@ -45,8 +45,17 @@ import InstructionsSensor from "./pages/instructions/InstructionsSensor";
 import Maps from "./pages/maps/Maps";
 import Actors from "./pages/actors/Actors";
 import Automation from "./pages/automation/Automation";
+import Button from '@material-ui/core/Button';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import MuiAlert from '@material-ui/lab/Alert';
+import DoneIcon from '@material-ui/icons/Done';
 
+function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 const drawerWidth = 240;
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -136,6 +145,15 @@ function ShowAppBar() {
     globalData.setTitle = setTitle
     const [open, setOpen] = React.useState(false);
     const [t, i18n] = useTranslation('common');
+    const [anchorEl, setAnchorEl] = React.useState(null);
+
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -165,7 +183,25 @@ function ShowAppBar() {
                         onClick={() => i18n.changeLanguage('en')}><img className="photo" src={"en.png"}/></button>
                 <IconButton color="inherit">
                     <Badge badgeContent={4} color="secondary">
-                        <NotificationsIcon />
+                        <Button onClick={handleClick}>
+                            <NotificationsIcon style={{color: "white"}}/>
+                        </Button>
+                        <Menu
+                            id="simple-menu"
+                            anchorEl={anchorEl}
+                            keepMounted
+                            open={Boolean(anchorEl)}
+                            onClose={handleClose}
+                        >
+                            <MenuItem style={{width: "700px"}} onClick={handleClose}>
+                                Mark all as read
+                                <DoneIcon />
+                            </MenuItem>
+                            <Alert severity="error">This is an error message!</Alert>
+                            <Alert severity="warning">This is a warning message!</Alert>
+                            <Alert severity="info">This is an information message!</Alert>
+                            <Alert severity="success">This is a success message!</Alert>
+                        </Menu>
                     </Badge>
                 </IconButton>
             </Toolbar>
@@ -185,7 +221,6 @@ function ShowAppBar() {
             <Divider />
             <List><MainListItems handleDrawerClose={handleDrawerClose}/></List>
             <Divider />
-            {/*<List><SecondaryListItems /></List>*/}
             <List><InfoListItems handleDrawerClose={handleDrawerClose}/></List>
         </Drawer>
     </div>
@@ -197,7 +232,6 @@ function App() {
     let [isLoggedIn, setLoggedIn] = useState(false);
     globalData.setLoggedIn = setLoggedIn
 
-    // document.body.style.background = "url('background-white.jpg') repeat center";
     document.body.style.background = "url('background-black.jpg') repeat center";
 
     if (isLoggedIn) {
