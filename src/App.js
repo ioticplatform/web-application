@@ -50,9 +50,10 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MuiAlert from '@material-ui/lab/Alert';
 import DoneIcon from '@material-ui/icons/Done';
+import Question from "./components/Question";
 
 function Alert(props) {
-    return <MuiAlert elevation={6} variant="filled" {...props} />;
+    return <MuiAlert elevation={6} variant="filled" {...props} style={{width: "700px"}}/>;
 }
 const drawerWidth = 240;
 
@@ -146,12 +147,21 @@ function ShowAppBar() {
     const [open, setOpen] = React.useState(false);
     const [t, i18n] = useTranslation('common');
     const [anchorEl, setAnchorEl] = React.useState(null);
+    let [notifications, setNotifications] = useState([{severity: "error", message: "Notification 1"},
+        {severity: "warning", message: "Notification 2"},
+        {severity: "info", message: "Notification 3"},
+        {severity: "success", message: "Notification 4"} ,
+        {severity: "success", message: "Notification 5"}]);
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
 
     const handleClose = () => {
+        console.log("heeeeeeeeeeeeeeeeeeei")
+        setNotifications([])
+        console.log("Uuuuuuuuuuuuuuuu")
+
         setAnchorEl(null);
     };
 
@@ -182,7 +192,7 @@ function ShowAppBar() {
                 <button style={{backgroundColor: "#355e35", border: "#355e35"}}
                         onClick={() => i18n.changeLanguage('en')}><img className="photo" src={"en.png"}/></button>
                 <IconButton color="inherit">
-                    <Badge badgeContent={4} color="secondary">
+                    <Badge badgeContent={notifications.length} color="secondary">
                         <Button onClick={handleClick}>
                             <NotificationsIcon style={{color: "white"}}/>
                         </Button>
@@ -192,15 +202,16 @@ function ShowAppBar() {
                             keepMounted
                             open={Boolean(anchorEl)}
                             onClose={handleClose}
+                            style={{marginTop: "35px"}}
                         >
-                            <MenuItem style={{width: "700px"}} onClick={handleClose}>
+                            <h2 style={{width: "700px", paddingLeft: "20px"}}>Notifications</h2>
+                            {notifications.length? <MenuItem style={{width: "700px"}} onClick={handleClose}>
                                 Mark all as read
                                 <DoneIcon />
-                            </MenuItem>
-                            <Alert severity="error">This is an error message!</Alert>
-                            <Alert severity="warning">This is a warning message!</Alert>
-                            <Alert severity="info">This is an information message!</Alert>
-                            <Alert severity="success">This is a success message!</Alert>
+                            </MenuItem>: ''}
+                            {notifications.length? notifications.map(it => (
+                                <Alert severity={it.severity}>{it.message}</Alert>
+                            )): <h4 style={{width: "700px", color: "gray", textAlign: "center"}}>No Notifications</h4>}
                         </Menu>
                     </Badge>
                 </IconButton>
