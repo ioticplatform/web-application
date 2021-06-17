@@ -51,7 +51,7 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MuiAlert from '@material-ui/lab/Alert';
 import DoneIcon from '@material-ui/icons/Done';
-import Question from "./components/Question";
+import history from './history';
 
 function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} style={{width: "700px"}}/>;
@@ -264,7 +264,7 @@ function App() {
     if (isLoggedIn) {
         return <div className="App">
             <h1>{t('this_is_an_example')}</h1>
-            <Router>
+            <Router history={history}>
                 <div>{isLoggedIn && <ShowAppBar/>}</div>
                 <div>
                     <Switch>
