@@ -20,14 +20,14 @@ import DevicesReport from "./devicesReport";
 function GoogleAnalytics() {
     const [isSignedIn, setIsSignedIn] = useState(false);
 
-    const updateSignin = (signedIn) => { //(3)
+    const updateSignin = (signedIn) => {
         setIsSignedIn(signedIn);
         if (!signedIn) {
             renderButton();
         }
     };
 
-    const init = () => { //(2)
+    const init = () => {
         checkSignedIn()
             .then((signedIn) => {
                 updateSignin(signedIn);

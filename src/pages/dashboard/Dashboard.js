@@ -28,11 +28,11 @@ export default function Dashboard() {
                             <ButtonBase />
                         </Paper>
                 </Grid>
-                <Grid item xs={12} md={4} lg={3}>
-                    <Paper className="fixedHeightPaper">
-                        <TotalData />
-                    </Paper>
-                </Grid>
+                {/*<Grid item xs={12} md={4} lg={3}>*/}
+                {/*    <Paper className="fixedHeightPaper">*/}
+                {/*        <TotalData />*/}
+                {/*    </Paper>*/}
+                {/*</Grid>*/}
                 <div style={{height: "12vh"}}/>
             </Container>
             <Footer style ={{paddingBottom: "50px"}} description={t('welcome.thankYou', {framework:'React'})}/>

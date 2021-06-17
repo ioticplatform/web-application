@@ -3,7 +3,8 @@ import React, {useEffect, useState} from "react";
 import {
     BrowserRouter as Router,
     Switch,
-    Route
+    Route,
+    Redirect
 } from "react-router-dom";
 import Login from "./pages/login/Login";
 import Devices from "./pages/devices/Devices";
@@ -336,6 +337,9 @@ function App() {
                         <Route path="/automation">
                             <Automation/>
                         </Route>
+                        <Route exact path="/">
+                            <Redirect to="/firstPage" />
+                        </Route>
                     </Switch>
                 </div>
             </Router>
@@ -379,6 +383,9 @@ function App() {
                     </Route>
                     <Route path="/googleAnalytics">
                         <GoogleAnalytics/>
+                    </Route>
+                    <Route exact path="/">
+                        <Redirect to="/firstPage" />
                     </Route>
                 </Switch>
             </div>

@@ -84,7 +84,8 @@ export default function FirstPage() {
                     </Grid>
                 </main>
             </Container>
-            <Footer description={t('welcome.thankYou', {framework:'React'})} />
+            <Footer style={{position: "static"}} description={t('welcome.thankYou', {framework:'React'})} />
+            <div style={{height: "200px"}}></div>
         </React.Fragment>
     );
 }
