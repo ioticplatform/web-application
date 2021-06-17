@@ -4,7 +4,6 @@ class MessageParser {
   }
 
   parse(message) {
-    console.log(message);
     const lowercase = message.toLowerCase();
 
     if (lowercase.includes("hello") || lowercase.includes("hi")) {
@@ -21,6 +20,22 @@ class MessageParser {
 
     if (lowercase.includes("device")) {
       this.actionProvider.handleDeviceInfo();
+    }
+
+    if (lowercase.includes("what", "sensor")) {
+      this.actionProvider.handleWhatIsSensorInfo();
+    }
+
+    if (lowercase.includes("where", "sensor")) {
+      this.actionProvider.handleWhereSensorInfo();
+    }
+
+    if (lowercase.includes("actor")) {
+      this.actionProvider.handleActorInfo();
+    }
+
+    if (lowercase.includes("automation")) {
+      this.actionProvider.handleAutomationInfo();
     }
   }
 }

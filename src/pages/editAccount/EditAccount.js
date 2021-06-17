@@ -5,24 +5,10 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
-import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
-import {api} from "../../repo/api";
-
-function Copyright() {
-    return (
-        <Typography variant="body2" color="textSecondary" align="center">
-            {'Copyright © '}
-            <Link color="inherit" href="https://material-ui.com/">
-                Your Website
-            </Link>{' '}
-            {new Date().getFullYear()}
-            {'.'}
-        </Typography>
-    );
-}
+import {api, globalData} from "../../repo/api";
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
@@ -78,22 +64,22 @@ export default function EditAccount() {
         setActiveStep(activeStep - 1);
     };
 
-    let [email, setEmail] = useState("")
-    let [username, setUsername] = useState("")
-    let [password, setPassword] = useState("")
-    let [address, setAddress] = useState("")
-    let [firstName, setFirstName] = useState("")
-    let [lastName, setLastName] = useState("")
-    let [city, setCity] = useState("")
-    let [country, setCountry] = useState("")
-    let [state, setState] = useState("")
-    let [zip, setZip] = useState("")
+    let [email, setEmail] = useState(globalData.user.email)
+    let [username, setUsername] = useState(globalData.user.username)
+    let [password, setPassword] = useState(globalData.user.password)
+    let [address, setAddress] = useState(globalData.user.address)
+    let [firstName, setFirstName] = useState(globalData.user.firstName)
+    let [lastName, setLastName] = useState(globalData.user.lastName)
+    let [city, setCity] = useState(globalData.user.city)
+    let [country, setCountry] = useState(globalData.user.country)
+    let [state, setState] = useState(globalData.user.state)
+    let [zip, setZip] = useState(globalData.user.zipCode)
 
     let [error, setError] = useState("")
 
     async function onUpdateClick(){
         try{
-            await api.editAccount(password)
+            await api.editAccount(address, firstName, lastName, city, country, state, zip)
             handleNext()
         } catch (e){
             setError("Info Error.")
@@ -104,11 +90,7 @@ export default function EditAccount() {
         <React.Fragment>
             <CssBaseline />
             <AppBar position="absolute" color="default" className={classes.appBar}>
-                <Toolbar>
-                    <Typography variant="h6" color="inherit" noWrap>
-                        Edit Account
-                    </Typography>
-                </Toolbar>
+
             </AppBar>
             <main className={classes.layout}>
                 <Paper className={classes.paper}>
@@ -126,25 +108,24 @@ export default function EditAccount() {
                             <React.Fragment>
                                 <React.Fragment>
                                     <Typography variant="h6" gutterBottom>
-                                        Personal Info
+                                        Edit Personal Info
                                     </Typography>
                                     <Grid container spacing={3}>
                                         <Grid item xs={12} sm={6}>
                                             <TextField
-                                                required
                                                 id="firstName"
                                                 name="firstName"
+                                                variant="filled"
                                                 label="First name"
                                                 fullWidth
-                                                autoComplete="given-name"
                                                 value={firstName} onChange={(it) => setFirstName(it.target.value)}
                                             />
                                         </Grid>
                                         <Grid item xs={12} sm={6}>
                                             <TextField
-                                                required
                                                 id="lastName"
                                                 name="lastName"
+                                                variant="filled"
                                                 label="Last name"
                                                 fullWidth
                                                 autoComplete="family-name"
@@ -157,6 +138,11 @@ export default function EditAccount() {
                                                 id="username"
                                                 name="username"
                                                 label="Username"
+                                                variant="outlined"
+                                                disabled={true}
+                                                InputProps={{
+                                                    readOnly: true,
+                                                }}
                                                 fullWidth
                                                 autoComplete="shipping address-line1"
                                                 value={username} onChange={(it) => setUsername(it.target.value)}
@@ -166,6 +152,11 @@ export default function EditAccount() {
                                             <TextField
                                                 required
                                                 id="email"
+                                                variant="outlined"
+                                                disabled={true}
+                                                InputProps={{
+                                                    readOnly: true,
+                                                }}
                                                 name="email"
                                                 label="Email"
                                                 fullWidth
@@ -176,6 +167,11 @@ export default function EditAccount() {
                                         <Grid item xs={12}>
                                             <TextField
                                                 required
+                                                disabled={true}
+                                                variant="outlined"
+                                                InputProps={{
+                                                    readOnly: true,
+                                                }}
                                                 type="password"
                                                 id="password"
                                                 name="password"
@@ -189,6 +185,7 @@ export default function EditAccount() {
                                             <TextField
                                                 id="address"
                                                 name="address"
+                                                variant="filled"
                                                 label="Address"
                                                 fullWidth
                                                 autoComplete="shipping address-line2"
@@ -197,9 +194,9 @@ export default function EditAccount() {
                                         </Grid>
                                         <Grid item xs={12} sm={6}>
                                             <TextField
-                                                required
                                                 id="city"
                                                 name="city"
+                                                variant="filled"
                                                 label="City"
                                                 fullWidth
                                                 autoComplete="shipping address-level2"
@@ -210,15 +207,16 @@ export default function EditAccount() {
                                             <TextField
                                                 id="state"
                                                 name="state"
+                                                variant="filled"
                                                 label="State/Province/Region"
                                                 value={state} onChange={(it) => setState(it.target.value)}
                                                 fullWidth/>
                                         </Grid>
                                         <Grid item xs={12} sm={6}>
                                             <TextField
-                                                required
                                                 id="zip"
                                                 name="zip"
+                                                variant="filled"
                                                 label="Zip / Postal code"
                                                 fullWidth
                                                 autoComplete="shipping postal-code"
@@ -227,9 +225,9 @@ export default function EditAccount() {
                                         </Grid>
                                         <Grid item xs={12} sm={6}>
                                             <TextField
-                                                required
                                                 id="country"
                                                 name="country"
+                                                variant="filled"
                                                 label="Country"
                                                 fullWidth
                                                 autoComplete="shipping country"
@@ -257,7 +255,6 @@ export default function EditAccount() {
                         )}
                     </React.Fragment>
                 </Paper>
-                <Copyright />
             </main>
         </React.Fragment>
     );

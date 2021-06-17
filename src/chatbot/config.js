@@ -22,7 +22,7 @@ const config = {
       props: {
         questions: [
           {
-            question: "How can get a device?",
+            question: "How can I get a device?",
             answer:
                 "You can make it yourself or you can buy one from us. See the Buy Devices section from the menu.",
             id: 1,

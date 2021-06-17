@@ -155,7 +155,7 @@ function ShowAppBar() {
         setLoading(true)
         let res = await api.getNotifications();
         setLoading(false)
-        setNotifications(res.data.notifications)
+        setNotifications(res.data.notifications.reverse())
     }
 
     useEffect(() => {

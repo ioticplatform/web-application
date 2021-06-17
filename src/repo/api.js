@@ -23,7 +23,14 @@ async function login(username, pass) {
             id: res.data._id,
             email: res.data.email,
             username: res.data.username,
-            role: res.data.role
+            role: res.data.role,
+            firstName: res.data.firstName,
+            lastName: res.data.lastName,
+            address: res.data.address,
+            city: res.data.city,
+            state: res.data.state,
+            zipCode: res.data.zipCode,
+            country: res.data.country
         }
         localStorage.setItem("token", token);
         localStorage.setItem("user", JSON.stringify(user));
@@ -86,8 +93,9 @@ async function getSensorData() {
     return res;
 }
 
-async function editAccount(password) {
-    let res = axios.put(API_HOST + `/users/${user.id}`, {password: password}, {headers: {Authorization: `jwt ${token}`}});
+async function editAccount(address, firstName, lastName, city, country, state, zip) {
+    let res = axios.put(API_HOST + `/users/${user.id}`, {address:address, firstName:firstName, lastName:lastName, city:city, country:country, state:state, zipCode:zip},
+        {headers: {Authorization: `jwt ${token}`}});
     return res;
 }
 
