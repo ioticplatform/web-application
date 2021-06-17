@@ -19,7 +19,7 @@ export default function Dashboard() {
 
     return (
         <div>
-            <div style={{height: "3vh"}}/>
+            <div style={{height: "1.2vh"}}/>
             <Title>{t('dashboard.welcome', {framework:'React'})}, {globalData.user.username}!</Title>
             <div style={{height: "4vh"}}/>
             <Container>
@@ -36,13 +36,13 @@ export default function Dashboard() {
                 <div style={{height: "12vh"}}/>
             </Container>
             <Footer style ={{paddingBottom: "50px"}} description={t('welcome.thankYou', {framework:'React'})}/>
-            <Container className="containerChatbot">
+            <div className="containerChatbot">
                     <Chatbot
                         config={config}
                         actionProvider={ActionProvider}
                         messageParser={MessageParser}
                     />
-            </Container>
+            </div>
         </div>
     );
 }
