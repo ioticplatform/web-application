@@ -1,5 +1,5 @@
 import './App.scss';
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {
     BrowserRouter as Router,
     Switch,
@@ -27,7 +27,7 @@ import Typography from "@material-ui/core/Typography";
 import Badge from "@material-ui/core/Badge";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import AppBar from "@material-ui/core/AppBar";
-import {globalData} from "./repo/api";
+import {api, globalData} from "./repo/api";
 import ForgotPassword from "./pages/forgotPassword/ForgotPassword";
 import ResetPassword from "./pages/forgotPassword/ResetPassword";
 import FirstPage from "./pages/firstPage/FirstPage";
@@ -147,21 +147,36 @@ function ShowAppBar() {
     const [open, setOpen] = React.useState(false);
     const [t, i18n] = useTranslation('common');
     const [anchorEl, setAnchorEl] = React.useState(null);
-    let [notifications, setNotifications] = useState([{severity: "error", message: "Notification 1"},
-        {severity: "warning", message: "Notification 2"},
-        {severity: "info", message: "Notification 3"},
-        {severity: "success", message: "Notification 4"} ,
-        {severity: "success", message: "Notification 5"}]);
+    let [isLoading, setLoading] = useState(false);
+
+    let [notifications, setNotifications] = useState([]);
+
+    async function loadNotifications() {
+        setLoading(true)
+        let res = await api.getNotifications();
+        setLoading(false)
+        setNotifications(res.data.notifications)
+    }
+
+    useEffect(() => {
+        const intervalId = setInterval(() => {loadNotifications()}, 1000)
+        return () => clearInterval(intervalId);
+    }, [])
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
 
     const handleClose = () => {
-        console.log("heeeeeeeeeeeeeeeeeeei")
         setNotifications([])
-        console.log("Uuuuuuuuuuuuuuuu")
+        loadNotifications()
+        setAnchorEl(null);
+    };
 
+    const handleCloseDelete = () => {
+        setNotifications([])
+        api.deleteNotifications();
+        loadNotifications()
         setAnchorEl(null);
     };
 
@@ -205,7 +220,7 @@ function ShowAppBar() {
                             style={{marginTop: "35px"}}
                         >
                             <h2 style={{width: "700px", paddingLeft: "20px"}}>Notifications</h2>
-                            {notifications.length? <MenuItem style={{width: "700px"}} onClick={handleClose}>
+                            {notifications.length? <MenuItem style={{width: "700px"}} onClick={handleCloseDelete}>
                                 Mark all as read
                                 <DoneIcon />
                             </MenuItem>: ''}

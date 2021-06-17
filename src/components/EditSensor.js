@@ -13,6 +13,8 @@ import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import {api} from "../repo/api";
 import MenuItem from '@material-ui/core/MenuItem';
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
@@ -34,8 +36,11 @@ export default function EditSensor({sensor, onFinishEdit}) {
     const [open, setOpen] = React.useState(false);
 
     let [name, setName] = useState("")
-    let [measureUnit, setMeasureUnit] = useState("")
-
+    let [min_val, setMinVal] = useState(sensor.min_val)
+    let [max_val, setMaxVal] = useState(sensor.max_val)
+    let [measureUnit, setMeasureUnit] = useState(sensor.measure_unit)
+    let [emailNotifications, setEmailNotifications] = useState(sensor.emailNotifications?sensor.emailNotifications:true)
+    let [webNotifications, setWebNotifications] = useState(sensor.webNotifications?sensor.webNotifications:true)
     let [error, setError] = useState("")
 
     const handleClickOpen = () => {
@@ -50,15 +55,13 @@ export default function EditSensor({sensor, onFinishEdit}) {
         try{
             if (!name)
                 name = sensor.name;
-            await api.editSensor(sensor, measureUnit, name)
+            await api.editSensor(sensor, measureUnit, name, min_val, max_val, emailNotifications, webNotifications)
             handleClose();
             onFinishEdit();
         } catch (e){
             setError("Info Error.")
         }
     }
-
-    console.log(sensor)
 
     return (
         <div>
@@ -154,7 +157,39 @@ export default function EditSensor({sensor, onFinishEdit}) {
                                 ))}
                             </TextField>
                         </Grid>
+                    <Grid item xs={4}>
+                        <h3>
+                            Min Value:
+                        </h3>
+                        <TextField
+                            id="min_val"
+                            name="min_val"
+                            variant="filled"
+                            fullWidth
+                            value={min_val} onChange={(it) => setMinVal(it.target.value)}
+                        />
                     </Grid>
+                    <Grid item xs={4}>
+                        <h3>
+                            Max Value:
+                        </h3>
+                        <TextField
+                            id="max_val"
+                            name="max_val"
+                            variant="filled"
+                            fullWidth
+                            value={max_val} onChange={(it) => setMaxVal(it.target.value)}
+                        />
+                    </Grid>
+                    <Grid item xs={4}>
+                        <FormControlLabel control={<Checkbox checked={emailNotifications} onClick={(it) => setEmailNotifications(it.target.checked)}/> }
+                                          label=<h5 style={{color: "black", fontWeight: "lighter"}}>Receive email notifications</h5>
+                        />
+                        <FormControlLabel control={<Checkbox checked={webNotifications} onChange={(it) => setWebNotifications(it.target.checked)}/> }
+                                          label=<h5 style={{color: "black", fontWeight: "lighter"}}>Receive web notifications</h5>
+                        />
+                    </Grid>
+                </Grid>
                 </div>
             </Dialog>
         </div>

@@ -35,7 +35,7 @@ export default function Dashboard() {
                 </Grid>
                 <div style={{height: "12vh"}}/>
             </Container>
-            <Footer description={t('welcome.thankYou', {framework:'React'})}/>
+            <Footer style ={{paddingBottom: "50px"}} description={t('welcome.thankYou', {framework:'React'})}/>
             <Container className="containerChatbot">
                     <Chatbot
                         config={config}

@@ -120,8 +120,14 @@ async function editDevice(device, name, description) {
     return res;
 }
 
-async function editSensor(sensor, measurementUnit, name) {
-    let res = axios.put(API_HOST + `/users/${sensor.id_user}/devices/${sensor.id_device}/sensors/${sensor._id}`, {measure_unit: measurementUnit, name: name}, {headers: {Authorization: `jwt ${token}`}});
+async function editSensor(sensor, measurementUnit, name, min_val, max_val, emailNotifications, webNotifications) {
+    let res = axios.put(API_HOST + `/users/${sensor.id_user}/devices/${sensor.id_device}/sensors/${sensor._id}`,
+        {measure_unit: measurementUnit,
+              name: name,
+              min_val: min_val,
+              max_val: max_val,
+              emailNotifications: emailNotifications,
+              webNotifications: webNotifications}, {headers: {Authorization: `jwt ${token}`}});
     return res;
 }
 
@@ -173,10 +179,20 @@ async function getFAQ() {
     return axios.get(API_HOST + `/messages/faq`, {headers: {Authorization: `jwt ${token}`}});
 }
 
+async function getNotifications() {
+    return axios.get(API_HOST + `/users/${user.id}/notifications`, {headers: {Authorization: `jwt ${token}`}});
+}
+
+async function deleteNotifications() {
+    let res = axios.delete(API_HOST + `/users/${user.id}/notifications`,{headers: {Authorization: `jwt ${token}`}});
+    return res;
+}
+
 let api = {
     login, register, getDevices, getSensors, getDeviceSensors,
     getSensorData, editAccount, deleteDevice, editDevice, editSensor,
     forgotPassword, resetPassword, deleteData, deleteSensor,
     sendMessage, getUsers, getMessages, deleteMessage, addFAQMessage,
-    editMessage, getFAQ, loginWithGoogle, getActors, deleteActor}
+    editMessage, getFAQ, loginWithGoogle, getActors, deleteActor,
+    getNotifications, deleteNotifications}
 export {api, globalData}
