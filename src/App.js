@@ -159,7 +159,7 @@ function ShowAppBar() {
     }
 
     useEffect(() => {
-        const intervalId = setInterval(() => {loadNotifications()}, 1000)
+        const intervalId = setInterval(() => {loadNotifications()}, 5000)
         return () => clearInterval(intervalId);
     }, [])
 

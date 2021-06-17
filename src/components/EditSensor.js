@@ -42,6 +42,45 @@ export default function EditSensor({sensor, onFinishEdit}) {
     let [emailNotifications, setEmailNotifications] = useState(sensor.emailNotifications?sensor.emailNotifications:true)
     let [webNotifications, setWebNotifications] = useState(sensor.webNotifications?sensor.webNotifications:true)
     let [error, setError] = useState("")
+    function getMeasurementUnitsList(type) {
+        if (type == "temperature")
+            return [
+                {
+                    value: 'Celsius',
+                    label: 'Celsius',
+                },
+                {
+                    value: 'Fahrenheit',
+                    label: 'Fahrenheit',
+                }
+            ];
+        else if (type == "humidity")
+            return [
+                {
+                    value: '%',
+                    label: '%',
+                },
+                {
+                    value: 'g/m3',
+                    label: 'g/m3',
+                },
+                {
+                    value: 'kg/m3',
+                    label: 'kg/m3',
+                },
+                {
+                    value: 'g/kg',
+                    label: 'g/kg',
+                }
+            ];
+        else return [
+                {
+                    value: 'Unknown',
+                    label: 'Unknown',
+                }
+            ];
+    }
+    const measurementUnitsList = getMeasurementUnitsList(sensor.type)
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -141,20 +180,12 @@ export default function EditSensor({sensor, onFinishEdit}) {
                                 helperText="Please select one of the above."
                                 variant="outlined">
                                 {
-                                    [
-                                    {
-                                        value: 'Celsius',
-                                        label: 'Celsius',
-                                    },
-                                    {
-                                        value: 'Fahrenheit',
-                                        label: 'Fahrenheit',
-                                    }
-                                ].map((option) => (
-                                    <MenuItem key={option.value} value={option.value}>
-                                        {option.label}
-                                    </MenuItem>
-                                ))}
+                                    measurementUnitsList.map((option) => (
+                                        <MenuItem key={option.value} value={option.value}>
+                                            {option.label}
+                                        </MenuItem>)
+                                    )
+                                }
                             </TextField>
                         </Grid>
                     <Grid item xs={4}>

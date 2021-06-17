@@ -99,7 +99,6 @@ export default function Sensor() {
     let [normalValues, setNormalValues] = useState([]);
     let [lowerValues, setLowerValues] = useState([]);
     let [higherValues, setHigherValues] = useState([]);
-
     let [isLoading, setLoading] = useState(false);
 
     async function loadData() {
@@ -109,9 +108,17 @@ export default function Sensor() {
         setSensorData(res.data.data)
         setReChartSensorData(res.data.data.map(x => ({time: x.timestamp, value: x.value})))
         setChartSensorData(res.data.data.map(x => ["Date(" + x.timestamp + ")", x.value]))
-        setHigherValues(res.data.data.filter(x => x.value > 90));
-        setLowerValues(res.data.data.filter(x => x.value < 25));
-        setNormalValues(res.data.data.filter(x => x.value >= 25 && x.value <= 90));
+        if (globalData.sensor.max_val)
+            setHigherValues(res.data.data.filter(x => x.value > globalData.sensor.max_val));
+        else setHigherValues([])
+
+        if (globalData.sensor.min_val)
+            setLowerValues(res.data.data.filter(x => x.value < globalData.sensor.min_val));
+        else setLowerValues([])
+
+        if (globalData.sensor.min_val && globalData.sensor.max_val)
+            setNormalValues(res.data.data.filter(x => x.value >= globalData.sensor.min_val && x.value <= globalData.sensor.max_val));
+        setNormalValues(res.data.data)
     }
 
     useEffect(() => {
