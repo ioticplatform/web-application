@@ -64,6 +64,11 @@ export function MainListItems(props) {
         return <Redirect to={"/automation"}/>
     }
 
+    const openInNewTab = (url) => {
+        const newWindow = window.open(url, '_blank', 'noopener,noreferrer')
+        if (newWindow) newWindow.opener = null
+    }
+
     return <div>
             <ListItem button onClick={onAccountClick}>
                 <ListItemIcon>
@@ -77,7 +82,7 @@ export function MainListItems(props) {
                 </ListItemIcon>
                 <ListItemText primary="Dashboard" />
             </ListItem>
-            <ListItem button>
+            <ListItem button onClick={() => openInNewTab("https://www.optimusdigital.ro/en/")}>
                 <ListItemIcon>
                     <ShoppingCartIcon />
                 </ListItemIcon>
