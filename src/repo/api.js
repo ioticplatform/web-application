@@ -1,6 +1,6 @@
 import axios from 'axios';
-// let IP = "65.21.110.202";
-let IP = "localhost";
+let IP = "iotic.mywire.org";
+// let IP = "192.168.0.105";
 let PORT = "5000"
 let API_HOST = "http://" + IP + ":" + PORT + "/api"
 
@@ -196,11 +196,15 @@ async function deleteNotifications() {
     return res;
 }
 
+function getToken(){
+    return token
+}
+
 let api = {
     login, register, getDevices, getSensors, getDeviceSensors,
     getSensorData, editAccount, deleteDevice, editDevice, editSensor,
     forgotPassword, resetPassword, deleteData, deleteSensor,
     sendMessage, getUsers, getMessages, deleteMessage, addFAQMessage,
     editMessage, getFAQ, loginWithGoogle, getActors, deleteActor,
-    getNotifications, deleteNotifications}
+    getNotifications, deleteNotifications, getToken}
 export {api, globalData}
